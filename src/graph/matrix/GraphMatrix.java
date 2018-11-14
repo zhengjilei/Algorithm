@@ -7,13 +7,13 @@ import java.util.ArrayDeque;
  * created by Ethan-Walker on 2018/11/9
  */
 public class GraphMatrix {
-    int numVertices; // 当前顶点数
-    int maxVertices; //最大顶点数
-    int numEdges;   // 当前边数
+    private int numVertices; // 当前顶点数
+    private int maxVertices; //最大顶点数
+    private int numEdges;   // 当前边数
 
-    String[] verticesList; // 顶点表,存储各顶点的没名字
-    double[][] edge; // 邻接矩阵 存的是边对应的权值
-    double maxWeight = Double.MAX_VALUE;
+    private String[] verticesList; // 顶点表,存储各顶点的没名字
+    private double[][] edge; // 邻接矩阵 存的是边对应的权值
+    private double maxWeight = Double.MAX_VALUE;
 
     public GraphMatrix(int sz) {
         this.maxVertices = sz;
@@ -241,6 +241,14 @@ public class GraphMatrix {
             }
         }
         System.out.println();
+    }
+
+    public double getWeight(int i, int j) {
+        return edge[i][j];
+    }
+
+    public double getMaxWeight() {
+        return maxWeight;
     }
 
     public static void main(String[] args) {

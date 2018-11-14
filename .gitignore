@@ -2,3 +2,7 @@
 *.iml
 *.jar
 *.xml
+/out/
+/lib/
+/.idea/
+/algs4/

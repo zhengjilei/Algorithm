@@ -54,7 +54,7 @@ public class Prim {
                     minHeap.insert(new Edge(p, j, graph.getWeight(p, j)));
                 }
             }
-            while (!minHeap.isEmpty() && count < n) {
+            while (!minHeap.isEmpty()) {
                 e = minHeap.removeMin();
                 if (inSet[e.vertex2] == false) {
                     edges.add(e);

@@ -1,4 +1,4 @@
-package graph.kruscal;
+package graph.kruskal;
 
 /**
  * created by Ethan-Walker on 2018/11/14

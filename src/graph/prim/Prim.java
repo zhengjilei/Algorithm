@@ -1,7 +1,7 @@
 package graph.prim;
 
-import graph.kruscal.Edge;
-import graph.kruscal.EdgeMinHeap;
+import graph.kruskal.Edge;
+import graph.kruskal.EdgeMinHeap;
 import graph.matrix.GraphMatrix;
 
 import java.util.ArrayList;

@@ -11,7 +11,7 @@ public class GraphMatrix {
     private int maxVertices; //最大顶点数
     private int numEdges;   // 当前边数
 
-    private String[] verticesList; // 顶点表,存储各顶点的没名字
+    private String[] verticesList; // 顶点表,存储各顶点的名字
     private double[][] edge; // 邻接矩阵 存的是边对应的权值
     private double maxWeight = Double.MAX_VALUE;
 

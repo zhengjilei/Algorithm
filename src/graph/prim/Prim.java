@@ -73,5 +73,5 @@ public class Prim {
         ArrayList<Edge> edges = p.prim();
         System.out.println(Arrays.toString(edges.toArray()));
     }
-
+    
 }

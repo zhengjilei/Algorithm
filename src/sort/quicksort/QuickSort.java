@@ -7,27 +7,41 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
+ * 快速排序
+ * 取中位数法
  * Created by lenovo on 2018/3/26.
- * 栈溢出
  */
 public class QuickSort {
 
-    public static void main(String[] args) {
-        for (int k = 0; k < 1000; k++) {
-            Random random = new Random();
-            int length = random.nextInt(10000);
-//            System.out.println(length);
-            int[] a = new int[length];
-            int[] b = new int[length];
-            for (int i = 0; i < length; i++) {
-                a[i] = random.nextInt(10000);
-            }
-//          System.out.println(Arrays.toString(a));
-//          System.out.println();
-            quickSort(a, 0, length - 1);
-//          System.out.println(Arrays.toString(a));
+    public static int median3(int[] a, int left, int right) {
+        int mid = (left + right) / 2, k = left;
+        if (a[mid] < a[k]) k = mid;
+        if (a[right] < a[k]) k = right; // k指向三者中最小的元素
+        if (k != left) swap(a, k, left); // 将最小元素换到 left
+        if (mid != right && a[mid] < a[right]) swap(a, mid, right); // 将中间元素 pivot 换到数组末尾
 
-            System.out.println(SortJudge.judge(a));
+        return a[right];
+    }
+
+    public static int partition(int[] a, int left, int right) {
+        int pivotValue = median3(a, left, right);
+        int i = left, j = right;
+        while (i < j) {
+            while (i < j && a[i] <= pivotValue) i++;
+            while (i < j && a[j] >= pivotValue) j--;
+            if (i < j) {
+                swap(a, i, j);
+            }
+        }
+        swap(a, i, right); // 恢复pivot 的正确位置，i指向第一个比 pivot 大的数， 故可以交换到 pivot 的右边
+        return i;
+    }
+
+    public static void quickSort(int[] a, int left, int right) {
+        if (left < right) {
+            int pivotIndex = partition(a, left, right);
+            quickSort(a, left, pivotIndex - 1);
+            quickSort(a, pivotIndex + 1, right);
         }
     }
 
@@ -35,41 +49,6 @@ public class QuickSort {
         int temp = a[left];
         a[left] = a[right];
         a[right] = temp;
-
-       /* a[left]= a[left]^a[right];
-        a[right] =a[left]^a[right];
-        a[left] = a[left]^a[right];*/
-    }
-
-    public static int median3(int[] a, int left, int right) {
-        int mid = (left + right) / 2;
-
-        if (a[left] > a[mid]) swap(a, left, mid);
-        if (a[mid] > a[right]) swap(a, mid, right);
-        // 最大的数，此时在 right 位置上
-        if (a[left] > a[mid]) swap(a, left, mid);
-
-        swap(a, mid, right - 1);
-        return a[right - 1];
-    }
-
-    public static void quickSort(int[] a, int left, int right) {
-
-        if (left < right) {
-            int pivot = median3(a, left, right);
-            int i = left, j = right;
-            while (i < j) {
-                while (i < right && a[i] <= pivot) i++;
-                while (j > left && a[j] >= pivot) j--;
-                if (i < j) {
-                    swap(a, i, j);
-                }
-            }
-            swap(a, i, right - 1);
-            quickSort(a, left, i - 1);
-            quickSort(a, i + 1, right);
-
-        }
     }
 
     @Test
@@ -77,6 +56,18 @@ public class QuickSort {
         int[] a = new int[]{1, 0, 4, 6, 2, 4, 6, 2, 2};
         quickSort(a, 0, 8);
         System.out.println(Arrays.toString(a));
+
+
+        Random r = new Random();
+        int n = r.nextInt(20) + 20;
+        int[] b = new int[n];
+        for (int i = 0; i < n; i++) {
+            b[i] = r.nextInt(100);
+        }
+        System.out.println(Arrays.toString(b));
+        quickSort(b, 0, b.length - 1);
+        System.out.println(Arrays.toString(b));
+        System.out.println(SortJudge.judge(b));
     }
 
 }

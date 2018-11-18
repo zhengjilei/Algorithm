@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * Created by lenovo on 2018/5/14.
  */
-public class QuickSortTemplet {
+public class QuickSort2 {
     public static void main(String[] args) {
         for (int k = 0; k < 10000; k++) {
             Random random = new Random();

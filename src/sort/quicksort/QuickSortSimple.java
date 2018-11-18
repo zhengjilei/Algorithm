@@ -3,7 +3,6 @@ package sort.quicksort;
 import org.junit.Test;
 import sort.SortJudge;
 
-import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -92,8 +91,8 @@ public class QuickSortSimple {
         int pivot = a[endIndex];
         int i = startIndex, j = endIndex;
         while (i < j) {
-            while (i < endIndex && a[i] <= pivot) i++;
-            while (j > startIndex && a[j] >= pivot) j--;
+            while (i < j  && a[i] <= pivot) i++;
+            while (i < j  && a[j] >= pivot) j--;
             if (i < j) {
                 swap(a, i, j);
             }
@@ -118,14 +117,14 @@ public class QuickSortSimple {
 
     public static int partition3(int[] a, int startIndex, int endIndex) {
         Random random = new Random();
-        int pivotPos = random.nextInt(endIndex - startIndex + 1) + startIndex;
-        int pivot = a[pivotPos];
+        int pivotIndex = random.nextInt(endIndex - startIndex + 1) + startIndex;
+        int pivot = a[pivotIndex];
         int i = startIndex, j = endIndex;
-        swap(a, startIndex, pivotPos);
+        swap(a, startIndex, pivotIndex);
 
         while (i < j) {
-            while (i < endIndex && a[i] <= pivot) i++;
-            while (j > startIndex && a[j] >= pivot) j--;
+            while (i < j && a[i] <= pivot) i++;
+            while (i < j && a[j] >= pivot) j--;
             if (i < j) {
                 swap(a, i, j);
             }

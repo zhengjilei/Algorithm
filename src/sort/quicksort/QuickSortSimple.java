@@ -161,8 +161,18 @@ public class QuickSortSimple {
     @Test
     public void testA() {
         int[] a = new int[]{1, 0, 4, 6, 2, 4, 6, 2, 2};
-        quickSort3(a, 0, 8);
+        quickSort(a, 0, 8);
         System.out.println(Arrays.toString(a));
+
+        Random r = new Random();
+        int n = r.nextInt(20) + 20;
+        int[] b = new int[n];
+        for (int i = 0; i < n; i++) {
+            b[i] = r.nextInt(100);
+        }
+        System.out.println(Arrays.toString(b));
+        quickSort(b, 0, b.length - 1);
+        System.out.println(Arrays.toString(b));
     }
 
 

@@ -5,7 +5,6 @@ import java.util.Random;
 
 /**
  * Created by lenovo on 2018/3/26.
- * 直接插入排序
  */
 
 public class InsertSort {
@@ -21,20 +20,21 @@ public class InsertSort {
         }
         System.out.println(Arrays.toString(a));
         System.out.println();
-        insertSort(a);
+        binary_insert_sort(a, a.length);
         System.out.println(Arrays.toString(a));
     }
 
     /**
-     * 插入排序
+     * 直接插入排序
+     * 稳定
+     * O(n^2)
      */
     public static void insertSort(int[] a) {
-        for (int i = 1; i < a.length; i++) {
-            int j = i - 1;
-            int insert = a[i];
-            while (j >= 0 && insert < a[j]) {
+        int i, j, insert;
+        for (i = 1; i < a.length; i++) {
+            insert = a[i];
+            for (j = i - 1; j >= 0 && insert < a[j]; j--) {
                 a[j + 1] = a[j];
-                j--;
             }
             a[j + 1] = insert;
         }
@@ -42,24 +42,33 @@ public class InsertSort {
 
     /**
      * 希尔排序
-         */
+     * 不稳定
+     * O(n^1.3~n^2)
+     */
     public static void shellSort(int[] a) {
-        int gap = a.length;
+        int gap = a.length, x, i, j, insert;
         while (gap != 0) {
             gap = gap / 2;        // 间隔从大到小
-            for (int x = 0; x < a.length; x += gap) {  // 分成 若干组，每组进行直接插入排序， x为每组的首位
-                for (int i = x + gap; i < a.length; i++) {
-                    int j = i - gap;
-                    while (j >= 0 && a[i] < a[j]) {
+            for (x = 0; x < gap; x++) {
+                // 分成 gap 组，每组进行直接插入排序， x 为每组的首位
+                for (i = x + gap; i < a.length; i++) {
+                    insert = a[i];
+                    for (j = i - gap; j >= 0 && insert < a[j]; j -= gap) {
                         a[j + gap] = a[j];
-                        j -= gap;
                     }
-                    a[j + gap] = a[i];
+                    a[j + gap] = insert;
                 }
             }
         }
     }
 
+    /**
+     * 折半插入排序
+     * 稳定
+     * O(nlogn)
+     * @param a
+     * @param length
+     */
     public static void binary_insert_sort(int a[], int length) {
         for (int i = 1; i < length; i++) {
             int insert = a[i];
@@ -77,8 +86,8 @@ public class InsertSort {
             int mid = (l + r) / 2;
             if (key < a[mid]) {
                 r = mid - 1;
-            }
-            else {
+            } else {
+                // key=a[mid] 归为这一类，保证稳定排序（相等元素，保证位置不变化）
                 l = mid + 1;
             }
         }

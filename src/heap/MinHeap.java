@@ -15,6 +15,7 @@ public class MinHeap {
         this.currentSize = currentSize;
         buildMinHeap(heap, 0, currentSize);
     }
+
     // 最小堆排序， 从大到小排序
     public void minHeapSort() {
 
@@ -24,12 +25,14 @@ public class MinHeap {
         int end = currentSize - 1;
         while (end > 0) {
 
-            heap[start] = heap[start] + heap[end] - (heap[end] = heap[start]);
-            // 重新调整
-            buildMinHeap(heap, 0, end);
+            swap(heap, start, end);
+
             end--;
+            // 重新调整
+            siftDown(0, end);
         }
     }
+
     private void buildMinHeap(int[] a, int start, int length) {
         int position = length / 2 - 1;
         while (position >= 0) {
@@ -37,6 +40,7 @@ public class MinHeap {
             position--;
         }
     }
+
     /**
      * 下沉调整最小子堆
      *

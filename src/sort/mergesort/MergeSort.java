@@ -1,5 +1,7 @@
 package sort.mergesort;
 
+import sort.SortJudge;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -13,17 +15,18 @@ public class MergeSort {
 
     public static void main(String[] args) {
         Random random = new Random();
-        int length = random.nextInt(100);
+        int length = random.nextInt(20) + 30;
         System.out.println(length);
         arr = new int[length];
         temp = new int[length];
         for (int i = 0; i < length; i++) {
-            arr[i] = random.nextInt(200);
+            arr[i] = random.nextInt(100);
         }
         System.out.println(Arrays.toString(arr));
         System.out.println();
         mergeSort(0, length - 1);
         System.out.println(Arrays.toString(arr));
+        System.out.println(SortJudge.judge(arr));
     }
 
     public static void mergeSort(int l, int r) {
@@ -35,23 +38,23 @@ public class MergeSort {
         }
     }
 
-    public static void merge(int leftStart, int leftEnd, int rightEnd) {
-        int rightStart = leftEnd + 1;
-        int t = leftStart;
-        int count = rightEnd - leftStart + 1;
-        while (leftStart <= leftEnd && rightStart <= rightEnd) {
-            if (arr[leftStart] <= arr[rightStart]) temp[t++] = arr[leftStart++];
-            else temp[t++] = arr[rightStart++];
+    public static void merge(int l, int lEnd, int rEnd) {
+        int lStart = l;
+        int rStart = lEnd + 1;
+        int cnt = l;
+        while (lStart <= lEnd && rStart <= rEnd) {
+            if (arr[lStart] <= arr[rStart]) temp[cnt++] = arr[lStart++];
+            else temp[cnt++] = arr[rStart++];
         }
-        while (leftStart <= leftEnd) {
-            temp[t++] = arr[leftStart++];
+        while (lStart <= lEnd) {
+            temp[cnt++] = arr[lStart++];
         }
-        while (rightStart <= rightEnd) {
-            temp[t++] = arr[rightStart++];
+        while (rStart <= rEnd) {
+            temp[cnt++] = arr[rStart++];
         }
 
-        for (int i = 0; i < count; i++, rightEnd--) {
-            arr[rightEnd] = temp[rightEnd];
+        for (int i = l; i <= rEnd; i++) {
+            arr[i] = temp[i];
         }
 
     }

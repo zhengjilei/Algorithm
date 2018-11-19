@@ -8,15 +8,15 @@ import java.util.Random;
  * 从小到大排序，构造最大堆, 每次选出最大值，放在数组末尾
  * 从大到小排序 ，构造最小堆
  */
-public class HeapSort {
+public class HeapSortTest {
 
     public static void main(String[] args) {
         Random random = new Random();
-        int currentSize = 10;
+        int currentSize = random.nextInt(20)+30;
         int[] t = new int[currentSize];
 
         for (int i = 0; i < currentSize; i++) {
-            t[i] = random.nextInt(200);
+            t[i] = random.nextInt(100);
         }
         System.out.println(Arrays.toString(t));
 

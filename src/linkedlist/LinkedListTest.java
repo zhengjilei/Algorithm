@@ -42,4 +42,33 @@ public class LinkedListTest {
 
         System.out.println(linkedList.hasLoop());
     }
+
+    @Test
+    public void testEndK(){
+        MyLinkedList<Integer> linkedList = new MyLinkedList<>();
+        linkedList.insert(323);
+        linkedList.insert(435);
+        linkedList.insert(25);
+        linkedList.insert(45);
+        linkedList.insert(48);
+        linkedList.insert(128);
+
+        System.out.println(linkedList.getEndK(0));
+        System.out.println(linkedList.getEndK(1));
+        System.out.println(linkedList.getEndK(4));
+        System.out.println(linkedList.getEndK(6));
+        System.out.println(linkedList.getEndK(7));
+        System.out.println(linkedList.getEndK(8));
+
+        System.out.println();
+        System.out.println(linkedList.getEndK2(0));
+        System.out.println(linkedList.getEndK2(1));
+        System.out.println(linkedList.getEndK2(4));
+        System.out.println(linkedList.getEndK2(6));
+        System.out.println(linkedList.getEndK2(7));
+        System.out.println(linkedList.getEndK2(8));
+
+
+
+    }
 }

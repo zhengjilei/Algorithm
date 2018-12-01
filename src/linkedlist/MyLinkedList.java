@@ -128,7 +128,7 @@ public class MyLinkedList<T> {
     }
 
     /**
-     * 未知链表长度：获取链表倒数第 k 个节点(双指针法，相差 k-1)
+     * 未知链表长度：获取链表倒数第 k 个节点(双指针法)
      *
      * @param k
      * @return
@@ -137,6 +137,7 @@ public class MyLinkedList<T> {
 
         Node p = header.next;
         Node q = p;
+        if (p == null || k <= 0) return null;
         for (int i = 0; i < k; i++) {// p 和 q 相差 k 步
             if (q == null) return null; // 没有倒数第 K 个节点
             else q = q.next;
@@ -144,6 +145,24 @@ public class MyLinkedList<T> {
         while (q != null) {
             q = q.next;
             p = p.next;
+        }
+        return p;
+    }
+
+    public Node getEndK2(int k) {
+        if (header == null || k <= 0) return null;
+        Node p = header.next, q = header.next;
+        if (p == null) return null;
+
+        int i = 0;
+        while (i < k && q != null) { // q 向前走 k 步
+            q = q.next;
+            i++;
+        }
+        if (i < k) return null; // 总数小于 k 个
+        while (q != null) {
+            p = p.next;
+            q = q.next;
         }
         return p;
     }
@@ -211,6 +230,14 @@ public class MyLinkedList<T> {
 
         public Node(T data) {
             this.data = data;
+        }
+
+        @Override
+        public String toString() {
+            if (this == null) return "null";
+            else {
+                return this.data+"";
+            }
         }
     }
 }

@@ -18,7 +18,8 @@ public class QuickSort {
         if (a[mid] < a[k]) k = mid;
         if (a[right] < a[k]) k = right; // k指向三者中最小的元素
         if (k != left) swap(a, k, left); // 将最小元素换到 left
-        if (mid != right && a[mid] < a[right]) swap(a, mid, right); // 将中间元素 pivot 换到数组末尾
+        if (mid != right && a[mid] < a[right])
+            swap(a, mid, right); // 将中间元素 pivot 换到数组末尾
 
         return a[right];
     }
@@ -31,9 +32,14 @@ public class QuickSort {
             while (i < j && a[j] >= pivotValue) j--;
             if (i < j) {
                 swap(a, i, j);
+                // 这里不能有 i++;j--;
+                // 例如 取中位数后得到 21 13 9 15   （15是pivot）
+                // 21 和 9 需要交换位置, i++, j-- 之后得到i=j=1 跳出循环
+                // i 指向的位置数值不一定大于 pivot=15，交换 13 15 得到错误划分
             }
         }
-        swap(a, i, right); // 恢复pivot 的正确位置，i指向第一个比 pivot 大的数， 故可以交换到 pivot 的右边
+        // 恢复pivot 的正确位置，i指向第一个比 pivot 大的数， 故可以交换到 pivot 的右边
+        swap(a, i, right);
         return i;
     }
 
@@ -53,8 +59,8 @@ public class QuickSort {
 
     @Test
     public void testA() {
-        int[] a = new int[]{1, 0, 4, 6, 2, 4, 6, 2, 2};
-        quickSort(a, 0, 8);
+        int[] a = new int[]{75, 70, 80, 59, 54, 96, 12, 78, 29, 35, 11, 69, 56, 36, 79, 45, 69, 30, 27, 47, 17, 74};
+        quickSort(a, 0, 21);
         System.out.println(Arrays.toString(a));
 
 

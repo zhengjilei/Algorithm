@@ -21,6 +21,114 @@ public class BinaryTree<T> {
         root.parentNode = null;
     }
 
+    public void buildTree(int[] a, int[] b) throws Exception {
+        root = buildTree(a, b, 0, 0, b.length - 1);
+    }
+
+    /**
+     * 根据前序和中序序列构造二叉树
+     *
+     * @param a
+     * @param b
+     * @param aStart
+     * @param bStart
+     * @param bEnd
+     * @return
+     * @throws Exception
+     */
+    public Node<Integer> buildTree(int[] a, int[] b, int aStart, int bStart, int bEnd) throws Exception {
+
+        if (bEnd - bStart < 0) return null;
+        int k = 0;
+        int j = bStart;
+        while (j <= bEnd && a[aStart] != b[j]) {
+            j++;
+            k++;
+        }
+        if (j > bEnd) {
+            throw new Exception("前序和中序不匹配"); // 前序中序不一致，必须得抛出异常，如果返回 Null 会误以为可以正确构建二叉树
+        }
+        // k 表示 左子树节点个数
+
+        Node<Integer> root = new Node<>(a[aStart]);
+
+        Node p = buildTree(a, b, aStart + 1, bStart, bStart + k - 1); // [bStart,bStart+k-1] 构造左子树
+        Node q = buildTree(a, b, aStart + k + 1, bStart + k + 1, bEnd); // [bStart+k+1, bEnd] 构造右子树
+
+        root.leftChild = p;
+        root.rightChild = q;
+        if (p != null) {
+            p.parentNode = root;
+        }
+        if (q != null) {
+            q.parentNode = root;
+        }
+        return root;
+    }
+
+    /**
+     * 获取中序遍历下的下一个节点
+     *
+     * @param node
+     * @return
+     */
+    public Node<Integer> getNext(Node<Integer> node) {
+
+        if (node == null) return null;
+        Node<Integer> p = node;
+
+        if (p.rightChild != null) {
+            // 右子节点不为空，中序下一个节点为右子树的最左子节点
+            p = p.rightChild;
+            while (p.leftChild != null) {
+                p = p.leftChild;
+            }
+            return p;
+        } else {
+            // 右子节点为空
+            Node<Integer> parent;
+            while (p != null) {
+                parent = p.parentNode;
+                if (parent != null) {
+                    if (parent.leftChild == p) {
+                        // p 是 父节点的左子节点, 父节点即为中序下一个节点
+                        return parent;
+                    } else {
+                        p = parent;
+                    }
+                } else {
+                    break;
+                }
+            }
+
+
+        }
+        return null;
+    }
+
+    public void inOrderByGetNext() {
+        System.out.print("inOrderByGetNext: ");
+        Node p = getFirstInOrder();
+        while (p != null) {
+            visit(p);
+            p = getNext(p);
+        }
+        System.out.println();
+    }
+
+    /**
+     * 获取中序遍历下的第一个节点
+     *
+     * @return
+     */
+    public Node<Integer> getFirstInOrder() {
+        Node<Integer> p = root;
+        while (p.leftChild != null) {
+            p = p.leftChild;
+        }
+        return p;
+    }
+
     private void visit(Node n) {
         System.out.print(n.value + "  ");
     }

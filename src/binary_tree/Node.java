@@ -13,5 +13,5 @@ public class Node<T> {
 
     public Node leftChild;
     public Node rightChild;
-     Node parentNode;
+    public Node parentNode;
 }

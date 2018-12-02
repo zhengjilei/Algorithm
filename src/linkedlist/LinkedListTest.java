@@ -23,6 +23,8 @@ public class LinkedListTest {
         linkedList.insert(48);
         linkedList.insert(128);
         linkedList.print();
+        System.out.print("链表反向输出: ");
+        linkedList.reversePrint();
 
         linkedList.reverseLinkedList();
         linkedList.print();
@@ -68,6 +70,24 @@ public class LinkedListTest {
         System.out.println(linkedList.getEndK2(7));
         System.out.println(linkedList.getEndK2(8));
 
+
+    }
+
+    @Test
+    public void testReversePrint(){
+        MyLinkedList<Integer> linkedList = new MyLinkedList<>();
+        linkedList.reversePrint();
+        linkedList.reversePrint2();
+
+        linkedList.insert(48);
+        linkedList.insert(128);
+        linkedList.reversePrint();
+        linkedList.reversePrint2();
+
+        linkedList.insert(25);
+        linkedList.insert(45);
+        linkedList.reversePrint();
+        linkedList.reversePrint2();
 
 
     }

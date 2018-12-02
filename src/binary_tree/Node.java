@@ -11,7 +11,7 @@ public class Node<T> {
         this.value = value;
     }
 
-    Node leftChild;
-    Node rightChild;
-    Node parentNode;
+    public Node leftChild;
+    public Node rightChild;
+     Node parentNode;
 }

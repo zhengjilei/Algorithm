@@ -7,7 +7,7 @@ package 剑指offer;
  * O(m+n)
  * created by Ethan-Walker on 2018/12/2
  */
-public class Q0051_UnionTwoSortedArray {
+public class Q005A_UnionTwoSortedArray {
 
 }
 /*

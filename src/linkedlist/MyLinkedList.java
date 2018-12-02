@@ -1,5 +1,7 @@
 package linkedlist;
 
+import java.util.ArrayDeque;
+
 /**
  * Created by lenovo on 2018/4/2.
  * 带附加头结点的链表
@@ -7,19 +9,19 @@ package linkedlist;
 public class MyLinkedList<T> {
 
 
-    private Node<T> header;
+    private Node<T> head;
     private int size;
 
     public MyLinkedList() {
-        this.header = new Node<>(null);  // 链表头不放数据
+        this.head = new Node<>(null);  // 链表头不放数据
     }
 
-    public Node<T> getHeader() {
-        return header;
+    public Node<T> getHead() {
+        return head;
     }
 
     public boolean insert(T data) {
-        Node tmp = header;
+        Node tmp = head;
         while (true) {
             if (tmp.next == null) {
                 tmp.next = new Node(data);
@@ -32,10 +34,10 @@ public class MyLinkedList<T> {
     }
 
     public boolean delete(T data) {
-        Node tmp = header.next;
+        Node tmp = head.next;
 
         if (tmp != null && tmp.data.equals(data)) {
-            header.next = tmp.next;
+            head.next = tmp.next;
             size--;
             return true;
         }
@@ -60,7 +62,7 @@ public class MyLinkedList<T> {
     }
 
     public boolean update(T olddata, T newdata) {
-        Node tmp = header.next;
+        Node tmp = head.next;
         while (tmp != null) {
             if (tmp.data.equals(olddata)) {
                 tmp.data = newdata;
@@ -73,7 +75,7 @@ public class MyLinkedList<T> {
     }
 
     public boolean query(T data) {
-        Node tmp = header.next;
+        Node tmp = head.next;
         while (tmp != null) {
             if (tmp.data.equals(data)) {
                 return true;
@@ -85,7 +87,7 @@ public class MyLinkedList<T> {
 
 
     public void deleteDuplicateNodes() {
-        Node outer = header.next;
+        Node outer = head.next;
         while (outer != null) {
             Node inner = outer;
             Node cur = inner.next;
@@ -107,7 +109,7 @@ public class MyLinkedList<T> {
      * 反转链表
      */
     public void reverseLinkedList() {
-        Node q = header.next;
+        Node q = head.next;
         Node p = null, r = null;
         while (q != null) {
             r = q.next;
@@ -115,11 +117,11 @@ public class MyLinkedList<T> {
             p = q;
             q = r;
         }
-        header.next = p;
+        head.next = p;
     }
 
     public void print() {
-        Node cur = header.next;
+        Node cur = head.next;
         while (cur != null) {
             System.out.print(cur.data + "->");
             cur = cur.next;
@@ -135,7 +137,7 @@ public class MyLinkedList<T> {
      */
     public Node<T> getEndK(int k) {
 
-        Node p = header.next;
+        Node p = head.next;
         Node q = p;
         if (p == null || k <= 0) return null;
         for (int i = 0; i < k; i++) {// p 和 q 相差 k 步
@@ -150,8 +152,8 @@ public class MyLinkedList<T> {
     }
 
     public Node getEndK2(int k) {
-        if (header == null || k <= 0) return null;
-        Node p = header.next, q = header.next;
+        if (head == null || k <= 0) return null;
+        Node p = head.next, q = head.next;
         if (p == null) return null;
 
         int i = 0;
@@ -174,9 +176,9 @@ public class MyLinkedList<T> {
      * @param
      */
     public void printMidNode() {
-        Node first = header;
+        Node first = head;
 
-        Node second = header;
+        Node second = head;
         if (second.next == null) {
             // 空链表
             print();
@@ -214,7 +216,7 @@ public class MyLinkedList<T> {
      */
     public boolean hasLoop() {
 
-        Node p = header, q = header.next;
+        Node p = head, q = head.next;
         while (p != q) {
             if (q == null || q.next == null) return false;
             p = p.next;
@@ -223,6 +225,42 @@ public class MyLinkedList<T> {
         return true;
     }
 
+
+    /**
+     * 利用栈反向打印单向链表
+     */
+    public void reversePrint() {
+        ArrayDeque stack = new ArrayDeque<>();
+        if (head == null) return;
+        Node p = head.next;
+        while (p != null) {
+            stack.push(p.data);
+            p = p.next;
+        }
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pop() + " ");
+        }
+        System.out.println();
+    }
+
+    /**
+     * 递归反向打印单向链表
+     *
+     * @param n
+     */
+    public void reversePrint2(Node n) {
+        if (n == null) return;
+        if (n.next != null) {
+            reversePrint2(n.next);
+        }
+        System.out.print(n.data+" ");
+    }
+
+    public void reversePrint2() {
+        if (head == null) return;
+        reversePrint2(head.next);
+        System.out.println();
+    }
 
     class Node<T> {
         T data;
@@ -236,7 +274,7 @@ public class MyLinkedList<T> {
         public String toString() {
             if (this == null) return "null";
             else {
-                return this.data+"";
+                return this.data + "";
             }
         }
     }

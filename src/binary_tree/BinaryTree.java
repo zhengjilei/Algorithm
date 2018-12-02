@@ -10,6 +10,10 @@ public class BinaryTree<T> {
 
     private Node root = null;
 
+    public BinaryTree() {
+
+    }
+
     public BinaryTree(T value) {
         root = new Node(value);
         root.leftChild = null;
@@ -21,8 +25,36 @@ public class BinaryTree<T> {
         System.out.print(n.value + "  ");
     }
 
+    public void setRoot(Node root) {
+        if (root == null) return;
+        this.root = root;
+    }
 
-    public void preOrderRecur(Node p) {
+    public Node getRoot() {
+        return root;
+    }
+
+    public void preOrderRecur() {
+        if (root == null) return;
+        preOrderRecur(root);
+        System.out.println();
+    }
+
+    public void inOrderRecur() {
+        if (root == null) return;
+
+        inOrderRecur(root);
+        System.out.println();
+    }
+
+    public void postOrderRecur() {
+        if (root == null) return;
+
+        postOrderRecur(root);
+        System.out.println();
+    }
+
+    private void preOrderRecur(Node p) {
         if (p != null) {
             visit(p);
             preOrderRecur(p.leftChild);
@@ -30,7 +62,7 @@ public class BinaryTree<T> {
         }
     }
 
-    public void inOrderRecur(Node p) {
+    private void inOrderRecur(Node p) {
         if (p != null) {
             inOrderRecur(p.leftChild);
             visit(p);
@@ -38,10 +70,10 @@ public class BinaryTree<T> {
         }
     }
 
-    public void postOrder(Node p) {
+    private void postOrderRecur(Node p) {
         if (p != null) {
-            postOrder(p.leftChild);
-            postOrder(p.rightChild);
+            postOrderRecur(p.leftChild);
+            postOrderRecur(p.rightChild);
             visit(p);
         }
     }
@@ -80,12 +112,11 @@ public class BinaryTree<T> {
 
     /**
      * 层次序遍历：队列
-     *
-     * @param p
      */
-    public void levelOrder(Node p) {
+    public void levelOrder() {
+        if (root == null) return;
         ArrayDeque<Node> queue = new ArrayDeque<>();
-        queue.push(p);
+        queue.push(root);
         Node q;
         while (!queue.isEmpty()) {
             q = queue.poll();
@@ -93,6 +124,7 @@ public class BinaryTree<T> {
             if (q.leftChild != null) queue.offer(q.leftChild);
             if (q.rightChild != null) queue.offer(q.rightChild);
         }
+        System.out.println();
     }
 
     /**

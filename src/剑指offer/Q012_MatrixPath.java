@@ -14,8 +14,8 @@ public class Q012_MatrixPath {
 
     void init() {
         moves = new Move[4];
-        moves[3] = new Move(1, 0, "down");
-        moves[2] = new Move(0, 1, "right");
+        moves[3] = new Move(0, 1, "down");
+        moves[2] = new Move(1, 0, "right");
         moves[1] = new Move(-1, 0, "left");
         moves[0] = new Move(0, -1, "up");
     }
@@ -33,7 +33,7 @@ public class Q012_MatrixPath {
                         }
                     }
                 }
-                if (getMatrixPath(s, chs, 0, visited, i, j)) {
+                if (getMatrixPath2(s, chs, 0, visited, i, j)) {
                     while (!stack.isEmpty()) {
                         Pos p = stack.pop();
                         System.out.print("(" + p.x + "," + p.y + ")  ");
@@ -79,25 +79,44 @@ public class Q012_MatrixPath {
         if (visited[i][j] == false && s.charAt(index) == chs[i][j]) {
             visited[i][j] = true;
             stack.push(new Pos(i, j));
-
             for (int k = 0; k < 4; k++) {
                 if (getMatrixPath(s, chs, index + 1, visited, i + moves[k].x, j + moves[k].y)) {
                     // 返回 true 表明找到成功路径了   false 表示当前路径不成功
-
                     return true;
                 }
             }
             // 四个方向上 都探索失败，回退
             stack.pop();
+            visited[i][j] = false;
         }
         return false;
+    }
+
+    public boolean getMatrixPath2(String s, char[][] chs, int index, boolean[][] visited, int i, int j) {
+        if (index == s.length()) return true;
+        if (i < 0 || i >= chs.length || j < 0 || j >= chs[0].length) return false;
+        boolean hasPath = false;
+        if (visited[i][j] == false && s.charAt(index) == chs[i][j]) {
+            visited[i][j] = true;
+            stack.push(new Pos(i, j));
+            hasPath = getMatrixPath2(s, chs, index + 1, visited, i + 1, j)
+                    || getMatrixPath2(s, chs, index + 1, visited, i, j + 1)
+                    || getMatrixPath2(s, chs, index + 1, visited, i - 1, j)
+                    || getMatrixPath2(s, chs, index + 1, visited, i, j - 1);
+            if (!hasPath) {
+                stack.pop();
+                visited[i][j] = false;
+            }
+        }
+        return hasPath;
+
     }
 
     public static void main(String[] args) {
         Q012_MatrixPath p = new Q012_MatrixPath();
         p.init();
 //        char[][] chs = new char[][]{{'a', 'b', 't', 'g'}, {'c', 'f', 'c', 's'}, {'j', 'd', 'e', 'h'}};
-        char[][] chs = new char[][]{{'a', 'b', 't', 'g'}};
-        System.out.println(p.getMatrixPath("e", chs));
+        char[][] chs = new char[][]{{'a', 'b', 'f', 'e'}, {'m', 'f', 'g', 'k'}, {'b', 'k', 'c', 'd'}};
+        System.out.println(p.getMatrixPath("bfekgf", chs));
     }
 }

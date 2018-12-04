@@ -12,8 +12,8 @@ public class Q010_Jump {
 
     public long jumpKind(int n) {
         if (n <= 0) return 0;
-        long a = 1, b = 1; // 跳上 1层 1种,跳上 2层 2种
-        long c = 1;
+        int a = 1, b = 1; // 跳上 1层 1种,跳上 2层 2种
+        int c = 1;
         for (int i = 2; i <= n; i++) {
             c = a + b;
             a = b;
@@ -23,7 +23,7 @@ public class Q010_Jump {
     }
 
     @Test
-    public void testJumpKind(){
+    public void testJumpKind() {
         System.out.println(jumpKind(1));
         System.out.println(jumpKind(2));
         System.out.println(jumpKind(3));

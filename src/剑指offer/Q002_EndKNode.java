@@ -25,11 +25,13 @@ public class Q002_EndKNode {
         if (head == null || k <= 0) return null;
         Node p = head, q = head;
         int i = 0;
-        while (i < k && q != null) { // q 向前走 k 步
+        for (i = 0; i < k && q != null; i++) {      // q 向前走 k 步
             q = q.next;
-            i++;
         }
+
         if (i < k) return null; // 总数小于 k 个
+
+        // q 指向 null 时，p 指向倒数第 k 个节点
         while (q != null) {
             p = p.next;
             q = q.next;

@@ -7,8 +7,8 @@ import org.junit.Test;
  */
 public class LinkedListTest {
     @Test
-    public void testInteger(){
-        MyLinkedList<Integer> linkedList = new MyLinkedList<>();
+    public void testInteger() {
+        MyLinkedList linkedList = new MyLinkedList();
         linkedList.reverseLinkedList();
         linkedList.print();
 
@@ -29,14 +29,14 @@ public class LinkedListTest {
         linkedList.reverseLinkedList();
         linkedList.print();
 
-        MyLinkedList<Integer>.Node<Integer> endK = linkedList.getEndK(2);
-        System.out.println(endK.data);
+        MyLinkedList.Node endK = linkedList.getEndK(2);
+        System.out.println(endK.val);
 
         linkedList.printMidNode();
         linkedList.query(435);
         linkedList.query(43);
 
-        linkedList.update(435,434);
+        linkedList.update(435, 434);
         linkedList.print();
 
         linkedList.reverseLinkedList();
@@ -46,8 +46,8 @@ public class LinkedListTest {
     }
 
     @Test
-    public void testEndK(){
-        MyLinkedList<Integer> linkedList = new MyLinkedList<>();
+    public void testEndK() {
+        MyLinkedList linkedList = new MyLinkedList();
         linkedList.insert(323);
         linkedList.insert(435);
         linkedList.insert(25);
@@ -74,8 +74,8 @@ public class LinkedListTest {
     }
 
     @Test
-    public void testReversePrint(){
-        MyLinkedList<Integer> linkedList = new MyLinkedList<>();
+    public void testReversePrint() {
+        MyLinkedList linkedList = new MyLinkedList();
         linkedList.reversePrint();
         linkedList.reversePrint2();
 
@@ -88,7 +88,71 @@ public class LinkedListTest {
         linkedList.insert(45);
         linkedList.reversePrint();
         linkedList.reversePrint2();
+    }
 
 
+    @Test
+    public void testDeleteSpecNode() {
+        MyLinkedList linkedList = new MyLinkedList();
+        linkedList.insert(323);
+        linkedList.insert(435);
+        linkedList.insert(25);
+        linkedList.insert(45);
+        linkedList.insert(48);
+        linkedList.insert(128);
+
+        linkedList.print();
+        MyLinkedList.Node node = linkedList.findNode(323);
+        MyLinkedList.Node node1 = linkedList.findNode(435);
+        MyLinkedList.Node node2 = linkedList.findNode(45);
+        MyLinkedList.Node node3 = linkedList.findNode(128);
+        linkedList.deleteSpecNode(node3);
+        linkedList.print();
+    }
+
+    @Test
+    public void testDeleteDupNode() {
+        MyLinkedList linkedList = new MyLinkedList();
+
+        linkedList.insert(25);
+        linkedList.insert(25);
+        linkedList.insert(25);
+        linkedList.insert(45);
+        linkedList.insert(45);
+        linkedList.insert(48);
+        linkedList.insert(128);
+        linkedList.insert(128);
+        linkedList.insert(323);
+        linkedList.insert(323);
+        linkedList.insert(323);
+        linkedList.insert(323);
+        linkedList.insert(435);
+        linkedList.insert(435);
+        linkedList.print();
+        linkedList.deleteDupNode();
+        linkedList.print();
+    }
+
+    @Test
+    public void testDeleteAllDupNode() {
+        MyLinkedList linkedList = new MyLinkedList();
+        linkedList.insert(25);
+        linkedList.insert(25);
+        linkedList.insert(25);
+        linkedList.insert(45);
+        linkedList.insert(45);
+//        linkedList.insert(48);
+        linkedList.insert(128);
+        linkedList.insert(128);
+        linkedList.insert(323);
+        linkedList.insert(323);
+        linkedList.insert(323);
+        linkedList.insert(323);
+        linkedList.insert(435);
+        linkedList.insert(435);
+
+        linkedList.print();
+        linkedList.deleteAllDupNode();
+        linkedList.print();
     }
 }

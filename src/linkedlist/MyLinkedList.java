@@ -6,21 +6,21 @@ import java.util.ArrayDeque;
  * Created by lenovo on 2018/4/2.
  * 带附加头结点的链表
  */
-public class MyLinkedList<T> {
+public class MyLinkedList {
 
 
-    private Node<T> head;
+    private Node head;
     private int size;
 
     public MyLinkedList() {
-        this.head = new Node<>(null);  // 链表头不放数据
+        this.head = new Node(-1);  // 链表头不放数据
     }
 
-    public Node<T> getHead() {
+    public Node getHead() {
         return head;
     }
 
-    public boolean insert(T data) {
+    public boolean insert(int data) {
         Node tmp = head;
         while (true) {
             if (tmp.next == null) {
@@ -33,10 +33,10 @@ public class MyLinkedList<T> {
         return true;
     }
 
-    public boolean delete(T data) {
+    public boolean delete(int data) {
         Node tmp = head.next;
 
-        if (tmp != null && tmp.data.equals(data)) {
+        if (tmp != null && tmp.val == data) {
             head.next = tmp.next;
             size--;
             return true;
@@ -48,7 +48,7 @@ public class MyLinkedList<T> {
 
             if (tmp != null) {
                 next = tmp.next;
-                if (tmp.data.equals(data)) {
+                if (tmp.val == data) {
                     previous.next = next;
                     size--;
                     return true;
@@ -61,11 +61,11 @@ public class MyLinkedList<T> {
         return false;
     }
 
-    public boolean update(T olddata, T newdata) {
+    public boolean update(int olddata, int newdata) {
         Node tmp = head.next;
         while (tmp != null) {
-            if (tmp.data.equals(olddata)) {
-                tmp.data = newdata;
+            if (tmp.val == olddata) {
+                tmp.val = newdata;
                 return true;
             }
             tmp = tmp.next;
@@ -74,10 +74,10 @@ public class MyLinkedList<T> {
 
     }
 
-    public boolean query(T data) {
+    public boolean query(int data) {
         Node tmp = head.next;
         while (tmp != null) {
-            if (tmp.data.equals(data)) {
+            if (tmp.val == data) {
                 return true;
             }
             tmp = tmp.next;
@@ -92,7 +92,7 @@ public class MyLinkedList<T> {
             Node inner = outer;
             Node cur = inner.next;
             while (cur != null) {
-                if (outer.data == cur.data) {
+                if (outer.val == cur.val) {
                     inner.next = cur.next;
                     cur = cur.next;
                     size--;
@@ -123,7 +123,7 @@ public class MyLinkedList<T> {
     public void print() {
         Node cur = head.next;
         while (cur != null) {
-            System.out.print(cur.data + "->");
+            System.out.print(cur.val + "->");
             cur = cur.next;
         }
         System.out.println();
@@ -135,7 +135,7 @@ public class MyLinkedList<T> {
      * @param k
      * @return
      */
-    public Node<T> getEndK(int k) {
+    public Node getEndK(int k) {
 
         Node p = head.next;
         Node q = p;
@@ -199,11 +199,11 @@ public class MyLinkedList<T> {
             second = second.next.next;//3 5
             if (second != null && second.next == null) {
                 // 偶数
-                System.out.println(first.data + " & " + first.next.data);
+                System.out.println(first.val + " & " + first.next.val);
                 return;
             } else if (second == null) {
                 // 奇数
-                System.out.println(first.data);
+                System.out.println(first.val);
                 return;
             }
         }
@@ -234,7 +234,7 @@ public class MyLinkedList<T> {
         if (head == null) return;
         Node p = head.next;
         while (p != null) {
-            stack.push(p.data);
+            stack.push(p.val);
             p = p.next;
         }
         while (!stack.isEmpty()) {
@@ -253,7 +253,7 @@ public class MyLinkedList<T> {
         if (n.next != null) {
             reversePrint2(n.next);
         }
-        System.out.print(n.data+" ");
+        System.out.print(n.val + " ");
     }
 
     public void reversePrint2() {
@@ -262,19 +262,121 @@ public class MyLinkedList<T> {
         System.out.println();
     }
 
-    class Node<T> {
-        T data;
-        Node<T> next;
+    /**
+     * O(1) 时间内删除指定节点
+     * 删除节点 p, 返回头结点
+     *
+     * @param head
+     * @param p
+     * @return
+     */
+    public void deleteSpecNode(Node p) {
+        if (head == null || p == null) {
+            return;
+        }
 
-        public Node(T data) {
-            this.data = data;
+        Node q = p.next;
+        if (q == null) {
+            //说明 p 是最后一个节点，只能顺序查找到 p 的前驱节点
+            Node t = head;
+            while (t.next != p) {
+                t = t.next;
+            }
+            t.next = null;
+        } else {
+            // 将 q 节点内容复制给 p, 删除 q 节点
+            p.val = q.val;
+            p.next = q.next;
+        }
+        return;
+
+    }
+
+    public Node findNode(int val) {
+        Node p = head.next;
+        while (p != null && p.val != val) {
+            p = p.next;
+        }
+
+        return p;
+    }
+
+    /**
+     * 链表递增排序
+     * 删除重复节点
+     *
+     * @param head
+     */
+    public void deleteDupNode() {
+        if (head == null || head.next == null) return;//25->25->25->45->45->48->128->128->323->323->323->323->435->435->
+        Node p = head.next, q = p.next;
+        while (q != null) {
+            if (p.val != q.val) {
+                if (p.next != q) {
+                    // 说明p q 之间有重复元素 p
+                    p.next = q;
+
+                }
+                p = q;
+                q = q.next;
+            } else {
+                q = q.next;
+            }
+        }
+        if (p.next != q) {
+            p.next = q;
+        }
+
+    }
+
+    /**
+     * 有附加头结点
+     * 在一个排序的链表中，删除所有的重复节点(多个节点重复，删除所有)
+     * 1. 所有节点都被删除
+     * 2. 没有重复节点
+     * 3. 首节点是重复节点
+     * 4. 尾节点是重复节点
+     */
+    public void deleteAllDupNode() {
+        if (head == null || head.next == null || head.next.next == null)// 无节点/只有一个节点
+            return;
+
+        Node prev = head, p = head.next; // prev 指向第一个非重复节点
+        Node q;
+        while (p != null) {
+            q = p.next;
+            if (q != null && q.val == p.val) {
+                // p 是重复节点, 需要删除
+                while (q != null && q.val == p.val) {
+                    q = q.next;
+                }
+                // q == null || q指向第一个 不等于 p 的节点
+                prev.next = q;
+            } else {
+                // q==null || q.val !=p.val 即 p 不需要删除
+                prev.next = p;
+                prev = p;
+            }
+            p = q;
+        }
+
+        return;
+
+    }
+
+    class Node {
+        int val;
+        Node next;
+
+        public Node(int val) {
+            this.val = val;
         }
 
         @Override
         public String toString() {
             if (this == null) return "null";
             else {
-                return this.data + "";
+                return this.val + "";
             }
         }
     }

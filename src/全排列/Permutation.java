@@ -7,6 +7,8 @@ public class Permutation {
     /**
      * 求数组 a 从 a[0] 到 a[i] 的全排列
      * recur(a,i,n) 表示a[0]到 a[i] 的全排列
+     * <p>
+     * 不考虑a[0] ~ a[i] 之间具有重复值
      *
      * @param a
      * @param i
@@ -17,6 +19,7 @@ public class Permutation {
             System.out.println(Arrays.toString(a));
             return;
         }
+        // 将 a[j] 排到末尾，对 a[0] ~ a[i-1] 求全排列
         for (int j = 0; j <= i; j++) {
             swap(a, j, i);
             recur(a, i - 1, n);
@@ -37,6 +40,7 @@ public class Permutation {
             System.out.println(Arrays.toString(a));
             return;
         }
+        // 将 a[j] 排到 a[i] 位置，递归求 a[i+1] ~ a[n-1]的全排列
         for (int j = i; j <= n - 1; j++) {
             swap(a, j, i);
             recur2(a, i + 1, n);
@@ -115,7 +119,7 @@ public class Permutation {
 
     public static void main(String[] args) {
         int[] a = new int[]{1, 1, 2, 3};
-//        recur2(a, 0, 4);
-        lexicalPermutation(a, a.length);
+        recur(a, 3, 4);
+//        lexicalPermutation(a, a.length);
     }
 }

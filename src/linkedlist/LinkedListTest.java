@@ -155,4 +155,25 @@ public class LinkedListTest {
         linkedList.deleteAllDupNode();
         linkedList.print();
     }
+
+    @Test
+    public void testUnionSortedList() {
+        MyLinkedList linkedList = new MyLinkedList();
+        linkedList.insert(5);
+        linkedList.insert(11);
+        linkedList.insert(18);
+        linkedList.insert(18);
+        linkedList.insert(25);
+
+        MyLinkedList linkedList2 = new MyLinkedList();
+        linkedList2.insert(2);
+        linkedList2.insert(3);
+        linkedList2.insert(14);
+        linkedList2.insert(23);
+        linkedList2.insert(29);
+        
+        MyLinkedList list3 = new MyLinkedList();
+        list3.setHead(list3.union(linkedList.getHead(), linkedList2.getHead()));
+        list3.print();
+    }
 }

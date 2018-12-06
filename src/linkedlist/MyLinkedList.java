@@ -20,6 +20,10 @@ public class MyLinkedList {
         return head;
     }
 
+    public void setHead(Node head) {
+        this.head = head;
+    }
+
     public boolean insert(int data) {
         Node tmp = head;
         while (true) {
@@ -118,6 +122,51 @@ public class MyLinkedList {
             q = r;
         }
         head.next = p;
+    }
+
+    /**
+     * 合并两个增序链表
+     *
+     * @param a
+     * @param b
+     * @return
+     */
+    public Node union(Node a, Node b) {
+
+        if (a == null || b == null) return a == null ? b : a;
+        if (a.next == null || b.next == null) return a.next == null ? b : a;
+
+        // 去掉头结点
+        a = a.next;
+        b = b.next;
+
+        Node head = new Node(-1);
+        Node c = head;
+        while (a != null && b != null) {
+            if (a.val <= b.val) {
+                c.next = a;
+                c = c.next;
+                a = a.next;
+            } else {
+                c.next = b;
+                c = c.next;
+                b = b.next;
+            }
+        }
+
+        while (a != null) {
+            c.next = a;
+            c = c.next;
+            a = a.next;
+        }
+
+        while (b != null) {
+            c.next = b;
+            c = c.next;
+            b = b.next;
+        }
+        c.next = null;
+        return head;
     }
 
     /**

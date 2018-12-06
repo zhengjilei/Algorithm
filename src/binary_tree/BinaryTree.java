@@ -8,17 +8,19 @@ import java.util.ArrayDeque;
  */
 public class BinaryTree<T> {
 
-    private Node root = null;
+    private TreeNode root = null;
+
+
 
     public BinaryTree() {
 
     }
 
     public BinaryTree(T value) {
-        root = new Node(value);
-        root.leftChild = null;
-        root.rightChild = null;
-        root.parentNode = null;
+        root = new TreeNode(value);
+        root.left = null;
+        root.right = null;
+        root.parent = null;
     }
 
     public void buildTree(int[] a, int[] b) throws Exception {
@@ -36,7 +38,7 @@ public class BinaryTree<T> {
      * @return
      * @throws Exception
      */
-    public Node<Integer> buildTree(int[] a, int[] b, int aStart, int bStart, int bEnd) throws Exception {
+    public TreeNode<Integer> buildTree(int[] a, int[] b, int aStart, int bStart, int bEnd) throws Exception {
 
         if (bEnd - bStart < 0) return null;
         int k = 0;
@@ -50,18 +52,18 @@ public class BinaryTree<T> {
         }
         // k 表示 左子树节点个数
 
-        Node<Integer> root = new Node<>(a[aStart]);
+        TreeNode<Integer> root = new TreeNode<>(a[aStart]);
 
-        Node p = buildTree(a, b, aStart + 1, bStart, bStart + k - 1); // [bStart,bStart+k-1] 构造左子树
-        Node q = buildTree(a, b, aStart + k + 1, bStart + k + 1, bEnd); // [bStart+k+1, bEnd] 构造右子树
+        TreeNode p = buildTree(a, b, aStart + 1, bStart, bStart + k - 1); // [bStart,bStart+k-1] 构造左子树
+        TreeNode q = buildTree(a, b, aStart + k + 1, bStart + k + 1, bEnd); // [bStart+k+1, bEnd] 构造右子树
 
-        root.leftChild = p;
-        root.rightChild = q;
+        root.left = p;
+        root.right = q;
         if (p != null) {
-            p.parentNode = root;
+            p.parent = root;
         }
         if (q != null) {
-            q.parentNode = root;
+            q.parent = root;
         }
         return root;
     }
@@ -72,25 +74,25 @@ public class BinaryTree<T> {
      * @param node
      * @return
      */
-    public Node<Integer> getNext(Node<Integer> node) {
+    public TreeNode<Integer> getNext(TreeNode<Integer> node) {
 
         if (node == null) return null;
-        Node<Integer> p = node;
+        TreeNode<Integer> p = node;
 
-        if (p.rightChild != null) {
+        if (p.right != null) {
             // 右子节点不为空，中序下一个节点为右子树的最左子节点
-            p = p.rightChild;
-            while (p.leftChild != null) {
-                p = p.leftChild;
+            p = p.right;
+            while (p.left != null) {
+                p = p.left;
             }
             return p;
         } else {
             // 右子节点为空
-            Node<Integer> parent;
+            TreeNode<Integer> parent;
             while (p != null) {
-                parent = p.parentNode;
+                parent = p.parent;
                 if (parent != null) {
-                    if (parent.leftChild == p) {
+                    if (parent.left == p) {
                         // p 是 父节点的左子节点, 父节点即为中序下一个节点
                         return parent;
                     } else {
@@ -108,7 +110,7 @@ public class BinaryTree<T> {
 
     public void inOrderByGetNext() {
         System.out.print("inOrderByGetNext: ");
-        Node p = getFirstInOrder();
+        TreeNode p = getFirstInOrder();
         while (p != null) {
             visit(p);
             p = getNext(p);
@@ -121,24 +123,24 @@ public class BinaryTree<T> {
      *
      * @return
      */
-    public Node<Integer> getFirstInOrder() {
-        Node<Integer> p = root;
-        while (p.leftChild != null) {
-            p = p.leftChild;
+    public TreeNode<Integer> getFirstInOrder() {
+        TreeNode<Integer> p = root;
+        while (p.left != null) {
+            p = p.left;
         }
         return p;
     }
 
-    private void visit(Node n) {
-        System.out.print(n.value + "  ");
+    private void visit(TreeNode n) {
+        System.out.print(n.val + "  ");
     }
 
-    public void setRoot(Node root) {
+    public void setRoot(TreeNode root) {
         if (root == null) return;
         this.root = root;
     }
 
-    public Node getRoot() {
+    public TreeNode getRoot() {
         return root;
     }
 
@@ -162,26 +164,26 @@ public class BinaryTree<T> {
         System.out.println();
     }
 
-    private void preOrderRecur(Node p) {
+    private void preOrderRecur(TreeNode p) {
         if (p != null) {
             visit(p);
-            preOrderRecur(p.leftChild);
-            preOrderRecur(p.rightChild);
+            preOrderRecur(p.left);
+            preOrderRecur(p.right);
         }
     }
 
-    private void inOrderRecur(Node p) {
+    private void inOrderRecur(TreeNode p) {
         if (p != null) {
-            inOrderRecur(p.leftChild);
+            inOrderRecur(p.left);
             visit(p);
-            inOrderRecur(p.rightChild);
+            inOrderRecur(p.right);
         }
     }
 
-    private void postOrderRecur(Node p) {
+    private void postOrderRecur(TreeNode p) {
         if (p != null) {
-            postOrderRecur(p.leftChild);
-            postOrderRecur(p.rightChild);
+            postOrderRecur(p.left);
+            postOrderRecur(p.right);
             visit(p);
         }
     }
@@ -192,13 +194,13 @@ public class BinaryTree<T> {
      * 出栈访问，循环第一步
      */
     public void preOrder() {
-        ArrayDeque<Node> stack = new ArrayDeque<>();
+        ArrayDeque<TreeNode> stack = new ArrayDeque<>();
         stack.push(root);
         while (!stack.isEmpty()) {
             root = stack.pop();
             visit(root);
-            if (root.rightChild != null) stack.push(root.rightChild);
-            if (root.leftChild != null) stack.push(root.leftChild);
+            if (root.right != null) stack.push(root.right);
+            if (root.left != null) stack.push(root.left);
         }
     }
 
@@ -207,13 +209,13 @@ public class BinaryTree<T> {
      * 只压右节点
      */
     public void preOrderAno() {
-        ArrayDeque<Node> stack = new ArrayDeque<>();
-        Node p = root;
+        ArrayDeque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode p = root;
         stack.push(null); // 防止栈为空，弹出出错
         while (p != null) {
             visit(p);
-            if (p.rightChild != null) stack.push(p.rightChild);
-            if (p.leftChild != null) p = p.leftChild;
+            if (p.right != null) stack.push(p.right);
+            if (p.left != null) p = p.left;
             else p = stack.pop();  // 左子树为空，得访问右子树了（中间节点最先已经访问过了）
         }
     }
@@ -223,14 +225,14 @@ public class BinaryTree<T> {
      */
     public void levelOrder() {
         if (root == null) return;
-        ArrayDeque<Node> queue = new ArrayDeque<>();
+        ArrayDeque<TreeNode> queue = new ArrayDeque<>();
         queue.push(root);
-        Node q;
+        TreeNode q;
         while (!queue.isEmpty()) {
             q = queue.poll();
             visit(q);
-            if (q.leftChild != null) queue.offer(q.leftChild);
-            if (q.rightChild != null) queue.offer(q.rightChild);
+            if (q.left != null) queue.offer(q.left);
+            if (q.right != null) queue.offer(q.right);
         }
         System.out.println();
     }
@@ -240,20 +242,20 @@ public class BinaryTree<T> {
      * 非递归
      */
     public void midOrder() {
-        ArrayDeque<Node> stack = new ArrayDeque<>();
-        Node p = root;
+        ArrayDeque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode p = root;
         do {
             // 递进压入 p 的左子树节点,直到左子树节点为空
             while (p != null) {
                 stack.push(p);
-                p = p.leftChild;
+                p = p.left;
             }
 
             // 弹出栈顶元素，进行访问，并进入到其右子树，重复该操作
             if (!stack.isEmpty()) {
                 p = stack.pop();
                 visit(p);
-                p = p.rightChild;
+                p = p.right;
             }
         } while (p != null || !stack.isEmpty());
         // p==null 可能是右子树为空，但栈不为空（下一次需要再次弹出）
@@ -263,4 +265,68 @@ public class BinaryTree<T> {
     /**
      * 后序遍历，节点内部设置 L、R标记 略复杂
      */
+
+
+    public void mirrorTree() {
+        if (root == null) return;
+        ArrayDeque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode node = root, temp;
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            node = stack.pop();
+            temp = node.left;
+            node.left = node.right;
+            node.right = temp;
+
+            if (node.left != null) stack.push(node.left);
+            if (node.right != null) stack.push(node.right);
+        }
+    }
+
+    public void mirrorTreeRecur() {
+        mirrorTreeRecur(root);
+    }
+
+    /**
+     * 求二叉树的镜像
+     *
+     * @param root
+     * @return
+     */
+    private void mirrorTreeRecur(TreeNode root) {
+        if (root == null) return;
+
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+        root.left = right;
+        root.right = left;
+        mirrorTreeRecur(root.left);
+        mirrorTreeRecur(root.right);
+    }
+
+
+    /**
+     * 判断一个二叉树是否是对称结构
+     * @param root
+     * @return
+     */
+    public boolean isSymmetrical(TreeNode<Integer> root) {
+        if (root == null) return true;
+        if (root.left == null && root.right == null) return true;
+
+        if (root.left != null && root.right != null) {
+            return judge(root.left, root.right);
+        }
+        return false;
+    }
+
+    public boolean judge(TreeNode<Integer> root1, TreeNode<Integer> root2) {
+        if (root1 == null && root2 == null) return true;
+        if (root1 == null || root2 == null) return false; // 只有一个为空
+        if (!root1.val.equals(root2.val)) {
+            return false;
+        }
+        return judge(root1.left, root2.right) && judge(root1.right, root2.left);
+    }
+
 }

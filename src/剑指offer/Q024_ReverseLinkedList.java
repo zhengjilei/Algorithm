@@ -1,6 +1,7 @@
 package 剑指offer;
 
 /**
+ * 反转链表
  * created by Ethan-Walker on 2018/12/6
  */
 public class Q024_ReverseLinkedList {
@@ -19,12 +20,18 @@ public class Q024_ReverseLinkedList {
         return prev;
     }
 
-    public class ListNode {
-        int val;
-        ListNode next = null;
 
-        ListNode(int val) {
-            this.val = val;
-        }
+    /**
+     * 递归实现反转链表
+     *
+     * @return
+     */
+    public ListNode reverseRecur(ListNode node) {
+        if (node == null || node.next == null) return node;
+
+        ListNode head = reverseRecur(node.next); // 逆转 node  node.next, 并返回新链表的头结点
+        node.next.next = node;
+        node.next = null;
+        return head;
     }
 }

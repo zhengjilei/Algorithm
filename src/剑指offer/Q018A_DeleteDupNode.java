@@ -32,12 +32,6 @@ public class Q018A_DeleteDupNode {
 
     }
 
-
-    class ListNode {
-        int val;
-        ListNode next;
-    }
-
     /**
      * 没有附加头结点
      * 在一个排序的链表中，删除所有的重复节点(多个节点重复，删除所有)

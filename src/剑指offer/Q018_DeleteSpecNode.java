@@ -9,7 +9,7 @@ public class Q018_DeleteSpecNode {
 
     /**
      * 删除节点 p, 返回头结点
-     *
+     * <p>
      * 1. 删除的链表 只有待删除节点一个节点
      * 2. 删除的节点是尾结点
      *
@@ -17,13 +17,13 @@ public class Q018_DeleteSpecNode {
      * @param p
      * @return
      */
-    public Node deleteSpecNode(Node head, Node p) { // 假设无附加头结点
+    public ListNode deleteSpecNode(ListNode head, ListNode p) { // 假设无附加头结点
         if (head == null || p == null || head == p) return null;
 
-        Node q = p.next;
+        ListNode q = p.next;
         if (q == null) {
             //说明 p 是最后一个节点，只能顺序查找到 p 的前驱节点
-            Node t = head;
+            ListNode t = head;
             while (t.next != p) {
                 t = t.next;
             }
@@ -37,8 +37,4 @@ public class Q018_DeleteSpecNode {
 
     }
 
-    class Node {
-        int val;
-        Node next;
-    }
 }

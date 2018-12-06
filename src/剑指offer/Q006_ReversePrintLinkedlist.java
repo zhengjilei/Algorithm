@@ -16,9 +16,9 @@ public class Q006_ReversePrintLinkedlist {
      *
      * @param head
      */
-    public void reversePrint(Node head) {
+    public void reversePrint(ListNode head) {
         if (head == null || head.next == null) return;
-        Node p = null, q = head.next, r;
+        ListNode p = null, q = head.next, r;
 
         while (q.next != null) {
             r = q.next;
@@ -40,10 +40,10 @@ public class Q006_ReversePrintLinkedlist {
      *
      * @param head
      */
-    public void stackPrint(Node head) {
+    public void stackPrint(ListNode head) {
         ArrayDeque<Integer> stack = new ArrayDeque<>();
         if (head == null) return;
-        Node p = head.next;
+        ListNode p = head.next;
         while (p != null) {
             stack.push(p.val);
             p = p.next;
@@ -53,7 +53,7 @@ public class Q006_ReversePrintLinkedlist {
         }
     }
 
-    public void recurPrint(Node n) {
+    public void recurPrint(ListNode n) {
         if (n == null) return;
         if (n.next != null) {
             recurPrint(n.next);
@@ -62,9 +62,5 @@ public class Q006_ReversePrintLinkedlist {
         System.out.print(n.val);
     }
 
-    class Node {
-        int val;
-        Node next;
-    }
 
 }

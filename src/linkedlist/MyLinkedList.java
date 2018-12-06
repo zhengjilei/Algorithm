@@ -120,6 +120,22 @@ public class MyLinkedList {
         head.next = p;
     }
 
+    /**
+     * 递归实现反转链表
+     *
+     * @param node
+     * @return
+     */
+    Node reverseRecur(Node node) {
+
+        if (node == null || node.next == null) return node;
+
+        Node head = reverseRecur(node.next); // 逆转 node  node.next, 并返回新链表的头结点
+        node.next.next = node;
+        node.next = null;
+        return head;
+    }
+
     public void print() {
         Node cur = head.next;
         while (cur != null) {

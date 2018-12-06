@@ -21,9 +21,9 @@ public class Q002_EndKNode {
      * @param k
      * @return
      */
-    Node findKthToTailNode(Node head, int k) {
+    ListNode findKthToTailNode(ListNode head, int k) {
         if (head == null || k <= 0) return null;
-        Node p = head, q = head;
+        ListNode p = head, q = head;
         int i = 0;
         for (i = 0; i < k && q != null; i++) {      // q 向前走 k 步
             q = q.next;
@@ -38,16 +38,5 @@ public class Q002_EndKNode {
         }
         return p;
     }
-
-    class Node {
-        int val;
-        Node next;
-
-        public Node(int val) {
-            this.val = val;
-
-        }
-    }
-
 
 }

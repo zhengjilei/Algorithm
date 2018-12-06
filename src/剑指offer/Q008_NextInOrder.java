@@ -1,7 +1,7 @@
 package 剑指offer;
 
 import binary_tree.BinaryTree;
-import binary_tree.Node;
+import binary_tree.TreeNode;
 import org.junit.Test;
 
 /**
@@ -10,25 +10,25 @@ import org.junit.Test;
  */
 public class Q008_NextInOrder {
 
-    public Node<Integer> getNext(Node<Integer> node) {
+    public TreeNode<Integer> getNext(TreeNode<Integer> node) {
 
         if (node == null) return null;
-        Node<Integer> p = node;
+        TreeNode<Integer> p = node;
 
-        if (p.rightChild != null) {
+        if (p.right != null) {
             // 右子节点不为空，中序下一个节点为右子树的最左子节点
-            p = p.rightChild;
-            while (p.leftChild != null) {
-                p = p.leftChild;
+            p = p.right;
+            while (p.left != null) {
+                p = p.left;
             }
             return p;
         } else {
             // 右子节点为空, 寻找某个节点是父节点的左子节点
-            Node<Integer> parent;
+            TreeNode<Integer> parent;
             while (p != null) {
-                parent = p.parentNode;
+                parent = p.parent;
                 if (parent != null) {
-                    if (parent.leftChild == p) {
+                    if (parent.left == p) {
                         // p 是 父节点的左子节点, 父节点即为中序下一个节点
                         return parent;
                     } else {

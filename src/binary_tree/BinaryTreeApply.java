@@ -11,19 +11,19 @@ public class BinaryTreeApply {
      * @param p
      * @return
      */
-    public static int size(Node p) {
+    public static int size(TreeNode p) {
         if (p == null) return 0;
-        return 1 + size(p.leftChild) + size(p.rightChild);
+        return 1 + size(p.left) + size(p.right);
     }
 
     /**
      * 递归计算二叉树的深度
      */
-    public static int height(Node p) {
+    public static int height(TreeNode p) {
         if (p == null) return 0;
         else {
-            int i = height(p.leftChild);
-            int j = height(p.rightChild);
+            int i = height(p.left);
+            int j = height(p.right);
             return (i > j) ? i + 1 : j + 1;
         }
     }
@@ -31,9 +31,9 @@ public class BinaryTreeApply {
     /**
      * 递归判断两颗二叉树是否相等
      */
-    public boolean equal(Node a, Node b) {
+    public boolean equal(TreeNode a, TreeNode b) {
         if (a == null && b == null) return true;// 空树
-        if (a != null && b != null && a.leftChild.value == b.rightChild.value && equal(a.leftChild, b.leftChild) && equal(a.rightChild, b.rightChild)) {
+        if (a != null && b != null && a.left.val == b.right.val && equal(a.left, b.left) && equal(a.right, b.right)) {
             return true;
         } else {
             return false;
@@ -43,13 +43,13 @@ public class BinaryTreeApply {
     /**
      * 复制创建二叉树
      */
-    public Node copy(Node p) {
+    public TreeNode copy(TreeNode p) {
         if (p == null) {
             return null;
         }
-        Node t = new Node(p.value);
-        t.leftChild = copy(p.leftChild);
-        t.rightChild = copy(p.rightChild);
+        TreeNode t = new TreeNode(p.val);
+        t.left = copy(p.left);
+        t.right = copy(p.right);
         return t;
     }
 }

@@ -1,7 +1,7 @@
 package 剑指offer;
 
 import binary_tree.BinaryTree;
-import binary_tree.Node;
+import binary_tree.TreeNode;
 import org.junit.Test;
 
 /**
@@ -10,7 +10,7 @@ import org.junit.Test;
  */
 public class Q007_BuildBinaryTree {
 
-    public Node<Integer> buildTree(int[] a, int[] b, int aStart, int bStart, int bEnd) throws Exception {
+    public TreeNode<Integer> buildTree(int[] a, int[] b, int aStart, int bStart, int bEnd) throws Exception {
 
         if (bEnd - bStart < 0) return null;
         int k = 0;
@@ -24,10 +24,10 @@ public class Q007_BuildBinaryTree {
         }
         // k 表示 左子树节点个数
 
-        Node<Integer> root = new Node<>(a[aStart]);
+        TreeNode<Integer> root = new TreeNode<>(a[aStart]);
 
-        root.leftChild = buildTree(a, b, aStart + 1, bStart, bStart + k - 1); // [bStart,bStart+k-1] 构造左子树
-        root.rightChild = buildTree(a, b, aStart + k + 1, bStart + k + 1, bEnd); // [bStart+k+1, bEnd] 构造右子树
+        root.left = buildTree(a, b, aStart + 1, bStart, bStart + k - 1); // [bStart,bStart+k-1] 构造左子树
+        root.right = buildTree(a, b, aStart + k + 1, bStart + k + 1, bEnd); // [bStart+k+1, bEnd] 构造右子树
 
         return root;
     }
@@ -37,7 +37,7 @@ public class Q007_BuildBinaryTree {
         int[] a = new int[]{1, 2, 4, 7, 3, 5, 6, 8,};
         int[] b = new int[]{4, 7, 2, 1, 5, 3, 8, 6};
 
-        Node<Integer> root = null;
+        TreeNode<Integer> root = null;
         try {
             root = buildTree(a, b, 0, 0, 7);
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class Q007_BuildBinaryTree {
         int[] a = new int[]{0};
         int[] b = new int[]{2};
 
-        Node<Integer> root = null;
+        TreeNode<Integer> root = null;
         try {
             root = buildTree(a, b, 0, 0, 0);
         } catch (Exception e) {

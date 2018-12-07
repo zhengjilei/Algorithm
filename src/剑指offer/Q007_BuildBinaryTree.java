@@ -10,7 +10,7 @@ import org.junit.Test;
  */
 public class Q007_BuildBinaryTree {
 
-    public TreeNode<Integer> buildTree(int[] a, int[] b, int aStart, int bStart, int bEnd) throws Exception {
+    public TreeNode<Integer> buildTree(int[] a, int[] b, int aStart, int bStart, int bEnd)  {
 
         if (bEnd - bStart < 0) return null;
         int k = 0;
@@ -20,7 +20,7 @@ public class Q007_BuildBinaryTree {
             k++;
         }
         if (j > bEnd) {
-            throw new Exception("前序和中序不匹配"); // 前序中序不一致，必须得抛出异常，如果返回 Null 会误以为可以正确构建二叉树
+            throw new RuntimeException("前序和中序不匹配"); // 前序中序不一致，必须得抛出异常，如果返回 Null 会误以为可以正确构建二叉树
         }
         // k 表示 左子树节点个数
 
@@ -38,12 +38,7 @@ public class Q007_BuildBinaryTree {
         int[] b = new int[]{4, 7, 2, 1, 5, 3, 8, 6};
 
         TreeNode<Integer> root = null;
-        try {
-            root = buildTree(a, b, 0, 0, 7);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return;
-        }
+        root = buildTree(a, b, 0, 0, 7);
         BinaryTree<Integer> tree = new BinaryTree<>();
         tree.setRoot(root);
         tree.preOrderRecur();
@@ -58,12 +53,7 @@ public class Q007_BuildBinaryTree {
         int[] b = new int[]{2};
 
         TreeNode<Integer> root = null;
-        try {
-            root = buildTree(a, b, 0, 0, 0);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return;
-        }
+        root = buildTree(a, b, 0, 0, 0);
         BinaryTree<Integer> tree = new BinaryTree<>();
         tree.setRoot(root);
         tree.preOrderRecur();

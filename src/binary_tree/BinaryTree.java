@@ -11,7 +11,6 @@ public class BinaryTree<T> {
     private TreeNode root = null;
 
 
-
     public BinaryTree() {
 
     }
@@ -23,7 +22,7 @@ public class BinaryTree<T> {
         root.parent = null;
     }
 
-    public void buildTree(int[] a, int[] b) throws Exception {
+    public void buildTree(int[] a, int[] b) {
         root = buildTree(a, b, 0, 0, b.length - 1);
     }
 
@@ -38,7 +37,7 @@ public class BinaryTree<T> {
      * @return
      * @throws Exception
      */
-    public TreeNode<Integer> buildTree(int[] a, int[] b, int aStart, int bStart, int bEnd) throws Exception {
+    public TreeNode<Integer> buildTree(int[] a, int[] b, int aStart, int bStart, int bEnd) {
 
         if (bEnd - bStart < 0) return null;
         int k = 0;
@@ -48,7 +47,7 @@ public class BinaryTree<T> {
             k++;
         }
         if (j > bEnd) {
-            throw new Exception("前序和中序不匹配"); // 前序中序不一致，必须得抛出异常，如果返回 Null 会误以为可以正确构建二叉树
+            throw new RuntimeException("前序和中序不匹配"); // 前序中序不一致，必须得抛出异常，如果返回 Null 会误以为可以正确构建二叉树
         }
         // k 表示 左子树节点个数
 
@@ -140,7 +139,7 @@ public class BinaryTree<T> {
         this.root = root;
     }
 
-    public TreeNode getRoot() {
+    public TreeNode<T> getRoot() {
         return root;
     }
 
@@ -238,6 +237,122 @@ public class BinaryTree<T> {
     }
 
     /**
+     * 逐层换行打印
+     * 双队列实现，每个队列轮流放置一行
+     */
+    public void levelOrderLine() {
+        if (root == null) return;
+        ArrayDeque<TreeNode> queue1 = new ArrayDeque<>();
+        ArrayDeque<TreeNode> queue2 = new ArrayDeque<>();
+        TreeNode node = null;
+        queue1.push(root);
+        while (!queue1.isEmpty() || !queue2.isEmpty()) {
+            while (!queue1.isEmpty()) {
+                node = queue1.poll();
+                System.out.printf("%3d", node.val);
+                if (node.left != null) queue2.offer(node.left);
+                if (node.right != null) queue2.offer(node.right);
+            }
+            System.out.println();
+            while (!queue2.isEmpty()) {
+                node = queue2.poll();
+                System.out.printf("%3d", node.val);
+                if (node.left != null) queue1.offer(node.left);
+                if (node.right != null) queue1.offer(node.right);
+            }
+            System.out.println();
+        }
+    }
+
+    /**
+     * 逐层换行打印
+     * 辅助变量：
+     * toBePrint: 当前行还需要打印的节点个数
+     * nextLineNodeCount: 下一行节点的总数
+     */
+    public void printLine() {
+        if (root == null) return;
+        ArrayDeque<TreeNode> queue = new ArrayDeque<>();
+
+        TreeNode node = null;
+        queue.push(root);
+
+        int toBePrint = 1;          // 当前行还没有打印的节点个数
+        int nextLineNodeCount = 0;      // 下一行节点的总数
+        while (!queue.isEmpty()) {
+            node = queue.poll();
+            System.out.printf("%4d", node.val);
+            toBePrint--;
+
+            if (node.left != null) {
+                ++nextLineNodeCount;
+                queue.push(node.left);
+            }
+            if (node.right != null) {
+                ++nextLineNodeCount;
+                queue.push(node.right);
+            }
+
+            if (toBePrint == 0) {
+                System.out.println();
+                toBePrint = nextLineNodeCount;
+                nextLineNodeCount = 0;
+            }
+        }
+    }
+
+    /**
+     * 之字形逐层换行打印
+     *
+     * @param root
+     */
+    public void printZhiLevel() {
+        if (root == null) return;
+
+        ArrayDeque<TreeNode<Integer>> queue = new ArrayDeque<>();
+        ArrayDeque<Integer> stack = new ArrayDeque<>();
+        int beToPrint = 1, nextLineNodeCount = 0;
+        queue.push(root);
+        TreeNode node = null;
+        int flag = 0; // 0 表示打印顺序从左到右 , 1表示打印顺序从右到左，先正行压栈
+        while (!queue.isEmpty()) {
+            node = queue.poll();
+            if (flag == 0) {
+                System.out.printf("%5d", node.val);
+            } else {
+                stack.push((Integer) node.val);
+            }
+            beToPrint--;
+
+            if (node.left != null) {
+                nextLineNodeCount++;
+                queue.offer(node.left);
+            }
+            if (node.right != null) {
+                nextLineNodeCount++;
+                queue.offer(node.right);
+            }
+
+            if (beToPrint == 0) {
+                //一行结束
+                if (flag == 1) {
+                    // 从右到左的一行
+                    // 积攒的一行，从栈中退出
+                    while (!stack.isEmpty()) {
+                        System.out.printf("%5d", stack.pop());
+                    }
+                    flag = 0;
+                } else {
+                    flag = 1;
+                }
+                beToPrint = nextLineNodeCount;
+                nextLineNodeCount = 0;
+                System.out.println();
+            }
+        }
+    }
+
+    /**
      * 中序遍历
      * 非递归
      */
@@ -307,6 +422,7 @@ public class BinaryTree<T> {
 
     /**
      * 判断一个二叉树是否是对称结构
+     *
      * @param root
      * @return
      */

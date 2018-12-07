@@ -39,7 +39,8 @@ public class StackOutputSeq {
     }
 
     /**
-     * 保证数组a的前 k 个元素中，1的个数总是大于等于 0 的个数
+     * 压 0/1 到数组a的 index 位置
+     * 保证数组 a 的前 k 个元素中，1的个数总是大于等于 0 的个数
      *
      * @param a
      * @param index 当前要压入第 index 位置的数

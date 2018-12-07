@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Created by lenovo on 2018/3/30.
+ * Created by Ethan-Walker on 2018/3/30.
  */
 public class MergeSort {
 

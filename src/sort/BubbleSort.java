@@ -4,7 +4,7 @@ package sort;
  * 冒泡排序
  * O(n^2)
  * 稳定
- * Created by lenovo on 2018/3/26.
+ * Created by Ethan-Walker on 2018/3/26.
  */
 public class BubbleSort {
     public static void bubbleSort(int[] a) {

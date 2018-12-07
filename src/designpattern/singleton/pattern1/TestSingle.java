@@ -1,7 +1,7 @@
 package designpattern.singleton.pattern1;
 
 /**
- * Created by lenovo on 2018/5/11.
+ * Created by Ethan-Walker on 2018/5/11.
  */
 public class TestSingle {
     public static void main(String[] args) {

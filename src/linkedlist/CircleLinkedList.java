@@ -3,7 +3,7 @@ package linkedlist;
 import edu.princeton.cs.algs4.In;
 
 /**
- * Created by lenovo on 2018/7/22.
+ * Created by Ethan-Walker on 2018/7/22.
  * 循环链表 解决约瑟夫问题
  */
 public class CircleLinkedList<T> {

@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Created by lenovo on 2018/5/14.
+ * Created by Ethan-Walker on 2018/5/14.
  * 快速排序三路划分（解决两路划分情况下 太多相同元素导致算法复杂度变成 O(n^2)
  */
 public class QuickSortTri {

@@ -2,7 +2,7 @@ package designpattern.singleton.pattern1;
 
 /**
  * 懒汉模式
- * Created by lenovo on 2018/5/11.
+ * Created by Ethan-Walker on 2018/5/11.
  */
 public class MySingleObj2 {
     private static MySingleObj2 mySingleObj2;

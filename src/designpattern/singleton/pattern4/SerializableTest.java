@@ -4,7 +4,7 @@ package designpattern.singleton.pattern4;
 import java.io.*;
 
 /**
- * Created by lenovo on 2018/5/11.
+ * Created by Ethan-Walker on 2018/5/11.
  */
 public class SerializableTest {
     public static void main(String[] args) {

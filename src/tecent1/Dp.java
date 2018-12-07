@@ -3,7 +3,7 @@ package tecent1;
 import java.util.Scanner;
 
 /**
- * Created by lenovo on 2018/3/25.
+ * Created by Ethan-Walker on 2018/3/25.
  */
 public class Dp {
     private static int n;  // 组合目标

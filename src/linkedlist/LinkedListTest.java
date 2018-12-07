@@ -3,7 +3,7 @@ package linkedlist;
 import org.junit.Test;
 
 /**
- * Created by lenovo on 2018/4/2.
+ * Created by Ethan-Walker on 2018/4/2.
  */
 public class LinkedListTest {
     @Test

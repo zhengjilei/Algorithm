@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
- * Created by lenovo on 2018/4/25.
+ * Created by Ethan-Walker on 2018/4/25.
  */
 public class StackDemo {
     @Test

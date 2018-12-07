@@ -3,7 +3,7 @@ package pat.乙级;
 import java.util.Scanner;
 
 /**
- * Created by lenovo on 2018/4/22.
+ * Created by Ethan-Walker on 2018/4/22.
  * 翻转链表
  * 给定一个常数K以及一个单链表L，请编写程序将L中每K个结点反转。
  * 例如：给定L为1→2→3→4→5→6，K为3，则输出应该为3→2→1→6→5→4；

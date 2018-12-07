@@ -1,7 +1,7 @@
 package designpattern.singleton.pattern6;
 
 /**
- * Created by lenovo on 2018/5/11.
+ * Created by Ethan-Walker on 2018/5/11.
  * 枚举实现单例模式
  */
 public enum MySingleObj {

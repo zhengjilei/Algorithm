@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 /**
- * Created by lenovo on 2018/3/25.
+ * Created by Ethan-Walker on 2018/3/25.
 将硬币分为两份：1，2，4，8，16，.....和1，2，4，8，16....
  组成两个数值为a,b的两个数字，他们的和是a+b=n;
  a在每一份中只可能有一种组合方式（二进制的思想）。

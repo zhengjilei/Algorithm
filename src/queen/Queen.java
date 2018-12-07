@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 
 /**
  * 任意两个皇后不能在同一行、同一列、同一斜线上
- * Created by lenovo on 2018/7/28.
+ * Created by Ethan-Walker on 2018/7/28.
  */
 public class Queen {
 

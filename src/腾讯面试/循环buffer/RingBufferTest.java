@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Arrays;
 
 /**
- * Created by lenovo on 2018/4/21.
+ * Created by Ethan-Walker on 2018/4/21.
  */
 public class RingBufferTest {
 

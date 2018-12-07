@@ -1,7 +1,7 @@
 package 腾讯面试.循环buffer;
 
 /**
- * Created by lenovo on 2018/4/21.
+ * Created by Ethan-Walker on 2018/4/21.
  * 实现简单的循环Buffer
  * 用定长数组实现，队列结构，先入先出
  */

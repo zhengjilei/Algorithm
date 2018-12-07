@@ -3,7 +3,7 @@ package tecent1;
 import java.util.Scanner;
 
 /**
- * Created by lenovo on 2018/3/25.
+ * Created by Ethan-Walker on 2018/3/25.
  * 回溯法解决
  */
 public class Backtrack {

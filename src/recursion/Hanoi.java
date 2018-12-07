@@ -3,7 +3,7 @@ package recursion;
 import java.math.BigInteger;
 
 /**
- * Created by lenovo on 2018/7/22.
+ * Created by Ethan-Walker on 2018/7/22.
  */
 public class Hanoi {
 

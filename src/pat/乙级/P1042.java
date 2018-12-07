@@ -3,7 +3,7 @@ package pat.乙级;
 import java.util.*;
 
 /**
- * Created by lenovo on 2018/4/22.
+ * Created by Ethan-Walker on 2018/4/22.
  */
 public class P1042 {
     public static void main(String[] args) {

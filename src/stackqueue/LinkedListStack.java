@@ -2,7 +2,7 @@ package stackqueue;
 
 /**
  * 链式栈 ：头插法
- * Created by lenovo on 2018/7/21.
+ * Created by Ethan-Walker on 2018/7/21.
  */
 public class LinkedListStack<T> {
 

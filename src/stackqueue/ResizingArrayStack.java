@@ -3,7 +3,7 @@ package stackqueue;
 import java.util.Iterator;
 
 /**
- * Created by lenovo on 2018/7/21.
+ * Created by Ethan-Walker on 2018/7/21.
  */
 public class ResizingArrayStack<T> implements Iterable<T> {
 

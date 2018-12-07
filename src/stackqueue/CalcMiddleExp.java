@@ -6,7 +6,7 @@ import java.util.Deque;
 import java.util.HashSet;
 
 /**
- * Created by lenovo on 2018/7/21.
+ * Created by Ethan-Walker on 2018/7/21.
  * 双栈计算中缀表达式: 局限性很大 一般不这么做
  */
 public class CalcMiddleExp {

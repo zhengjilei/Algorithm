@@ -1,7 +1,7 @@
 package linkedlist;
 
 /**
- * Created by lenovo on 2018/7/22.
+ * Created by Ethan-Walker on 2018/7/22.
  * 多项式
  */
 public class Polynomial {

@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Created by lenovo on 2018/3/26.
+ * Created by Ethan-Walker on 2018/3/26.
  * 从小到大排序，构造最大堆, 每次选出最大值，放在数组末尾
  * 从大到小排序 ，构造最小堆
  */

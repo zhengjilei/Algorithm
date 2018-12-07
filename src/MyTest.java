@@ -4,7 +4,7 @@ import org.junit.Test;
 import java.util.Random;
 
 /**
- * Created by lenovo on 2018/6/23.
+ * Created by Ethan-Walker on 2018/6/23.
  */
 public class MyTest {
 

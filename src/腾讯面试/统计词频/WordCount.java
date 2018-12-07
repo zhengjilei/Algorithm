@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Created by lenovo on 2018/4/22.
+ * Created by Ethan-Walker on 2018/4/22.
  */
 public class WordCount {
 

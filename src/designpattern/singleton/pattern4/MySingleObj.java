@@ -3,7 +3,7 @@ package designpattern.singleton.pattern4;
 import java.io.Serializable;
 
 /**
- * Created by lenovo on 2018/5/11.
+ * Created by Ethan-Walker on 2018/5/11.
  * 静态内部类实现单例模式
  */
 public class MySingleObj implements Serializable{

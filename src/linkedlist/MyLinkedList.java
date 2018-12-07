@@ -3,7 +3,7 @@ package linkedlist;
 import java.util.ArrayDeque;
 
 /**
- * Created by lenovo on 2018/4/2.
+ * Created by Ethan-Walker on 2018/4/2.
  * 带附加头结点的链表
  */
 public class MyLinkedList {

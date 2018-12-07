@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 /**
- * Created by lenovo on 2018/4/15.
+ * Created by Ethan-Walker on 2018/4/15.
  */
 public class Maze {
 

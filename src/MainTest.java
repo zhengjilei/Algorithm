@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Created by lenovo on 2018/4/1.
+ * Created by Ethan-Walker on 2018/4/1.
  */
 public class MainTest {
     public static void main(String[] args) {

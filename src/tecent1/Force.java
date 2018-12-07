@@ -3,7 +3,7 @@ package tecent1;
 import java.util.Scanner;
 
 /**
- * Created by lenovo on 2018/3/24.
+ * Created by Ethan-Walker on 2018/3/24.
  * 腾讯有一道机试题：
  * 大概意思是：
  * 小Q非常富有，拥有非常多的硬币，小Q的拥有的硬币是有规律的，对于所有的非负整数K,小Q恰好> 各有两个数值为2^k，的硬币，所以小Q拥有的硬币是1，1，2，2，4，4……，小Q卖东西需要支付元钱，请问小Q想知道有多少种组合方案。

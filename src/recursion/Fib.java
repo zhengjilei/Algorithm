@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Scanner;
 
 /**
- * Created by lenovo on 2018/7/22.
+ * Created by Ethan-Walker on 2018/7/22.
  * 斐波那契数列：1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...
  */
 public class Fib {

@@ -9,7 +9,7 @@ import java.util.Random;
 /**
  * 快速排序
  * 取中位数法
- * Created by lenovo on 2018/3/26.
+ * Created by Ethan-Walker on 2018/3/26.
  */
 public class QuickSort {
 

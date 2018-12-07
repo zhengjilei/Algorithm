@@ -1,7 +1,7 @@
 package designpattern.singleton.pattern7;
 
 /**
- * Created by lenovo on 2018/5/11.
+ * Created by Ethan-Walker on 2018/5/11.
  * 静态代码块实现 单例模式
  * 6 中将枚举类暴露，违反职责单一原则
  */

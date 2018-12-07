@@ -1,7 +1,7 @@
 package 大疆;
 
 /**
- * Created by lenovo on 2018/7/8.
+ * Created by Ethan-Walker on 2018/7/8.
  * 给定一个非负数组，数组中的元素代表从当前位置可以向后跳几步，判断能否走到数组末尾
  */
 public class Step {

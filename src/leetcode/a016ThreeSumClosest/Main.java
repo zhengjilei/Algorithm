@@ -3,7 +3,7 @@ package leetcode.a016ThreeSumClosest;
 import java.util.Arrays;
 
 /**
- * Created by lenovo on 2018/6/12.
+ * Created by Ethan-Walker on 2018/6/12.
  */
 public class Main {
 

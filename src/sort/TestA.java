@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Created by lenovo on 2018/3/30.
+ * Created by Ethan-Walker on 2018/3/30.
  */
 public class TestA {
 

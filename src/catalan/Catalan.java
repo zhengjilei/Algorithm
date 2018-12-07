@@ -12,6 +12,8 @@ public class Catalan {
      * n       0   1   2   3   4   5
      * h(n)    1   1   2   5  14   42
      * h(n) = h(0)*h(n-1)+h(1)*h(n-2)+...+h(n-1)*h(0)
+     * <p>
+     * C(n,2n) - C(n-1,2n)
      *
      * @param n
      * @return
@@ -98,92 +100,23 @@ public class Catalan {
         return true;
     }
 
-    // 方法2
-    public static boolean isValidOutputSeq(int n, int[] output) {
-        int[] input = new int[n];
-        for (int i = 0; i < n; i++) {
-            input[i] = i + 1;
-        }
-        ArrayDeque<Integer> stack = new ArrayDeque<>();
-        int i = 0, j = 0; // i 指向 input ,j 指向output
-        // input[i] 待压入元素 output[i] 待匹配元素
-        while (i < n) {
-            // 将n个数全部入栈
-            if (!stack.isEmpty() && stack.peekFirst() == output[j]) {
-                // 栈不为空 ，先比较当前 output 元素和栈顶元素是否相等
-                stack.pop();
-                j++; // 匹配
-                continue;
-            }
-            if (input[i] == output[j]) {
-                i++;
-                j++;// 下一个
-            } else {
-                stack.push(input[i]);
-                i++;
-            }
-        }
-        while (!stack.isEmpty()) {
-            if (stack.peekFirst() == output[j]) {
-                stack.pop();
-                j++;
-            } else {
-                break;
-            }
-        }
-        if (stack.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
 
     /**
      * 判定给定的出栈序列是否合法
      *
-     * @param ori    入栈序列                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    入栈序列
+     * @param input  入栈序列                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    入栈序列
      * @param output 出栈序列
      * @return
      */
-    public static boolean isValidSeq(int[] ori, int[] output) {
-        int i = 0, j = 0;
-        int n = ori.length;
-        ArrayDeque<Integer> stack = new ArrayDeque<>();
-        while (j < n) {
-            if (!stack.isEmpty()) {
-                //栈不为空，优先对比栈顶
-                if (stack.peekFirst() == output[j]) {
-                    // 如果当前栈顶元素恰好等于 出栈元素，则栈顶元素出栈即可，匹配下一个
-                    j++;
-                    continue;  // 很重要，不能省略，保证不是往后进行比较，而是 先比较栈顶
-                }
-            }
-            //往后进行比较，序列压栈直到遇到 和出栈元素相同的数
-            while (i < n && ori[i] != output[j]) {
-                stack.push(ori[i]);
-                i++;
-            }
-            if (i == n) return false;
-            else {
-                i++;
-                j++;// 相当于 ori[i] 和 output[j] 匹配了
-            }
-        }
-        return true;
-
-    }
-
-    public static boolean isValidSeq(int[] input, int[] output, int n) {
+    public static boolean isValidSeq(int[] input, int[] output) {
         ArrayDeque<Integer> stack = new ArrayDeque<>();
         int i = 0, j = 0;
-        while (i < n) {
+        while (i < input.length) {
             // 让n个数全部压过栈
-            if (!stack.isEmpty() && stack.peekFirst() == output[j]) {
+            if (!stack.isEmpty() && stack.peek() == output[j]) { // 如果当前栈顶元素恰好等于 出栈元素，则栈顶元素出栈即可，匹配下一个
                 j++;
                 stack.pop();
-                continue;
+                continue; // 很重要，不能省略，保证不是往后进行比较，而是 先比较栈顶
             }
             // 栈为空 或者 栈顶元素不等于输出序列元素
             if (input[i] == output[j]) {
@@ -194,11 +127,11 @@ public class Catalan {
                 i++;
             }
         }
-        while(!stack.isEmpty()){
-            if(stack.peekFirst()==output[j]){
+        while (!stack.isEmpty()) {
+            if (stack.peekFirst() == output[j]) {
                 stack.pop();
                 j++;
-            }else{
+            } else {
                 return false;
             }
         }

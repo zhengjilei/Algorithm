@@ -1,5 +1,7 @@
 package queen;
 
+import java.util.Arrays;
+
 public class Queen2 {
 
     static int count = 0;
@@ -14,10 +16,7 @@ public class Queen2 {
      */
     public static void recur(int row, int n, int[] a) {
         if (row == n) {
-            for (int i = 0; i < n; i++) {
-                System.out.printf("%d ", a[i]);
-            }
-            System.out.println();
+            System.out.println(Arrays.toString(a));
             count++;
             return;
         }

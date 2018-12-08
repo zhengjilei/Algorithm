@@ -13,6 +13,10 @@ public class BinarySearchTree {
     public BinarySearchTree() {
     }
 
+    public Node getRoot() {
+        return root;
+    }
+
     /**
      * 返回 false 表明val 已在树中
      *

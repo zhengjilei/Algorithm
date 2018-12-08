@@ -12,6 +12,7 @@ public class PermutationApply {
     private static ArrayList<String> list = new ArrayList<>();
 
     /**
+     * 组合问题
      * 从数组a 中的 [0,n)前 n个元素中选出 m 个元素
      *
      * @param m
@@ -19,7 +20,7 @@ public class PermutationApply {
      * @param a
      */
     public static void Cnm(int m, int n, char[] a, StringBuilder sb) {
-        if (m < 0 || n <= 0) return;
+        if (m < 0 || n < 0) return;
         if (m == 0) {
             // 说明已经选好了
             list.add(sb.toString());

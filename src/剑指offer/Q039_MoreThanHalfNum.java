@@ -32,9 +32,9 @@ public class Q039_MoreThanHalfNum {
 
     public int MoreThanHalfNum_Solution(int[] array) {
         if (array == null || array.length == 0) return 0;
-        int num = kthMin(array.length / 2 + 1, array, 0, array.length - 1);        // 要找第 n/2 + 1 小的数，不要传  n/2 , 因为n=1 时，n/2 = 0 ，找第 0 小的数会出错
+        int num = kthMin(array.length / 2 + 1, array, 0, array.length - 1);   // 要找第 n/2 + 1 小的数，不要传 n/2 , 因为n=1 时，n/2 = 0 ，找第 0 小的数会出错
 
-        if (count(array, num)) {
+        if (checkMoreThanHalf(array, num)) {
             return num;
         } else {
             return 0;
@@ -85,7 +85,7 @@ public class Q039_MoreThanHalfNum {
         a[j] = t;
     }
 
-    public boolean count(int[] a, int num) {
+    public boolean checkMoreThanHalf(int[] a, int num) {
         int count = 0;
         for (int i = 0; i < a.length; i++) {
             if (a[i] == num) {
@@ -98,11 +98,13 @@ public class Q039_MoreThanHalfNum {
         return false;
     }
 
+
+
     @Test
     public void test() {
-        int[] a = new int[]{1,3,4,5,2,2,2,2,2};
+        int[] a = new int[]{1, 3, 4, 5, 2, 2, 2, 2, 2};
         int num = MoreThanHalfNum_Solution(a);
-        if (count(a, num)) {
+        if (checkMoreThanHalf(a, num)) {
             System.out.println("次数大于数组长度一半的数:" + num);
         } else {
             System.out.println("不存在次数大于数组长度一半的数");

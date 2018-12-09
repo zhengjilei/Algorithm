@@ -26,7 +26,7 @@ public class QuickSort {
 
     public static int partition(int[] a, int left, int right) {
         int pivotValue = median3(a, left, right);
-        int i = left, j = right;
+        int i = left, j = right; // 必须将 j 初始化为 right， 而不是 right-1
         while (i < j) {
             while (i < j && a[i] <= pivotValue) i++;
             while (i < j && a[j] >= pivotValue) j--;
@@ -62,7 +62,6 @@ public class QuickSort {
         int[] a = new int[]{75, 70, 80, 59, 54, 96, 12, 78, 29, 35, 11, 69, 56, 36, 79, 45, 69, 30, 27, 47, 17, 74};
         quickSort(a, 0, 21);
         System.out.println(Arrays.toString(a));
-
 
         Random r = new Random();
         int n = r.nextInt(20) + 20;

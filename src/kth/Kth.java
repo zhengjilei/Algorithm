@@ -5,6 +5,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
+ * 寻找第 k 小的数
+ * 时间复杂度 : O(n)
  * Created by EthanWalker on 2017/11/20.
  */
 public class Kth {
@@ -37,7 +39,8 @@ public class Kth {
         int pivotIndex = (int) (Math.random() * (right - left + 1) + left);
         swap(a, pivotIndex, right);  // 将选出的随机数 pivot 调到 数组末尾
 
-        int i = left, j = right - 1;
+//        int i = left, j = right - 1;
+        int i = left, j = right; // 注意 j 必须初始化为 right 而不是 right-1 否则会出错
         while (i < j) {
             while (i < j && a[i] <= a[right]) i++;
             while (i < j && a[j] >= a[right]) j--;

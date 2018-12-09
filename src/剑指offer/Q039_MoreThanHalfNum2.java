@@ -27,23 +27,25 @@ public class Q039_MoreThanHalfNum2 {
     public int moreThanHalfNum(int[] array) {
         if (array == null || array.length == 0) return 0;
         int candidate = array[0];
-        int count = 1; // count 并不是元素实际出现的累计次数
+        int count = 1; // count 并不是majority元素实际出现的累计次数, 而是majority 相对于其他元素的次数
 
         for (int i = 1; i < array.length; i++) {
             if (count == 0) { // 说明主要元素 不在a[0]~a[i-1] 之间或者是在其之间但在 a[0]~a[i-1] 范围内累计次数不超过 i/2, 即不是 a[0]~a[i-1]局部内的主要元素
-                // 主要元素在 a[i] ~a[n-1] 之间
+                // 主要元素在 a[i] ~ a[n-1] 之间
                 // 重新选定候选元素
                 candidate = array[i];
                 count = 1;
             } else if (array[i] == candidate) {
                 count++;
             } else {
-                count--; // 相对次数减1
+                count--; // 不同，抵消一个元素
             }
         }
         // 注意 ： count >=1 并不代表candidate 就是主要元素 示例 1 2 3 4 5 6 7 最终得到count=1  但没有candidate
 
         // 如果有 超过一半次数的数存在，一定为 candidate
+        // 但是candidate 存在，不代表其就是超过一半次数的数，因为可能该数组压根不存在这样的值
+
         if (checkMoreThanHalf(array, candidate)) {
             return candidate;
         } else {
@@ -65,6 +67,5 @@ public class Q039_MoreThanHalfNum2 {
         }
         return false;
     }
-
 
 }

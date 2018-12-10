@@ -5,13 +5,13 @@ import org.junit.Test;
 import java.util.*;
 
 /**
- * 求数组中出现次数超过 1/3 的数
+ * 求数组中出现次数超过 1/k 的数
  * <p>
- * 分析：这样的数可能存在 0 、1 、2 个
- * 用一个大小为 3 的数组，每次删除 3 个不同的数，遍历结束后，如果有超过 1/3 的数，一定在该数组中
+ * 分析：这样的数可能存在0~ 1/k -1个
+ * 用一个大小为 k 的数组，每次删除 k 个不同的数，遍历结束后，如果有超过 1/k 的数，一定在该数组中
  * created by Ethan-Walker on 2018/12/9
  */
-public class Q039_MoreThanThreePercent {
+public class Q039_MoreThanKPercent {
 
 
     /**
@@ -76,6 +76,9 @@ public class Q039_MoreThanThreePercent {
 
 
     /**
+     * 求次数超过数组长度 1/3的数值
+     * 暂时不知道这样做对不对
+     *
      * @param array
      * @return
      */

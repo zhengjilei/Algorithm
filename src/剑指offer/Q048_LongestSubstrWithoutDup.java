@@ -20,7 +20,7 @@ public class Q048_LongestSubstrWithoutDup {
      */
     public int getLongestSubStr(String str) {
 
-        boolean[] bitmap = new boolean[255];
+        boolean[] bitmap = new boolean[256];
         char[] chs = str.toCharArray();
         int length = chs.length;
 
@@ -59,7 +59,7 @@ public class Q048_LongestSubstrWithoutDup {
      */
     public int getLongestSubStr2(String str) {
         if (str.length() == 0) return 0;
-        int[] position = new int[255];// position['c'] = 12 表示字符 c 最近一次出现的位置是 12
+        int[] position = new int[256];// position['c'] = 12 表示字符 c 最近一次出现的位置是 12
         for (int i = 0; i < 255; i++) {
             position[i] = -1;
         }

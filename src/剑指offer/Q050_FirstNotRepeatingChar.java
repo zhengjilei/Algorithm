@@ -4,7 +4,7 @@ package 剑指offer;
  * 字符串中第一个只出现一次的字符
  * created by Ethan-Walker on 2018/12/11
  */
-public class FirstNotRepeatingChar {
+public class Q050_FirstNotRepeatingChar {
 
     /**
      * 返回位置

@@ -19,7 +19,7 @@ public class Main {
             long totalCount = getTotalCount(n, sum);
             double gailv = totalCount / sumCount;  //概率
 
-            String format = String.format("%.5f", gailv);
+            String format = String.format("%.7f", gailv);
             stringBuffer.append("[").append(sum).append(", ").append(format).append("]");
             if (sum != 6 * n) {
                 stringBuffer.append(", ");
@@ -32,6 +32,7 @@ public class Main {
 
     /**
      * 求 n 个骰子，出现和为 sum 的 总情况数
+     *
      * @param n
      * @return
      */
@@ -39,7 +40,7 @@ public class Main {
         if (n < 1 || sum < n || sum > 6 * n) {
             return 0;
         }
-        if (n == 1) return 1;
+        if (n == 1 || n == sum) return 1;
         return getTotalCount(n - 1, sum - 1) + getTotalCount(n - 1, sum - 2) + getTotalCount(n - 1, sum - 3) + getTotalCount(n - 1, sum - 4) + getTotalCount(n - 1, sum - 5) + getTotalCount(n - 1, sum - 6);
 
     }

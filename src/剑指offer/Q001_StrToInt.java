@@ -13,13 +13,15 @@ public class Q001_StrToInt {
      * 2. 输入字符串中包含不合理字符
      * 3. + - 号
      * 4. 最大整数、最小整数溢出
-     *
+     * 两种方法判断溢出：
+     * 计算结果和符号位相反
+     * 用一个更大范围的类型long 保存结果，判断值是否超过 int的边界即可
      * @param s
      * @return
      * @throws Exception
      */
     public int strToInt(String s) throws Exception {
-        if (s == null) throw new Exception("s can't be null");
+        if (s == null || s.length() == 0) throw new Exception("s can't be null");
         int value = 0, i = 0;
         int sign = 1;
         if (s.charAt(0) == '-') {
@@ -57,6 +59,16 @@ public class Q001_StrToInt {
             System.out.println(e.getMessage());
         }
 
+
+    }
+
+    @Test
+    public void test() {
+        int t = Integer.MIN_VALUE;
+        System.out.println(t - 1);  // 最小值溢出
+
+        int m = Integer.MAX_VALUE;
+        System.out.println(m + 1);// 最大值溢出
     }
 
 }

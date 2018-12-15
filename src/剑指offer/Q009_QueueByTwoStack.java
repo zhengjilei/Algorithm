@@ -8,17 +8,17 @@ import java.util.Arrays;
  */
 public class Q009_QueueByTwoStack<T> {
 
-    MStack<T> stack1;
-    MStack<T> stack2;
+    MStack<T> pushStack;
+    MStack<T> popStack;
 
     public Q009_QueueByTwoStack() {
-        stack1 = new MStack<>();
-        stack2 = new MStack<>();
+        pushStack = new MStack<>();
+        popStack = new MStack<>();
     }
 
     public void offer(T t) {
         // 插入队尾
-        stack1.push(t);
+        pushStack.push(t);
     }
 
     public T poll() {
@@ -26,21 +26,17 @@ public class Q009_QueueByTwoStack<T> {
             System.out.println("队列为空");
             return (T) null;
         }
-        if (stack2.isEmpty()) {
-            while (!stack1.isEmpty()) {
-                stack2.push(stack1.pop());
+        if (popStack.isEmpty()) {
+            while (!pushStack.isEmpty()) {
+                popStack.push(pushStack.pop());
             }
         }
 
-        return stack2.pop();
+        return popStack.pop();
     }
 
     public boolean isEmpty() {
-
-        if (stack2.isEmpty() && stack1.isEmpty()) {
-            return true;
-        }
-        return false;
+        return popStack.isEmpty() && pushStack.isEmpty();
     }
 
     public static void main(String[] args) {

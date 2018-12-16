@@ -445,4 +445,57 @@ public class BinaryTree<T> {
         return judge(root1.left, root2.right) && judge(root1.right, root2.left);
     }
 
+    /**
+     * 在以 root 为根节点的树中查找 target 节点，路径保存在 path中，返回最终路径长度（返回0表示target不在 该树中）
+     * 探索 index 位置的节点
+     *
+     * @param root
+     * @param target
+     * @param path
+     * @param index
+     * @return
+     */
+    public int getPath(TreeNode root, TreeNode target, TreeNode[] path, int index) {
+
+        if (root == null) return 0;
+        if (root == target) {
+            path[index] = target;
+            return index + 1;
+        }
+
+        path[index] = root; // 保存当前节点到路径中
+        int length = 0;
+        if ((length = getPath(root.left, target, path, index + 1)) > 0) {
+            return length;
+        }
+        if ((length = getPath(root.right, target, path, index + 1)) > 0) {
+            return length;
+        }
+        return 0;
+    }
+
+
+    /**
+     * 在二叉树中查找节点
+     * 层次遍历，队列
+     *
+     * @param t
+     * @return
+     */
+    public TreeNode getNodeByValue(T t) {
+        if (root != null) {
+            ArrayDeque<TreeNode> queue = new ArrayDeque<>();
+            queue.offer(root);
+            while (!queue.isEmpty()) {
+                TreeNode node = queue.poll();
+                if (node.val.equals(t)) {
+                    return node;
+                }
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
+            }
+        }
+        return null;
+    }
+
 }

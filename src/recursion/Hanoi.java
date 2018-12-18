@@ -41,6 +41,27 @@ public class Hanoi {
         }
     }
 
+    public static long showStep2(int n, String A, String B, String C) {
+        if (n == 1) {
+            System.out.println("move top disk from " + A + " to " + C);
+            return 1;
+        } else {
+            long count = 0;
+            // 将 A 顶端的 n-1 个盘子移到 B
+            count += showStep2(n - 1, A, C, B);
+
+
+            // 将 A 底部的盘子移到 C
+            System.out.println("move top disk from " + A + " to " + C);
+            count += 1;
+
+            // 将 B 上的 n-1 个盘子移到 C
+            count += showStep2(n - 1, B, A, C);
+
+            return count;
+        }
+    }
+
 
     public static void main(String[] args) {
 //        long count = hanoi(40);
@@ -51,6 +72,6 @@ public class Hanoi {
         System.out.println(count1);
         System.out.println(count2);
 
-        showStep(5, "A", "B", "C");
+        System.out.println(showStep2(5, "A", "B", "C"));
     }
 }

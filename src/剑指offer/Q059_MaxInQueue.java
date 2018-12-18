@@ -45,42 +45,47 @@ public class Q059_MaxInQueue {
     }
 
 
-    public ArrayList<Integer> maxInWindows2(int[] num, int size) {
+    /**
+     * 双端队列，存放的是索引
+     *
+     * @param num
+     * @param size
+     * @return
+     */
+    public int[] maxInWindows2(int[] array, int size) {
 
-        ArrayList<Integer> list = new ArrayList<>();
-        if (num == null || num.length == 0 || size <= 0 || size > num.length) {
-            return list;
-        }
-        ArrayDeque<Integer> deque = new ArrayDeque<>();
-        //队首元素始终为窗口中的最大值
+        if (array == null || size > array.length) return null;
+        if (array.length == 0) return new int[0];
 
-        int t = 0;
-        for (; t < size; t++) {
-            // （假设插入num[t] 之后）排出滑动窗口中不可能成为最大值的元素
-            while (!deque.isEmpty() && num[t] >= num[deque.peekLast()]) {
+        int resultLength = array.length - size + 1;
+        int[] result = new int[resultLength];
+        int resultIndex = 0;
+
+        ArrayDeque<Integer> deque = new ArrayDeque<>();// 双端队列，存放当前窗口中的最大值索引
+
+        for (int index = 0; index < array.length; index++) {
+            // 弹出不可能是窗口中最大的元素
+            while (!deque.isEmpty() && array[index] >= array[deque.peekLast()]) { //等于可取可不取
                 deque.pollLast();
             }
-            deque.offerLast(t);
-        }
+            deque.offerLast(index);
 
-        for (; t < num.length; t++) {
-            list.add(num[deque.peekFirst()]);
-            // （假设插入num[t] 之后）排出滑动窗口中不可能成为最大值的元素
-            while (!deque.isEmpty() && num[t] >= num[deque.peekLast()]) {
-                deque.pollLast();
-            }
-
-            if (!deque.isEmpty() && t - deque.peekFirst() >= size) //插入 num[t]之前，判断： deque 中的最大值已经不在滑动窗口中？
+            // 判断窗口中最大值是否需要弹出
+            if (index - deque.peekFirst() == size) {
                 deque.pollFirst();
-            deque.offerLast(t);
+            }
+            // 窗口中满 size 个元素时，需要获取最大值
+            if (index >= size - 1) {
+                result[resultIndex++] = array[deque.peekFirst()];
+
+            }
         }
-        list.add(num[deque.peekFirst()]);
-        return list;
+        return result;
     }
 
     @Test
     public void test() {
-        int[] a = new int[]{2, 3, 4, 2, 6, 2, 5, 1};
+        int[] a = new int[]{2, 2, 4, 2, 6, 2, 5, 1};
         System.out.println(maxInWindows2(a, 3));
     }
 }

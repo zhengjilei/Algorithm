@@ -1,5 +1,7 @@
 package recursion;
 
+import org.junit.Test;
+
 /**
  * Created by Ethan-Walker on 2018/7/22.
  * 添加限制条件，盘只能在相邻柱子之间移动, A 上的盘子不能直接移动到 C ，必须经过B -> C
@@ -36,4 +38,8 @@ public class HanoiStrict {
         }
     }
 
+    @Test
+    public void test(){
+        System.out.println(hanoiStrict(3));
+    }
 }

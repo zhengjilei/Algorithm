@@ -218,7 +218,7 @@ public class MyLinkedList {
 
     public Node getEndK2(int k) {
         if (head == null || k <= 0) return null;
-        Node p = head.next, q = head.next;
+        Node p = head.next, q = head.next; // 带附加头结点的链表
         if (p == null) return null;
 
         int i = 0;
@@ -272,6 +272,75 @@ public class MyLinkedList {
                 return;
             }
         }
+    }
+
+    /**
+     * 不考虑附加头结点
+     *
+     * @param node
+     * @return
+     */
+    public Node getMidNode(Node node) {
+        if (node == null) return null;
+        Node fast = node, slow = node; // fast slow 初始时指向头结点
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        // 奇数个节点，slow 指向中间
+        // 偶数个节点, slow 指向中间两个节点的后一个
+
+        return slow;
+    }
+
+    /**
+     * 不考虑附加头结点
+     *
+     * @param node
+     * @return
+     */
+    public Node getMidNode2(Node node) {
+        if (node == null) return null;
+        Node fast = node.next, slow = node; // fast 初始时 先走一步
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        // 奇数个节点，slow 指向中间
+        // 偶数个节点, slow 指向中间两个节点的前一个
+
+        return slow;
+    }
+
+    /**
+     * 获取链表的第 1/n 长度个节点
+     * 例如：
+     * 链表长度为 5 n=3, 获取第一个
+     * 链表长度为 6 n=2，获取第 3个
+     *
+     * @param node
+     * @param n
+     * @return
+     */
+    public Node getNPercentNode(Node node, int n) {
+
+        Node fast = node, slow = node;
+
+        int cnt = 0;
+        while (fast != null) {
+            fast = fast.next;
+            if (cnt != 0 && cnt % n == 0) {
+                slow = slow.next;
+            }
+            cnt++;
+
+        }
+        // TODO: 2018/12/20   未完成
+
+        return null;
+
     }
 
     /**

@@ -6,7 +6,13 @@ package 程序员代码面试指南;
 public class ListNode {
     int val;
     ListNode next;
-    public ListNode(int val){
+
+    public ListNode(int val) {
         this.val = val;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + val + ",next=" + (this.next == null ? "null]" : this.next.val + "]");
     }
 }

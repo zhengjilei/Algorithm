@@ -21,42 +21,26 @@ public class Q035_ComplexListCopy {
      * 时间复杂度 O(n)
      * 空间复杂度 O(n)
      *
-     * @param sourceHead
      * @return
      */
-    public RandomListNode copy(RandomListNode sourceHead) {
-        if (sourceHead == null) return null;
+    public RandomListNode copy(RandomListNode head) {
+        if (head == null) return head;
         HashMap<RandomListNode, RandomListNode> map = new HashMap<>();
 
-        RandomListNode destHead = new RandomListNode(sourceHead.label);
-
-        RandomListNode destNode = destHead;
-        map.put(sourceHead, destHead);
-
-        RandomListNode sourceNode = sourceHead.next;
+        RandomListNode sourceNode = head;
         while (sourceNode != null) {
-            destNode.next = new RandomListNode(sourceNode.label);
-            map.put(sourceNode, destNode.next);
-            destNode = destNode.next;
+            map.put(sourceNode, new RandomListNode(sourceNode.label));
             sourceNode = sourceNode.next;
         }
 
-        destNode.next = null;
-
-        sourceNode = sourceHead;
-        destNode = destHead;
-
+        sourceNode = head;
         while (sourceNode != null) {
-/*
-            if (sourceNode.random != null) { // 不能加这个判断，出错 ，why?
-                destNode.random = map.get(sourceNode.random);
-            }
-*/
-            destNode.random = map.get(sourceNode.random);
+            map.get(sourceNode).random = map.get(sourceNode.random);
+            map.get(sourceNode).next = map.get(sourceNode.next);
             sourceNode = sourceNode.next;
-            destNode = destNode.next;
         }
-        return destHead;
+
+        return map.get(head);
 
     }
 
@@ -65,8 +49,8 @@ public class Q035_ComplexListCopy {
         RandomListNode next = null;
         RandomListNode random = null;
 
-        RandomListNode(int label) {
-            this.label = label;
+        RandomListNode(int val) {
+            this.label = val;
         }
     }
 

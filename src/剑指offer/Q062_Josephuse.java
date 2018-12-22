@@ -39,9 +39,15 @@ public class Q062_Josephuse {
         return node.val;
     }
 
+
     /**
      * 公式法
-     * f[n][m] = (f[n-1][m]+ m) %n    n=1 时，结果为 0
+     * f(n,m) 表示从下标依次为 0,1,..,n-1 的n个元素中删除第 m 个数，最后剩下的数的下标
+     * f(n,m) = (f(n-1,m)+ m)) %n
+     * m 不变，n 从1 到 n
+     * t[1] = 0 (只有一个元素，返回下标位置0)
+     * t[2] = t[1]+m  %2
+     * t[3] = t[2]+m  %3
      *
      * @param n
      * @param m
@@ -51,7 +57,7 @@ public class Q062_Josephuse {
         if (n < 1 || m < 1) return -1;
 
         int last = 0;
-        for (int i = 2; i <= n; i++) { // 循环 n-1 趟，去掉 n-1 个数
+        for (int i = 2; i <= n; i++) { // 依次求 t[i], 循环 n-1 趟，去掉 n-1 个数
             last = (last + m) % i;
         }
         return last;
@@ -61,11 +67,12 @@ public class Q062_Josephuse {
     public void test() {
         long start = System.currentTimeMillis();
 
-        System.out.println(last1Number1(4000, 997)); ;
-        System.out.println(System.currentTimeMillis()-start);
+        System.out.println(last1Number1(4000, 997));
+        ;
+        System.out.println(System.currentTimeMillis() - start);
         start = System.currentTimeMillis();
         System.out.println(last1Number2(4000, 997));
-        System.out.println(System.currentTimeMillis()-start);
+        System.out.println(System.currentTimeMillis() - start);
 
     }
 }

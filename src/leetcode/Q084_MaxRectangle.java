@@ -7,7 +7,7 @@ import java.util.ArrayDeque;
 /**
  * created by Ethan-Walker on 2018/12/19
  */
-public class Q084_最大矩形 {
+public class Q084_MaxRectangle {
     public int largestRectangleArea(int[] heights) {
         int length = heights.length;
 

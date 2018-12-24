@@ -11,7 +11,7 @@ import org.junit.Test;
 public class Q036_BSTDualList {
 
     private Node head = null;
-    private Node pre = null;
+    private Node pre = null; // 当前节点的前趋节点,执行结束后就是双向链表尾节点
 
     public void inOrder(Node node) {
         if (node == null) return;
@@ -21,11 +21,32 @@ public class Q036_BSTDualList {
         if (pre != null) {
             pre.right = node;
         }
-        pre = node;
+        // 递归到最左下节点，设置为链表头结点
         if (head == null) {
-            head = pre;
+            head = node;
         }
+        pre = node;
+
         inOrder(node.right);
+    }
+
+
+    public void print() {
+        Node node = head;
+        while (node != null) {
+            System.out.print(node.val + ",");
+            node = node.right;
+        }
+        System.out.println();
+    }
+
+    public void reversePrint() {
+        Node node = pre;
+        while (node != null) {
+            System.out.print(node.val + ",");
+            node = node.left;
+        }
+        System.out.println();
     }
 
 
@@ -36,7 +57,8 @@ public class Q036_BSTDualList {
 
         inOrder(tree.getRoot());
 
-        System.out.println();
+        print();
+        reversePrint();
     }
 
 }

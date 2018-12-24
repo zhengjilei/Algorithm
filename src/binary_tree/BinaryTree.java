@@ -187,37 +187,6 @@ public class BinaryTree<T> {
         }
     }
 
-    /**
-     * 前序遍历，非递归
-     * 先压根节点，然后出栈访问，有右子树节点 先压右子树节点,然后压左子树节点
-     * 出栈访问，循环第一步
-     */
-    public void preOrder() {
-        ArrayDeque<TreeNode> stack = new ArrayDeque<>();
-        stack.push(root);
-        while (!stack.isEmpty()) {
-            root = stack.pop();
-            visit(root);
-            if (root.right != null) stack.push(root.right);
-            if (root.left != null) stack.push(root.left);
-        }
-    }
-
-    /**
-     * 前序遍历，非递归
-     * 只压右节点
-     */
-    public void preOrderAno() {
-        ArrayDeque<TreeNode> stack = new ArrayDeque<>();
-        TreeNode p = root;
-        stack.push(null); // 防止栈为空，弹出出错
-        while (p != null) {
-            visit(p);
-            if (p.right != null) stack.push(p.right);
-            if (p.left != null) p = p.left;
-            else p = stack.pop();  // 左子树为空，得访问右子树了（中间节点最先已经访问过了）
-        }
-    }
 
     /**
      * 层次序遍历：队列
@@ -353,6 +322,38 @@ public class BinaryTree<T> {
     }
 
     /**
+     * 前序遍历，非递归
+     * 先压根节点，然后出栈访问，有右子树节点 先压右子树节点,然后压左子树节点
+     * 出栈访问，循环第一步
+     */
+    public void preOrder() {
+        ArrayDeque<TreeNode> stack = new ArrayDeque<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            root = stack.pop();
+            visit(root);
+            if (root.right != null) stack.push(root.right);
+            if (root.left != null) stack.push(root.left);
+        }
+    }
+
+    /**
+     * 前序遍历，非递归
+     * 只压右节点
+     */
+    public void preOrderAno() {
+        ArrayDeque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode p = root;
+        stack.push(null); // 防止栈为空，弹出出错
+        while (p != null) {
+            visit(p);
+            if (p.right != null) stack.push(p.right);
+            if (p.left != null) p = p.left;
+            else p = stack.pop();  // 左子树为空，得访问右子树了（中间节点最先已经访问过了）
+        }
+    }
+
+    /**
      * 中序遍历
      * 非递归
      */
@@ -367,11 +368,9 @@ public class BinaryTree<T> {
             }
 
             // 弹出栈顶元素，进行访问，并进入到其右子树，重复该操作
-            if (!stack.isEmpty()) {
-                p = stack.pop();
-                visit(p);
-                p = p.right;
-            }
+            p = stack.pop();
+            visit(p);
+            p = p.right;
         } while (p != null || !stack.isEmpty());
         // p==null 可能是右子树为空，但栈不为空（下一次需要再次弹出）
         // 栈为空，可能 p 不为空
@@ -380,8 +379,6 @@ public class BinaryTree<T> {
     /**
      * 后序遍历，节点内部设置 L、R标记 略复杂
      */
-
-
     public void mirrorTree() {
         if (root == null) return;
         ArrayDeque<TreeNode> stack = new ArrayDeque<>();

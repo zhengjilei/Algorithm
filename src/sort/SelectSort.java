@@ -13,13 +13,11 @@ public class SelectSort {
      * 不稳定
      */
     public static void selectSort(int[] a) {
-        int min, minIndex, i, j;
+        int  minIndex, i, j;
         for (i = 0; i < a.length - 1; i++) {
-            min = a[i];     // min 记录最小值
             minIndex = i;  // minIndex 记录最小值的位置
             for (j = i + 1; j < a.length; j++) {
-                if (a[j] < min) {
-                    min = a[j];
+                if (a[j] < a[minIndex]) {
                     minIndex = j;
                 }
             }
@@ -28,6 +26,7 @@ public class SelectSort {
             }
         }
     }
+
 
     public static void swap(int i, int j, int[] a) {
         int t = a[i];

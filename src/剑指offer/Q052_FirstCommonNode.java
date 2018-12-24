@@ -140,7 +140,7 @@ public class Q052_FirstCommonNode {
             l--;
         }
         while (fastNode != null && slowNode != null) {
-            if (fastNode == slowNode) {
+            if (fastNode == slowNode) { // 必须放在前面 考虑链表 A:3->2 B：2 在 2点相交的情况
                 return fastNode;
             }
             fastNode = fastNode.next;

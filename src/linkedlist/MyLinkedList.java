@@ -342,6 +342,49 @@ public class MyLinkedList {
         return null;
 
     }
+    /**
+     * 计算环的入口点
+     *
+     * @param head
+     * @return
+     */
+    public Node getEnterLoop(Node head) {
+        if (head == null) return null;
+
+        Node fast = head, slow = head;
+        boolean hasLoop = false;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                hasLoop = true;
+                break;
+            }
+        }
+        if (!hasLoop) return null;
+
+        // 有环，且 fast slow 在环中
+
+        // 先计算环的长度
+        int count = 1;
+        while (slow.next != fast) {
+            count++;
+            slow = slow.next;
+        }
+
+        fast = slow = head;
+        // 快指针先前行 count 步
+        while (count > 0) {
+            fast = fast.next;
+            count--;
+        }
+
+        while (fast != slow) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return fast;
+    }
 
     /**
      * 判断单链表是否有环（双指针法 ,  n%节点数 = 2*n%节点数 ， n为迭代次数 ，如果有环，最多迭代次数 == 节点数时，就会相遇)

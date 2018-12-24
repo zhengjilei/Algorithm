@@ -49,7 +49,6 @@ public class P1025New {
      * @param reverseGap
      */
     private static void reverse(int[] list, int i, int reverseGap) {
-        int temp = list[i];
         int start = i;
         int end = i + reverseGap - 1;
         while (start < end) {

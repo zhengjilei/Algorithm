@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Created by Ethan-Walker on 2018/4/1.
  */
-public class MainTest {
+public class Q001TwoSumTest {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         long k = sc.nextInt();

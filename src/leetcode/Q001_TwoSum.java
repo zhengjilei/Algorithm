@@ -1,4 +1,4 @@
-package leetcode.a001TwoSum;
+package leetcode;
 
 import edu.princeton.cs.algs4.StdRandom;
 import org.testng.annotations.Test;
@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-class Main {
+class Q001_TwoSum {
 
     public static void main(String[] args) {
 /*        Random random = new Random();

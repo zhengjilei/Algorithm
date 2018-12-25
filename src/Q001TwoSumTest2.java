@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Created by Ethan-Walker on 2018/4/5.
  */
-public class MainTest2 {
+public class Q001TwoSumTest2 {
 
     public static void main(String[] args) {
         HashMap<Integer, String> hashMap = new HashMap<>();

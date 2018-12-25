@@ -3,7 +3,7 @@ package 程序员代码面试指南;
 /**
  * created by Ethan-Walker on 2018/12/24
  */
-public class Q025_ListSelectSort {
+public class Q026_ListSelectSort {
 
 
     /**

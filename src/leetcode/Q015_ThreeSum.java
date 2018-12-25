@@ -1,4 +1,4 @@
-package leetcode.a015ThreeSum;
+package leetcode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Ethan-Walker on 2018/6/4.
  */
-public class Main {
+public class Q015_ThreeSum {
 
     public static void main(String[] args) {
         int[] nums = new int[]{0, -2, -2, 2, 2};

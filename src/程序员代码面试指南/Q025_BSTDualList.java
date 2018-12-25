@@ -9,7 +9,7 @@ import java.util.ArrayDeque;
 /**
  * created by Ethan-Walker on 2018/12/24
  */
-public class Q024_BSTDualList {
+public class Q025_BSTDualList {
 
 
     private Node head = null;

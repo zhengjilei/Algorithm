@@ -1,4 +1,4 @@
-package leetcode.a004MedianTwoSorted;
+package leetcode;
 
 /**
  * There are two sorted arrays nums1 and nums2 of size m and n respectively.
@@ -14,7 +14,7 @@ import java.util.Random;
 /**
  * Created by Ethan-Walker on 2018/6/12.
  */
-public class Main {
+public class Q004_MedianTwoSorted {
 
     @Test
     public void a() {

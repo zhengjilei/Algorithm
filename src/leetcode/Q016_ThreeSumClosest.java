@@ -1,11 +1,11 @@
-package leetcode.a016ThreeSumClosest;
+package leetcode;
 
 import java.util.Arrays;
 
 /**
  * Created by Ethan-Walker on 2018/6/12.
  */
-public class Main {
+public class Q016_ThreeSumClosest {
 
     public static void main(String[] args) {
         int i = threeSumClosest(new int[]{-1, 2, 1, -4}, 1);

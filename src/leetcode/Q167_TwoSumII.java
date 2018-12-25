@@ -1,4 +1,4 @@
-package leetcode.a167TwoSumII;
+package leetcode;
 
 import java.util.HashMap;
 
@@ -6,7 +6,7 @@ import java.util.HashMap;
 /**
  * Created by Ethan-Walker on 2018/6/1.
  */
-public class Solution {
+public class Q167_TwoSumII {
 
     /**
      * 方法一： 按照 Two Sum 之前的方法做，但是没有运用到 升序排列的特点

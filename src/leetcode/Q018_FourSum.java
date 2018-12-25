@@ -1,4 +1,4 @@
-package leetcode.a018FourSum;
+package leetcode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Ethan-Walker on 2018/6/12.
  */
-public class Main {
+public class Q018_FourSum {
     public static void main(String[] args) {
         fourSum(new int[]{1, 0, -1, 0, -2, 2}, 0);
     }

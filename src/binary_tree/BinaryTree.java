@@ -22,12 +22,22 @@ public class BinaryTree<T> {
         root.parent = null;
     }
 
+    /**
+     * 根据字符串反序列化构建二叉树
+     * @param str
+     */
+    public void buildTree(String str) {
+
+    }
+
     public void buildTree(int[] a, int[] b) {
+        if (a.length != b.length) throw new RuntimeException("前序和中序不匹配");
         root = buildTree(a, b, 0, 0, b.length - 1);
     }
 
     /**
      * 根据前序和中序序列构造二叉树
+     * 返回根节点
      *
      * @param a
      * @param b
@@ -39,25 +49,27 @@ public class BinaryTree<T> {
      */
     public TreeNode<Integer> buildTree(int[] a, int[] b, int aStart, int bStart, int bEnd) {
 
+        // 构造以 a[aStart] 为根节点的子树返回
+
         if (bEnd - bStart < 0) return null;
-        int k = 0;
         int j = bStart;
+        // 在中序序列中找到第一个等于 a[aStart] 的数 b[j]
         while (j <= bEnd && a[aStart] != b[j]) {
             j++;
-            k++;
         }
         if (j > bEnd) {
             throw new RuntimeException("前序和中序不匹配"); // 前序中序不一致，必须得抛出异常，如果返回 Null 会误以为可以正确构建二叉树
         }
-        // k 表示 左子树节点个数
-
         TreeNode<Integer> root = new TreeNode<>(a[aStart]);
 
-        TreeNode p = buildTree(a, b, aStart + 1, bStart, bStart + k - 1); // [bStart,bStart+k-1] 构造左子树
-        TreeNode q = buildTree(a, b, aStart + k + 1, bStart + k + 1, bEnd); // [bStart+k+1, bEnd] 构造右子树
+        int leftCount = j - bStart + 1;  // 左子树的节点数目, 以便确定先序序列中的右子树起始位置
+        TreeNode p = buildTree(a, b, aStart + 1, bStart, j - 1); //   [aStart,aStart+leftCount-1] [bStart,j-1] 构造左子树
+        TreeNode q = buildTree(a, b, aStart + leftCount, j + 1, bEnd); //[aleft+leftCount,aEnd] [j+1, bEnd] 构造右子树
 
         root.left = p;
         root.right = q;
+
+        // 如果需要父节点指针的话
         if (p != null) {
             p.parent = root;
         }

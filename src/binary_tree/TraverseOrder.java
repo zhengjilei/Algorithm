@@ -3,6 +3,8 @@ package binary_tree;
 import org.junit.Test;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * created by Ethan-Walker on 2018/12/24
@@ -126,6 +128,76 @@ public class TraverseOrder {
             }
         }
         System.out.println();
+    }
+
+    /**
+     * 层遍历，不换行
+     *
+     * @param root
+     * @return
+     */
+    public List<Integer> levelOrder(TreeNode<Integer> root) {
+        ArrayList<Integer> result = new ArrayList<>();
+        if (root == null) return result;
+
+        ArrayDeque<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            root = queue.poll();
+            result.add(root.val);
+
+            if (root.left != null) {
+                queue.offer(root.left);
+            }
+            if (root.right != null) {
+                queue.offer(root.right);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 层遍历，换行
+     *
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder2(TreeNode<Integer> root) {
+        ArrayList<List<Integer>> result = new ArrayList<>();
+        if (root == null) return result;
+
+        ArrayDeque<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
+        ArrayList<Integer> level = new ArrayList<>();
+
+        TreeNode<Integer> node = null;
+        int curLevelCount = 1, nextLevelCount = 0;
+
+        while (!queue.isEmpty()) {
+            node = queue.poll();
+            level.add(node.val);  // 访问当前行元素，curLevelCount-1
+            curLevelCount--;
+
+            if (node.left != null) {
+                queue.offer(node.left);
+                nextLevelCount++;
+            }
+            if (node.right != null) {
+                queue.offer(node.right);
+                nextLevelCount++;
+            }
+
+            if (curLevelCount == 0) { // 当前层遍历结束
+
+                result.add(level);
+                level = new ArrayList<>();
+
+                curLevelCount = nextLevelCount;
+                nextLevelCount = 0;
+            }
+        }
+        return result;
+
     }
 
     @Test

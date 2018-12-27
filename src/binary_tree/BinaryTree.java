@@ -292,7 +292,7 @@ public class BinaryTree<T> {
 
         ArrayDeque<TreeNode<Integer>> queue = new ArrayDeque<>();
         ArrayDeque<Integer> stack = new ArrayDeque<>();
-        int beToPrint = 1, nextLineNodeCount = 0;
+        int curLevelCount = 1, nextLevelCount = 0;
         queue.push(root);
         TreeNode node = null;
         int flag = 0; // 0 表示打印顺序从左到右 , 1表示打印顺序从右到左，先正行压栈
@@ -303,18 +303,18 @@ public class BinaryTree<T> {
             } else {
                 stack.push((Integer) node.val);
             }
-            beToPrint--;
+            curLevelCount--;
 
             if (node.left != null) {
-                nextLineNodeCount++;
+                nextLevelCount++;
                 queue.offer(node.left);
             }
             if (node.right != null) {
-                nextLineNodeCount++;
+                nextLevelCount++;
                 queue.offer(node.right);
             }
 
-            if (beToPrint == 0) {
+            if (curLevelCount == 0) {
                 //一行结束
                 if (flag == 1) {
                     // 从右到左的一行
@@ -326,8 +326,8 @@ public class BinaryTree<T> {
                 } else {
                     flag = 1;
                 }
-                beToPrint = nextLineNodeCount;
-                nextLineNodeCount = 0;
+                curLevelCount = nextLevelCount;
+                nextLevelCount = 0;
                 System.out.println();
             }
         }

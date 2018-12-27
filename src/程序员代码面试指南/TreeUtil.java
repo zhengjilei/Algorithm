@@ -1,6 +1,8 @@
 package 程序员代码面试指南;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -102,5 +104,62 @@ public class TreeUtil {
         }
     }
 
+    /**
+     * 形象地打印二叉树
+     * 如果一个节点2的左子树为空,右子树不空 :  该节点表示未 ^2
+     * 左右子树均为空 ^2^
+     * 1
+     * ^2  3^
+     * ^4^ ^5^
+     *
+     * @param root
+     * @return
+     */
+    public static void printShapeBT(TreeNode root) {
+
+        List<List<String>> result = new ArrayList<>();
+        List<String> list = new ArrayList<>();
+
+        ArrayDeque<TreeNode> queue = new ArrayDeque<>();
+        int curLevelCount = 1, nextLevelCount = 0;
+        queue.offer(root);
+        TreeNode node = null;
+        while (!queue.isEmpty()) {
+            node = queue.poll();
+            // 访问当前节点
+            StringBuilder sb = new StringBuilder();
+            if (node.left == null) {
+                sb.append("^");
+            } else {
+                queue.offer(node.left);
+                nextLevelCount++;
+            }
+            sb.append(node.val);
+            if (node.right == null) {
+                sb.append("^");
+            } else {
+                queue.offer(node.right);
+                nextLevelCount++;
+            }
+
+            list.add(sb.toString());
+
+            curLevelCount--;
+            if (curLevelCount == 0) {
+                result.add(list);
+                list = new ArrayList<>();
+                curLevelCount = nextLevelCount;
+                nextLevelCount = 0;
+            }
+        }
+
+        for (List<String> l : result) {
+            for (String str : l) {
+                System.out.print(str + " ");
+            }
+            System.out.println();
+        }
+
+    }
 
 }

@@ -3,8 +3,6 @@ package 剑指offer;
 import binary_tree.BinaryTree;
 import binary_tree.TreeNode;
 
-import java.util.ArrayDeque;
-
 /**
  * 二叉树的序列化和反序列化
  * created by Ethan-Walker on 2018/12/8

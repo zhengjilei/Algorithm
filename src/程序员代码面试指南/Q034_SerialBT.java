@@ -164,7 +164,7 @@ public class Q034_SerialBT {
 
     @Test
     public void test() {
-        TreeNode root = TreeUtil.buildTreeByPreOrder("1!2!#!4!#!#!3!5!#!#!#!");
+        TreeNode root = TreeUtil.buildTreeByPreOrderStr("1!2!#!4!#!#!3!5!#!#!#!");
         String levelStr = serialByLevel(root); // 1!2!3!#!4!5!#!#!#!#!#!
         TreeNode root2 = deSerialByLevel(levelStr);
 

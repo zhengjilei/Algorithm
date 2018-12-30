@@ -19,6 +19,17 @@ public class Q889_BuildTree {
         return buildTreeByPreAndPost(pre, post, 0, post.length - 1, pre.length);
     }
 
+    /**
+     * 这里构造出来的二叉树是 众多结果中的一种
+     * 当某个节点只有一个子节点时，优先将这个节点作为右子节点
+     *
+     * @param pre
+     * @param post
+     * @param preStart
+     * @param postEnd
+     * @param length
+     * @return
+     */
     public TreeNode buildTreeByPreAndPost(int[] pre, int[] post, int preStart, int postEnd, int length) {
 
         if (length == 0) {
@@ -55,8 +66,17 @@ public class Q889_BuildTree {
 
         TreeNode root = constructFromPrePost(pre, post);
         TreeUtil.printShapeBT(root);
-        TreeUtil.levelOrder(root);
-        TreeUtil.preOrder(root);
+        int[] pre2 = {1, 2, 4, 6, 3, 5, 7};
+        int[] in2 = {4, 6, 2, 1, 5, 7, 3};
+        int[] post2 = {6, 4, 2, 7, 5, 3, 1};
+
+        TreeNode origin = TreeUtil.buildTreeByPreAndIn(pre2, in2);
+        System.out.println("原型：");
+        TreeUtil.printShapeBT(origin); // 树的原型
+
+        TreeNode result = constructFromPrePost(pre2, post2);
+        System.out.println("重建：");
+        TreeUtil.printShapeBT(result); // 根据先序后序构造出来的结果
 
     }
 }

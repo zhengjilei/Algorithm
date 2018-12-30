@@ -9,8 +9,26 @@ import java.util.Queue;
  * created by Ethan-Walker on 2018/12/26
  */
 public class TreeUtil {
+    public static TreeNode buildTreeByPreAndIn(int[] pre, int[] in) {
+        if (pre == null || in == null || pre.length != in.length) throw new RuntimeException("前序中序不匹配");
+        return buildTreeByPreAndIn(pre, in, 0, 0, pre.length);
+    }
 
-    public static TreeNode buildTreeByPreOrder(String str) {
+    private static TreeNode buildTreeByPreAndIn(int[] pre, int[] in, int preStart, int inStart, int length) {
+        if (length == 0) return null;
+        int j = 0;
+        while (j < length && in[inStart + j] != pre[preStart]) j++;
+        if (j >= length) throw new RuntimeException("前序中序不匹配");
+
+        TreeNode root = new TreeNode(pre[preStart]);
+        root.left = buildTreeByPreAndIn(pre, in, preStart + 1, inStart, j);
+        root.right = buildTreeByPreAndIn(pre, in, preStart + j + 1, j + inStart + 1, length - j - 1); // 这里的 j 不是索引，是左子树的大小
+        return root;
+    }
+
+    // TODO: 2018/12/30 按层序列化和反序列化 示例:  1,2,3,null,4,5,null
+
+    public static TreeNode buildTreeByPreOrderStr(String str) {
 
         String[] values = str.split("!");
         Queue<String> queue = new ArrayDeque<>();
@@ -19,19 +37,20 @@ public class TreeUtil {
             queue.offer(value);
         }
 
-        return buildTreeByPreOrder(queue);
+        return buildTreeByPreOrderStr(queue);
     }
 
-    private static TreeNode buildTreeByPreOrder(Queue<String> queue) {
+    private static TreeNode buildTreeByPreOrderStr(Queue<String> queue) {
         String s = queue.poll();
         if (s.equals("#")) {
             return null;
         }
         TreeNode root = new TreeNode(Integer.valueOf(s));
-        root.left = buildTreeByPreOrder(queue);
-        root.right = buildTreeByPreOrder(queue);
+        root.left = buildTreeByPreOrderStr(queue);
+        root.right = buildTreeByPreOrderStr(queue);
         return root;
     }
+
 
     public static String serialByPreOrder(TreeNode root) {
         if (root == null) return "#!";
@@ -159,7 +178,7 @@ public class TreeUtil {
             }
             System.out.println();
         }
-
+        System.out.println("-----------------------------");
     }
 
 }

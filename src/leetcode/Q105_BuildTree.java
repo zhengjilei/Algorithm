@@ -19,11 +19,9 @@ public class Q105_BuildTree {
 
         if (length == 0) return null;
 
-        // inStart==inEnd 也要进行下面的步骤，防止pre 和 in 序列不匹配
-
         //  构造以 pre[preStart] 为根节点的树
-        int j = 0; // 中序中找到根节点
-        while (j < length && in[j + inStart] != pre[preStart]) {
+        int j = 0;
+        while (j < length && in[j + inStart] != pre[preStart]) { // 中序中找到根节点
             j++;
         }
         if (j >= length) {

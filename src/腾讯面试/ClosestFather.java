@@ -1,7 +1,5 @@
 package 腾讯面试;
 
-import binary_tree.MultiTreeNode;
-
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -110,6 +108,8 @@ public class ClosestFather {
 
 
     /**
+     * 有指向父节点的指针
+     *
      * 任意树（可能是二叉树，可能是多叉树）
      * 两个链表的第一个公共节点
      * 计算两个链表的长度，双指针法

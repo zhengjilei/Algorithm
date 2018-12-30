@@ -20,6 +20,7 @@ public class Q106_BuildTree {
 
     private TreeNode buildTreeByInAndPost(int[] in, int[] post, int inStart, int postEnd, int length) {
         if (length == 0) return null;
+        // 构造以 post[postEnd]为根节点的树
         int j = 0;
         while (j < length && in[j + inStart] != post[postEnd]) {
             j++;

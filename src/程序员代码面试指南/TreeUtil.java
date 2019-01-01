@@ -181,4 +181,21 @@ public class TreeUtil {
         System.out.println("-----------------------------");
     }
 
+    /**
+     * 根据值查找节点,前提是树内节点值不重复
+     *
+     * @param val
+     * @return
+     */
+    public static TreeNode findNodeByVal(TreeNode root, int val) {
+        if (root == null) return null;
+        if (root.val == val) return root;
+
+        TreeNode leftResult = findNodeByVal(root.left, val);
+        if (leftResult != null) return leftResult;
+
+        TreeNode rightResult = findNodeByVal(root.right, val);
+        return rightResult;
+    }
+
 }

@@ -1,5 +1,7 @@
 package 程序员代码面试指南;
 
+import org.junit.Test;
+
 /**
  * 统计完全二叉树的节点数
  * <p>
@@ -53,11 +55,11 @@ public class q054_CountNodesOfCBT {
         if (leftHeight == rightHeight) {
             // 说明左子树是满二叉树, 节点数为 2^(height-curLevel) -1  + 1 （当前节点 root）
             // 右子树是完全二叉树，不确定是否是满二叉树
-            return 1 << leftHeight + getCount(root.right, curLevel + 1, height);
+            return (1 << leftHeight) + getCount(root.right, curLevel + 1, height);  // 注意 << 优先级低于 +
         } else {
             // rightHeight == leftHeight-1
             // 左子树不是满二叉树,  右子树是少一层的 满二叉树
-            return 1 << rightHeight + getCount(root.left, curLevel + 1, height);
+            return (1 << rightHeight) + getCount(root.left, curLevel + 1, height);
         }
     }
 
@@ -75,6 +77,19 @@ public class q054_CountNodesOfCBT {
             root = root.left;
         }
         return height;
+    }
+
+
+    @Test
+    public void test() {
+        int[] pre = {1, 2, 4, 5, 3, 6};
+        int[] in = {4, 2, 5, 1, 6, 3};
+
+        TreeNode root = TreeUtil.buildTreeByPreAndIn(pre, in);
+        TreeUtil.printShapeBT(root);
+        int i = countNodes(root);
+
+        System.out.println(i);
 
     }
 }

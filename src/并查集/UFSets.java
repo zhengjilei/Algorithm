@@ -1,6 +1,6 @@
 package 并查集;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 
 /**
  * 当需要统计每个集合中的总数时，设 parent[i]= -1 这种方式比较适合
@@ -11,7 +11,7 @@ public class UFSets {
     int[] parent; //parent[i]= j 表示编号为 i 的节点父节点编号为 j
     int size;
 
-    LinkedHashMap<Integer, Integer> valueNum; // key 表示数值，value 表示数值对应的编号
+    HashMap<Integer, Integer> valueNum; // key 表示数值，value 表示数值对应的编号
     int[] numValue; // 根据编号查数值
 
     public UFSets(int[] value, int size) {
@@ -30,7 +30,7 @@ public class UFSets {
      */
     public void buildValueIndex(int[] value) {
         numValue = value;
-        valueNum = new LinkedHashMap<>();
+        valueNum = new HashMap<>();
         for (int i = 0; i < value.length; i++) {
             valueNum.put(value[i], i);
         }
@@ -56,6 +56,7 @@ public class UFSets {
      */
     public int collapsingFind(int val) {
         int root = simpleFind(val);
+
         int j = valueNum.get(val), t;
         while (parent[j] >= 0) {
             t = parent[j];

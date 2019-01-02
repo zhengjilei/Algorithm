@@ -8,7 +8,7 @@ import org.junit.Test;
  * <p>
  * created by Ethan-Walker on 2018/12/30
  */
-public class q054_CountNodesOfCBT {
+public class Q054_CountNodesOfCBT {
 
     /**
      * 最简单的方法，和普通二叉树一样处理，遍历一遍

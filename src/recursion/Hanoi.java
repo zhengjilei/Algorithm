@@ -1,5 +1,7 @@
 package recursion;
 
+import org.junit.Test;
+
 import java.math.BigInteger;
 
 /**
@@ -9,6 +11,8 @@ public class Hanoi {
 
     /**
      * 计算 n 个盘子从 A -> C 需要多少步
+     * 时间复杂度: O(2^n)
+     * 空间复杂度: O(n)
      *
      * @param n
      * @return
@@ -18,6 +22,15 @@ public class Hanoi {
         return 2 * hanoi(n - 1) + 1;
     }
 
+    /**
+     * h[n] = 2*h[n-1]+1
+     * <p>
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(n)
+     *
+     * @param n
+     * @return
+     */
     public static BigInteger hanoiIteration(int n) {
         BigInteger[] a = new BigInteger[n + 1];
         a[0] = BigInteger.valueOf(0);
@@ -28,6 +41,51 @@ public class Hanoi {
         return a[n];
     }
 
+    /**
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(1)
+     *
+     * @param n
+     * @return
+     */
+    public static long hanoiStepCountIteration(int n) {
+        int a = 0, b = 0;
+        // 迭代 n 次
+        for (int i = 1; i <= n; i++) {
+            b = 2 * a + 1;
+            a = b;
+        }
+        return b;
+    }
+
+    /**
+     * h[n] = 2 * h[n-1]+1
+     * h[n]+1 = 2*(h[n-1]+1)
+     * 等比公式 h[n]+1 = 1(首项)* 2^n
+     * h[n] = 2^n -1
+     * 时间复杂度: O(1)
+     * 空间复杂度: O(1)
+     *
+     * @param n
+     * @return
+     */
+    public static long hanoiStepCount(int n) {
+        return (1 << n) - 1;
+    }
+
+    @Test
+    public void test() {
+        System.out.println(1 << 0); // 1(2^0==1)
+    }
+
+    /**
+     * 递归显示步数
+     *
+     * @param n
+     * @param A
+     * @param B
+     * @param C
+     */
     public static void showStep(int n, String A, String B, String C) {
         if (n == 1) {
             System.out.println("move top disk from " + A + " to " + C);
@@ -64,11 +122,11 @@ public class Hanoi {
 
 
     public static void main(String[] args) {
-//        long count = hanoi(40);
+//      long count = hanoi(40);
         BigInteger count1 = hanoiIteration(5);
 
         BigInteger count2 = hanoiIteration(64);
-//        System.out.println(count);
+//      System.out.println(count);
         System.out.println(count1);
         System.out.println(count2);
 

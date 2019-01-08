@@ -12,6 +12,8 @@ public class Q007_MaxInWindow {
 
 
     /**
+     * 双端队列的队首元素始终是 当前窗口中的最大值
+     *
      * @param array 数组
      * @param size  窗口长度
      * @return
@@ -34,12 +36,15 @@ public class Q007_MaxInWindow {
             }
             deque.offerLast(index);
 
-            // 判断窗口中最大值是否需要弹出
-            if (index - deque.peekFirst() == size) {
-                deque.pollFirst();
-            }
+
             // 窗口中满 size 个元素时，需要获取最大值
             if (index >= size - 1) {
+
+                // 判断窗口中最大值是否需要弹出 ，实际上 index>=size 时才有可能需要弹出
+                if (index - deque.peekFirst() == size) {
+                    deque.pollFirst();
+                }
+
                 result[resultIndex++] = array[deque.peekFirst()];
 
             }

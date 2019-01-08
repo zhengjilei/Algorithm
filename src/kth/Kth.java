@@ -7,6 +7,7 @@ import java.util.Scanner;
 /**
  * 寻找第 k 小的数
  * 时间复杂度 : O(n)
+ * 如果是第 k 大的数（逆序划分，左边是比 pivot 大的数）
  * Created by EthanWalker on 2017/11/20.
  */
 public class Kth {
@@ -16,19 +17,19 @@ public class Kth {
      * 在a[left]~a[right] 中选择第 K小的数
      * 复杂度 O(n)
      */
-    public static int kth(int[] a, int k, int left, int right) {
+    public static int kth(int[] a, int left, int right, int k) {
         if (k <= 0) return -1;
-        int pivotRelativePos = randomPartition(a, left, right);
-
-        if (pivotRelativePos + 1 == k) {
+        int pivotIndex = randomPartition(a, left, right);
+        int leftSize = pivotIndex - left;
+        if (leftSize + 1 == k) {
             // 随机数恰好是 第 k 小的数
-            return a[pivotRelativePos + left];
-        } else if (pivotRelativePos + 1 > k) {
+            return a[pivotIndex];
+        } else if (leftSize + 1 > k) {
             // 第 k 小的数在随机数的左边
-            return kth(a, k, left, pivotRelativePos + left - 1);
+            return kth(a, left, pivotIndex - 1, k);
         } else {
             // 第 k 小的数在随机数的右边
-            return kth(a, (k - pivotRelativePos - 1), pivotRelativePos + left + 1, right);
+            return kth(a, pivotIndex + 1, right, k - (leftSize + 1));
         }
     }
 
@@ -49,7 +50,7 @@ public class Kth {
             }
         }
         swap(a, i, right);      // 将选中的 pivot 调到 正确的位置
-        return i - left;        // 返回 pivot 的相对left位置
+        return i;
 
     }
 

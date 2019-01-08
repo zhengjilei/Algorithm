@@ -1,4 +1,4 @@
-package 剑指offer;
+package kth;
 
 import org.junit.Test;
 
@@ -7,19 +7,13 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * 寻找最小的 k 个数
- * <p>
- * 方法一：排序 O(nlogn)
- * <p>
- * 方法二：
- * 和寻找第k小的数思路相同，由于划分后，只要找到第k小的数的位置，前面的数都比其小.
- * <p>
- * 优点：时间复杂度低  O(n)
+ * 寻找数组中的最小的前 k 个数
+ * 思路：划分
+ * 优点：时间复杂度低  O(n) 空间复杂度:
  * 缺点: 会改变原数组
- * <p>
- * created by Ethan-Walker on 2018/12/9
+ * created by Ethan-Walker on 2019/1/8
  */
-public class Q040_TopKMin {
+public class TopKMin {
 
     public ArrayList<Integer> GetLeastNumbers_Solution(int[] input, int k) {
         int index = getTopKMinIndex(input, 0, input.length - 1, k);
@@ -54,7 +48,7 @@ public class Q040_TopKMin {
         int pivotIndex = (int) (Math.random() * (right - left + 1) + left);
 //        int pivotIndex = right;
         swap(array, pivotIndex, right);
-        int i = left, j = right ;
+        int i = left, j = right;
         while (i < j) {
             while (i < j && array[i] <= array[right]) i++;
             while (i < j && array[j] >= array[right]) j--;

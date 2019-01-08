@@ -1,14 +1,17 @@
-package heap;
+package kth;
 
 import org.junit.Test;
 
 import java.util.*;
 
 /**
+ * 找出数据流中的最小的前k个元素
+ * 堆实现
+ * 时间复杂度: O(nlogk)
+ * 空间复杂度: O(k)
  * Created by Ethan-Walker on 2018/5/14.
- * 找出最小的前k个元素
  */
-public class TopKMinHeap {
+public class TopKMinInStream {
 
     private static int[] heap;
 
@@ -29,8 +32,12 @@ public class TopKMinHeap {
     }
 
     /**
+     * 建大顶堆
      * 获取数组 arr 中的最小的 top k 个
      * 堆顶元素为第 k 小的（最大堆，堆顶元素是最小的k个元素中的最大值）
+     * <p>
+     * 时间复杂度: O(nlogk)
+     * 空间复杂度: O(1)
      *
      * @param arr
      * @param k
@@ -44,7 +51,7 @@ public class TopKMinHeap {
                 siftDown(arr, 0, k - 1);
             }
         }
-        // 最终得到的第 0 ~ k-1 个数为 最小k 个数
+        // 最终得到的第 0 ~ k-1 个数为 最小的 k 个数
     }
 
     /**

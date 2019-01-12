@@ -1,4 +1,4 @@
-package 模式匹配;
+package KMP;
 
 public class KMP {
 
@@ -31,11 +31,12 @@ public class KMP {
         int i = 0, j = 0;
         while (i < s.length() && j < p.length()) {
             if (j == -1 || s.charAt(i) == p.charAt(j)) {
-                // j==-1 说明 next[0] = -1  说明之前j=0时比较了 s[0] 和 [j] ，但不等，然后 j = next[0] = -1,
+                // j==-1 说明 next[0] = -1  说明之前j=0时比较了 s[0] 和 s[j] ，但不等，然后 j = next[0] = -1,
                 // 故i/j 都需要往后走一步（i++,j++）,模式字符串从头开始比较
                 i++;
                 j++;
             } else {
+                // 模式字符串跳到 next[j]=k 处继续比较
                 j = next[j];
             }
         }

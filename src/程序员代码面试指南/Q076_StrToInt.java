@@ -1,23 +1,16 @@
-package 整数字符串转换;
+package 程序员代码面试指南;
 
-public class IntegerString {
+import org.junit.Test;
 
-    /**
-     * 整数转换成字符串:
-     *
-     * @param n
-     * @return
-     */
-    public String itoa1(int n) {
-        return "";
-    }
+/**
+ * created by Ethan-Walker on 2019/1/12
+ */
+public class Q076_StrToInt {
 
     /**
      * 假设整数是合法、符合日常书写的整数
      * 例如不会出现：0100,+321,1e10,-0021
      * 整数字符串转换成整数
-     * <p>
-     * 如果数字溢出，返回 0
      *
      * @param str
      * @return
@@ -39,6 +32,7 @@ public class IntegerString {
             }
             sum = sum * 10 + cur;
         }
+
         // 原数是正数，但是正数部分求反之后恰好等于最小值，在上面处理过程中只会保留该非法数，剔除
         // 2147483648
         if (positive && sum == Integer.MIN_VALUE) {
@@ -46,5 +40,22 @@ public class IntegerString {
         }
         return positive ? -sum : sum;
     }
-
+    public boolean isValid(String str) {
+        int i = 0;
+        if (str.charAt(0) == '-')
+            i++;
+        for (; i < str.length(); i++) {
+            if (str.charAt(i) < '0' || str.charAt(i) > '9')
+                return false;
+        }
+        return true;
+    }
+    @Test
+    public void test() {
+        System.out.println(-193 / 10); // -19
+        System.out.println(-193 % 10); // -3
+        System.out.println(Integer.MIN_VALUE);
+        System.out.println(Integer.MIN_VALUE / 10);
+        System.out.println(Integer.MIN_VALUE % 10);
+    }
 }

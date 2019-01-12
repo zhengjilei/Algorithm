@@ -1,4 +1,4 @@
-package 模式匹配;
+package KMP;
 
 import java.util.Scanner;
 

@@ -23,18 +23,14 @@ public class MinHeap {
 
         int start = 0;
         int end = currentSize - 1;
-        while (end > 0) {
-
-            swap(heap, start, end);
-
-            end--;
-            // 重新调整
-            siftDown(0, end);
-        }
+        do {
+            swap(heap, 0, end);         // 最小值交换到堆末尾
+            siftDown(0, --end);          // 只需要调整根节点即可
+        } while (end >= 1);
     }
 
     private void buildMinHeap(int[] a, int start, int length) {
-        int position = length / 2 - 1;
+        int position = (length - 2) >> 1;
         while (position >= 0) {
             siftDown(position, length - 1);
             position--;
@@ -49,7 +45,7 @@ public class MinHeap {
      */
     private void siftDown(int startIndex, int endIndex) {
         int i = startIndex;
-        int j = i * 2 + 1; // i 节点的左子节点
+        int j = (i << 1) + 1; // i 节点的左子节点
 
         while (j <= endIndex) {
             if (j < endIndex && heap[j + 1] < heap[j]) j++; // 如果j<endIndex 说明有右子节点，让j指向 左右子节点中较小的一位
@@ -57,7 +53,7 @@ public class MinHeap {
             else {
                 swap(heap, i, j);
                 i = j;
-                j = i * 2 + 1;  // 继续下沉调整
+                j = (i << 1) + 1;  // 继续下沉调整
             }
         }
     }

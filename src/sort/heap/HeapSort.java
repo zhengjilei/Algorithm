@@ -2,7 +2,6 @@ package sort.heap;
 
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  * Created by Ethan-Walker on 2018/3/26.
@@ -36,17 +35,15 @@ public class HeapSort {
 
         int start = 0;
         int end = heapLength - 1;
-        while (end > 0) {
-
-            heap[start] = heap[start] + heap[end] - (heap[end] = heap[start]);
-            // 重新调整
-            buildMinHeap(heap, 0, end);
-            end--;
-        }
+        buildMinHeap(heap, 0, end);
+        do {
+            swap(0, end);         // 最小值交换到堆末尾
+            siftDown(0, --end);   // 只需要调整根节点即可
+        } while (end >= 1);
     }
 
     public static void buildMinHeap(int[] a, int start, int length) {
-        int position = length >> 1 - 1;
+        int position = (length - 2) >> 1;
         while (position >= 0) {
             siftDown(position, length - 1);
             position--;
@@ -61,14 +58,14 @@ public class HeapSort {
      */
     private static void siftDown(int startIndex, int endIndex) {
         int i = startIndex;
-        int j = i << 1 + 1; // i 节点的左子节点
+        int j = (i << 1) + 1; // i 节点的左子节点
         while (j <= endIndex) {
             if (j < endIndex && heap[j + 1] < heap[j]) j++; // 如果 j 不是最后一个节点 且 i 的右子节点比左子节点要小， 则j +1
             if (heap[i] <= heap[j]) break; // i 节点比子节点都小
             else {
-                heap[j] = heap[i] + heap[j] - (heap[i] = heap[j]);
+                swap(i, j);
                 i = j;
-                j = i << 1 + 1;  // 继续下沉调整
+                j = (i << 1) + 1;  // 继续下沉调整
             }
         }
     }
@@ -94,6 +91,7 @@ public class HeapSort {
 
     /**
      * 插入一个新元素到堆中，调整堆
+     *
      * @param value
      * @return
      */
@@ -109,6 +107,7 @@ public class HeapSort {
 
     /**
      * 上浮调整
+     *
      * @param startIndex
      */
     private static void siftUp(int startIndex) {
@@ -124,5 +123,11 @@ public class HeapSort {
             }
         }
 
+    }
+
+    public static void swap(int i, int j) {
+        int a = heap[i];
+        heap[i] = heap[j];
+        heap[j] = a;
     }
 }

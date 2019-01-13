@@ -1,6 +1,5 @@
 package 剑指offer;
 
-import org.testng.annotations.Test;
 
 /**
  * 倒数第 k 个节点

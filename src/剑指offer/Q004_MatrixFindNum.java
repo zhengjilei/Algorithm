@@ -1,6 +1,7 @@
 package 剑指offer;
 
-import org.testng.annotations.Test;
+
+import org.junit.Test;
 
 /**
  * 二维数组中查找一个数

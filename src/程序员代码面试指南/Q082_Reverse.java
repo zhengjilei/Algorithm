@@ -10,7 +10,12 @@ import java.util.Arrays;
  */
 public class Q082_Reverse {
 
-
+    /**
+     * 方法一：用Java 的split() 方法
+     *
+     * @param str
+     * @return
+     */
     public String reverse(String str) {
         String[] s = str.split(" ");
         for (int i = 0; i < s.length / 2; i++) {
@@ -49,6 +54,11 @@ public class Q082_Reverse {
         System.out.println(Arrays.toString(chs2));
     }
 
+    /**
+     * 方法二: 先整体逆序，再局部逆序
+     *
+     * @param chs
+     */
     public void reverse(char[] chs) {
         for (int i = 0; i < chs.length / 2; i++) {
             swap(chs, i, chs.length - i - 1);
@@ -59,7 +69,6 @@ public class Q082_Reverse {
             while (end < chs.length && chs[end] != ' ') {
                 end++;
             }
-
             // 对 start, end-1 进行逆序
             int len = end - start;
             int sum = end - 1 + start; // 关于中点对称的两个下标之和
@@ -74,6 +83,39 @@ public class Q082_Reverse {
         char c = chs[i];
         chs[i] = chs[j];
         chs[j] = c;
+    }
+
+    // 补充题目
+    public void rotateStr(char[] chs, int size) {
+        if (chs == null || chs.length <= 1 || size <= 0 || size >= chs.length) return;
+        // 先整体逆序，再将前左右半区各自逆序
+
+        for (int i = 0; i < chs.length / 2; i++) {
+            swap(chs, i, chs.length - i - 1);
+        }
+
+        // 逆转左半区
+        int leftLen = chs.length - size;
+        for (int i = 0; i < leftLen / 2; i++) {
+            swap(chs, i, leftLen - i - 1);
+        }
+
+        // 逆转右半区, leftLen  为右半区起点
+        int sum = chs.length - 1 + leftLen;
+        int limit = size / 2 + leftLen;
+        for (int i = leftLen; i < limit; i++) {
+            swap(chs, i, sum - i);
+        }
+
+    }
+
+
+    @Test
+    public void test2() {
+        char[] chs = {'A', 'B', 'C', 'D', 'E'};
+        rotateStr(chs, 3);
+        System.out.println(Arrays.toString(chs));
+
     }
 
 }

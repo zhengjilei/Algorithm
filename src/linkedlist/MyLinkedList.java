@@ -342,6 +342,7 @@ public class MyLinkedList {
         return null;
 
     }
+
     /**
      * 计算环的入口点
      *
@@ -387,12 +388,17 @@ public class MyLinkedList {
     }
 
     /**
-     * 判断单链表是否有环（双指针法 ,  n%节点数 = 2*n%节点数 ， n为迭代次数 ，如果有环，最多迭代次数 == 节点数时，就会相遇)
+     * 判断单链表是否有环（双指针法 )
+     * 快指针每次走两步，慢指针每次走1步
+     * 假设有环：慢指针进入环的入口节点时，快指针已经在环内了，设从入口节点开始编号的话，快指针离慢指针此时相差 k 个节点
+     * 从慢指针进入环的入口节点时开始统计走的步数 n
+     * 2n - n = k 时， 即快指针比慢指针多走了 k 个节点（恰弥补了刚开始的 k 个节点），故此时慢指针快指针相遇
+     * <p>
+     * 故如果快慢指针相遇，说明一定有环
      *
      * @return
      */
     public boolean hasLoop() {
-
         Node p = head, q = head.next;
         while (p != q) {
             if (q == null || q.next == null) return false;

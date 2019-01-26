@@ -7,6 +7,8 @@ import java.util.ArrayDeque;
  */
 public class Q020_ValidBracket {
 
+    // 多个不同的括号，需要用栈
+    // 只有一种括号，可以通过计数方式
     public boolean isValid(String s) {
         ArrayDeque<Character> stack = new ArrayDeque<>();
         for (int i = 0; i < s.length(); i++) {

@@ -31,19 +31,19 @@ public class Q016_ThreeSumClosest {
             int end = nums.length - 1;
 
             while (start < end) {
-                int tempResult = nums[i] + nums[start] + nums[end];
+                int sum = nums[i] + nums[start] + nums[end];
 
                 // 计算结果和 target 的差值
-                int diffValue = Math.abs(tempResult - target);
+                int diffValue = Math.abs(sum - target);
                 if (diffValue < minDiffValue) {
                     // 判断当前结果是否最接近 target
                     minDiffValue = diffValue;
-                    result = tempResult;
+                    result = sum;
                 }
 
-                if (tempResult == target) {
+                if (sum == target) {
                     return target;
-                } else if (tempResult < target) {
+                } else if (sum < target) {
                     // 计算结果小于 target
                     start++;
                 } else {

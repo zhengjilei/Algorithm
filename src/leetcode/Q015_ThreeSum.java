@@ -13,6 +13,7 @@ public class Q015_ThreeSum {
         int[] nums = new int[]{0, -2, -2, 2, 2};
         List<List<Integer>> lists = threeSum(nums);
         System.out.println(Arrays.toString(lists.toArray()));
+        System.out.println(threeSumCount(nums, 0));
     }
 
     /**
@@ -64,9 +65,9 @@ public class Q015_ThreeSum {
     }
 
     /**
-     * O(nlogn)
-     * 一共多少组三个元素之和等于target
-     * 考虑重复元素
+     * O(n^2)
+     * 计算一共多少组三个元素之和等于target
+     * 考虑重复元组
      */
     public static int threeSumCount(int[] nums, int target) {
         Arrays.sort(nums);
@@ -74,10 +75,11 @@ public class Q015_ThreeSum {
         int cnt = 0;
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
-                int index = Arrays.binarySearch(nums, target - nums[i] - nums[j]);
+                int index = Arrays.binarySearch(nums, target - nums[i] - nums[j]); //
                 if (index > j) {
                     cnt++;
                     int left = index - 1, right = index + 1;
+
                     while (left > j && nums[left] == nums[index]) {
                         left--;
                         cnt++;
@@ -91,4 +93,6 @@ public class Q015_ThreeSum {
         }
         return cnt;
     }
+
+
 }

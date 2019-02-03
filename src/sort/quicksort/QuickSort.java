@@ -16,11 +16,10 @@ public class QuickSort {
     public static int median3(int[] a, int left, int right) {
         int mid = (left + right) / 2, minIndex = left;
         if (a[mid] < a[minIndex]) minIndex = mid;
-        if (a[right] < a[minIndex]) minIndex = right; // k指向三者中最小的元素
+        if (a[right] < a[minIndex]) minIndex = right; // minIndex 指向三者中最小的元素
         if (minIndex != left) swap(a, minIndex, left); // 将最小元素换到 left
         if (mid != right && a[mid] < a[right])
-            swap(a, mid, right); // 将中间元素 pivot 换到数组末尾
-
+            swap(a, mid, right);
         return a[right];
     }
 

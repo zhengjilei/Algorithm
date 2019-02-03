@@ -10,6 +10,8 @@ public class Q070_LongConsecutive {
 
     /**
      * map key 为数组中遍历到的值 ，value 是该值所在最长序列的长度
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(n)
      *
      * @param arr
      * @return
@@ -17,7 +19,7 @@ public class Q070_LongConsecutive {
     public int longestConsecutive(int[] arr) {
         if (arr == null || arr.length == 0) return 0;
         HashMap<Integer, Integer> map = new HashMap<>();
-        int max = 1, len = 0;
+        int max = 1;
         for (int i = 0; i < arr.length; i++) {
             if (!map.containsKey(arr[i])) {
                 map.put(arr[i], 1);

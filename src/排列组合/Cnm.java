@@ -1,4 +1,4 @@
-package 组合;
+package 排列组合;
 
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -34,7 +34,6 @@ public class Cnm {
             // chs[n-1]不选
             recur(m, n - 1, chs, selected, index);
 
-
             // chs[n-1]选
             selected[index] = chs[n - 1];
             recur(m - 1, n - 1, chs, selected, index + 1);
@@ -57,7 +56,6 @@ public class Cnm {
             return cnm(m, n - 1) + cnm(m - 1, n - 1); // 第 n 个不取  或者 第 n 个取
         }
     }
-
 
     public static long cnm3(int m, int n) {
         long[][] cnm = new long[n + 1][n + 1];
@@ -96,15 +94,15 @@ public class Cnm {
         char[] chs = new char[]{'a', 'b', 'c', 'd', 'e', 'f'};
         int m = 4;
         char[] selected = new char[m];
-//        recur(m, chs.length, chs, selected, 0);
+        recur(m, chs.length, chs, selected, 0);
 
 //        System.out.println(cnm(2, 4));
-        System.out.println(cnm(10, 25));
+//        System.out.println(cnm(10, 25));
         m = 20;
         int n = 90;
-        System.out.println(cnm2(m, n));
-        System.out.println(cnm3(m, n));
-        System.out.println(Long.MAX_VALUE);
+//        System.out.println(cnm2(m, n));
+//        System.out.println(cnm3(m, n));
+//        System.out.println(Long.MAX_VALUE);
     }
 
 }

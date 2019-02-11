@@ -1,4 +1,4 @@
-package 全排列;
+package 排列组合;
 
 import java.util.ArrayList;
 import java.util.Arrays;

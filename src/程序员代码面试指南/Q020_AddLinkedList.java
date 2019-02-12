@@ -40,9 +40,12 @@ public class Q020_AddLinkedList {
             val = up;
             if (list1 != null) {
                 val += list1.val;
+                list1 = list1.next;
             }
             if (list2 != null) {
                 val += list2.val;
+                list2 = list2.next;
+
             }
 
             up = val / 10; // 1 （表示有进位）或者 0
@@ -53,14 +56,6 @@ public class Q020_AddLinkedList {
             } else {
                 prev.next = node;
                 prev = node;
-            }
-
-            if (list1 != null) {
-                list1 = list1.next;
-            }
-            if (list2 != null) {
-                list2 = list2.next;
-
             }
         }
 

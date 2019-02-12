@@ -3,7 +3,6 @@ package graph.dijkstra;
 import graph.matrix.DirectedGraphMatrix;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -37,8 +36,8 @@ public class Dijkstra {
         int n = 5;
         graphInit(n);
 
-        path = new int[n];         // path[i] = k 表示到顶点i的最短路径的 上一个顶点 path[i] = -1 表示直接从顶点
-        dist = new double[n]; // dist[i] 表示从源点0 到顶点i的最短路径长度
+        path = new int[n];                // path[i] = k 表示到顶点i的最短路径的 上一个顶点 path[i] = -1 表示直接从顶点
+        dist = new double[n];             // dist[i] 表示从源点0 到顶点i的最短路径长度
         boolean[] inSet = new boolean[n];  // inSet[i]=true 表示顶点i加入集合中
 
         int source = 0;
@@ -47,12 +46,12 @@ public class Dijkstra {
             if (i != source && dist[i] < graph.getMaxWeight()) path[i] = source;
             else path[i] = -1;
         }
-        double maxWeight = Double.MAX_VALUE;
+        double maxWeight = graph.getMaxWeight();
         double min;
         int minIndex = 0;
         inSet[0] = true;
         for (int i = 0; i < n - 1; i++) {
-            // 选不在集合中 并且dist[v] 最小的顶点 v 加入集合
+            // 选不在集合中 并且 dist[v] 最小的顶点 v 加入集合
             min = maxWeight;
 
             for (int j = 0; j < n; j++) {
@@ -65,7 +64,7 @@ public class Dijkstra {
             //更新 dist 表
             for (int j = 0; j < n; j++) {
                 if (inSet[j] == false
-                        && graph.getWeight(minIndex, j) < graph.getMaxWeight()
+                        && graph.getWeight(minIndex, j) < graph.getMaxWeight()   // minIndex-> j 不是无穷大
                         && dist[minIndex] + graph.getWeight(minIndex, j) < dist[j]) {
                     dist[j] = dist[minIndex] + graph.getWeight(minIndex, j);
                     path[j] = minIndex;

@@ -2,7 +2,7 @@ package leetcode;
 
 /**
  * 链表的归并排序
- * 由于合并时，
+ * 由于链表节点可以直接利用，故不需要额外的空间
  * created by Ethan-Walker on 2018/12/24
  */
 public class Q148_SortLinkedList {

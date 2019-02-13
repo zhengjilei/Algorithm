@@ -32,6 +32,7 @@ public class Dijkstra {
     int[] path;
     double[] dist;
 
+    // 时间复杂度: O(n^2)
     void dijkstra() {
         int n = 5;
         graphInit(n);

@@ -6,6 +6,7 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 
 /**
+ * 任意两点之间的最短路径
  * created by Ethan-Walker on 2018/11/17
  */
 public class Floyd {
@@ -26,9 +27,8 @@ public class Floyd {
         graph.insertEdge(2, 1, 5);
         graph.insertEdge(2, 3, 8);
         graph.insertEdge(3, 2, 6);
-
     }
-
+    // 时间复杂度: O(n^3)
     void floyd() {
         int n = 4;
         graphInit(n);
@@ -42,13 +42,15 @@ public class Floyd {
                 else path[i][j] = -1;
             }
         }
-
-        for (int k = 0; k < n; k++) {
+        // cost(k)[i][j] 表示从顶点 i->j  中间顶点可以是 vertex[0...k] 的最短路径
+        for (int k = 0; k < n; k++) {  // 依次加入 vertex[k] 到中间顶点集合
+            // 每加入一个中间顶点，需要更新全部的 cost
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
+                    // 更新cost, 通过中间顶点更近还是原先路径更短
                     if (cost[i][k] + cost[k][j] < cost[i][j]) {
                         cost[i][j] = cost[i][k] + cost[k][j];
-                        path[i][j] = path[k][j];
+                        path[i][j] = path[k][j];  // i->j 的路径中到达j的上一个顶点更新为 k->j 路径中的到达 j 的上一个顶点
                     }
                 }
             }
@@ -60,6 +62,7 @@ public class Floyd {
         int t;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
+                // 输出从 i -> j 的最短路径
                 if (i != j && cost[i][j] < graph.getMaxWeight()) {
                     System.out.printf(i + "->" + j + ": ");
                     stack.push(j);

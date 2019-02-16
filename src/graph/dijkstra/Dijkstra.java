@@ -62,7 +62,7 @@ public class Dijkstra {
                 }
             }
             inSet[minIndex] = true;//顶点 minIndex 加入集合
-            //更新 dist 表
+            //更新 dist 表, 只需要更新到不在顶点集合中的顶点的最短路径
             for (int j = 0; j < n; j++) {
                 if (inSet[j] == false
                         && graph.getWeight(minIndex, j) < graph.getMaxWeight()   // minIndex-> j 不是无穷大

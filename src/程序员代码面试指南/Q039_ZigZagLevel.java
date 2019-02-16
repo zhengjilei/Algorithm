@@ -8,7 +8,7 @@ import java.util.Queue;
 /**
  * created by Ethan-Walker on 2018/12/28
  */
-public class Q039_LevelTransferBT {
+public class Q039_ZigZagLevel {
 
     /**
      * 按层遍历
@@ -48,7 +48,7 @@ public class Q039_LevelTransferBT {
     /**
      * 之字形打印
      * 方法1：按照上面存入到 List< List< Integer>> 中，每隔一行反转List< Integer>
-     * 方法2: 创建一个栈，添加辅助变量level
+     * 方法2: 创建一个栈，添加辅助变量 level
      * level&1)==1 奇数：从左向右遍历，故不需要处理，正常访问即可
      * level&0)==0 偶数：从右向左遍历，弹出时先不着急访问，先压到栈中，等换行时从栈中退出
      *

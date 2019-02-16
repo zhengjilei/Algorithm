@@ -47,11 +47,11 @@ public class Q048_LCA1 {
         return prev;
     }
 
-
+    // 只有当找到路径时，才返回 > 1
     public int getPath(TreeNode root, TreeNode target, TreeNode[] path, int level) {
         if (root == null) return 0;
 
-        path[level] = root;     // 存当前根节点
+        path[level] = root;     // 存当前节点
         if (root == target) {
             return level + 1;
         }

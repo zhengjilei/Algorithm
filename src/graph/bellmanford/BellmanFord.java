@@ -6,6 +6,8 @@ import org.junit.Test;
 import java.util.Arrays;
 
 /**
+ * Bellman-Ford 算法
+ * 单源任意权值最短路径（可以处理权值是负的问题）
  * created by Ethan-Walker on 2019/2/13
  */
 public class BellmanFord {
@@ -51,7 +53,6 @@ public class BellmanFord {
             else
                 path[i] = -1;
         }
-
         double min;
         double weight;
         // dist(k) [u] (k>=1 && k<=n-1 )表示从源点v 到达终点 u 最多经过 k 条边的最短路径长度

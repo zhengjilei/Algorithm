@@ -12,6 +12,8 @@ public class Q048_LCA2 {
      * 然后决定当前节点是否是最低公共祖先，或者是某个节点的祖先
      * 时间复杂度: O(n)
      *
+     * 前提是: 以root为根的子树一定包含 node1 node2 两个节点
+     * 否则会返回只包含其中一个节点/null
      * @param root
      * @param node1
      * @param node2
@@ -23,8 +25,8 @@ public class Q048_LCA2 {
 
         TreeNode left = lowestCommonAncestor(root.left, node1, node2);
         TreeNode right = lowestCommonAncestor(root.right, node1, node2);
-        // left==null 说明左子树不包含 node1或node2
-        // right==null 说明右子树不包含node1或node2
+        // left==null  说明左子树不包含 node1或node2
+        // right==null 说明右子树不包含 node1或node2
 
         // 左右子树都不为空，说明左子树中找到了node1（/+node2）右子树中找到了 node2(/+node1)
         if (left != null && right != null) {

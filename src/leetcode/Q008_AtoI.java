@@ -3,6 +3,11 @@ package leetcode;
 import org.junit.Test;
 
 /**
+ * 1. 空指针
+ * 2. 开头、结尾空格字符
+ * 3. 输入字符串中包含不合理字符
+ * 4. + - 号
+ * 5. 最大整数、最小整数溢出
  * created by Ethan-Walker on 2019/1/12
  */
 public class Q008_AtoI {
@@ -21,11 +26,12 @@ public class Q008_AtoI {
             return 0;
         }
         int cur = 0, sum = 0;
-        int minq = Integer.MIN_VALUE / 10;
-        int minr = Integer.MIN_VALUE % 10;
+        int minDiv = Integer.MIN_VALUE / 10;
+        int minRemain = Integer.MIN_VALUE % 10;
         for (; i < str.length() && isDigit(str.charAt(i)); i++) {
+            if (!isDigit(str.charAt(i))) return -1;
             cur = '0' - str.charAt(i);
-            if (sum < minq || (sum == minq && cur < minr))
+            if (sum < minDiv || (sum == minDiv && cur < minRemain))
                 return positive ? Integer.MAX_VALUE : Integer.MIN_VALUE;
             sum = sum * 10 + cur;
         }

@@ -40,7 +40,8 @@ public class MySingleObj2 {
         return mySingleObj2;
     }
 
-    // 最终解决方案3: DCL双重检查锁机制
+    // 解决方案3: DCL双重检查锁机制,仍然存在问题，创建对象会分成三步，第2/3重排序就会导致并发错误
+    // 禁止重排序：声明单例对象为 volatile 变量
     public static MySingleObj2 getInstance3() {
         try {
             if (mySingleObj2 == null) {

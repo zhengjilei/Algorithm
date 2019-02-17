@@ -1,6 +1,9 @@
 package designpattern.singleton.pattern6;
 
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * Created by Ethan-Walker on 2018/5/11.
  */
@@ -12,12 +15,9 @@ public class TestSingle {
                 System.out.println(MySingleObj.MY_SINGLE_OBJ.getInstance());
             }
         };
-        Thread[] threads = new Thread[100];
+        ExecutorService pool = Executors.newFixedThreadPool(100);
         for (int i = 0; i < 100; i++) {
-            threads[i] = new Thread(runnable);
-        }
-        for (int i = 0; i < 100; i++) {
-            threads[i].start();
+            pool.execute(runnable);
         }
     }
 }

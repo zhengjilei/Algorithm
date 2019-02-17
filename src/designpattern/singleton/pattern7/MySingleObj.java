@@ -6,18 +6,21 @@ package designpattern.singleton.pattern7;
  * 6 中将枚举类暴露，违反职责单一原则
  */
 public class MySingleObj {
-    public enum MyEnumSingleton {
+    private static enum MySingleEnum {
         MY_SINGLE_OBJ;
-        private Object object;
-        private MyEnumSingleton() {
-            object = new Object();
+        private MySingleObj singleton;
+
+        MySingleEnum() {
+            singleton = new MySingleObj();
         }
-        public Object getInstance() {
-            return object;
+
+        private MySingleObj getSingleInstance() {
+            return singleton;
         }
     }
-    public static Object getInstance() {
-        return MyEnumSingleton.MY_SINGLE_OBJ.getInstance();
+
+    public static MySingleObj getSingleInstance() {
+        return MySingleEnum.MY_SINGLE_OBJ.getSingleInstance();
     }
 
 }

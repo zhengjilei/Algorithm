@@ -48,7 +48,7 @@ public class Q889_BuildTree {
         int j = 1; // 跳过前序序列第一个元素（根节点）
         while (j < length && pre[j + preStart] != post[postEnd - 1]) j++; //在前序序列中找到 等于后序序列的倒数第二个值（右子树的根节点）
         if (j == length) {
-            throw new RuntimeException("前序和后序遍历");
+            throw new RuntimeException("前序和后序不匹配");
         }
 
         int leftSize = j - 1;
@@ -56,6 +56,38 @@ public class Q889_BuildTree {
         root.left = buildTreeByPreAndPost(pre, post, preStart + 1, postEnd - rightSize - 1, leftSize);
         root.right = buildTreeByPreAndPost(pre, post, preStart + 1 + leftSize, postEnd - 1, rightSize);
 
+        return root;
+    }
+
+    /**
+     * 当某个节点只有一个子节点时，优先将这个节点作为左子节点
+     * @param pre
+     * @param post
+     * @param preStart
+     * @param postStart
+     * @param length
+     * @return
+     */
+    public TreeNode buildTreeByPreAndPost2(int[] pre, int[] post, int preStart, int postStart, int length) {
+        if (length == 0) return null;
+        if (pre[preStart] != post[postStart + length - 1])
+            throw new RuntimeException("前序和后序不匹配");
+        if (length == 1) {
+            return new TreeNode(pre[preStart]);
+        }
+
+        TreeNode root = new TreeNode(pre[preStart]);
+        int leftRootIndex = preStart + 1;
+        int j = postStart;
+        while (j < postStart + length - 1 && post[j] != pre[leftRootIndex]) j++;
+
+        if (j == postStart + length - 1) throw new RuntimeException("前序和后序不匹配");
+
+        int leftLen = j - postStart + 1;
+        int rightLen = length - leftLen - 1;
+
+        root.left = buildTreeByPreAndPost2(pre,post,preStart+1, postStart,leftLen);
+        root.right = buildTreeByPreAndPost2(pre,post,preStart+leftLen+1, j+1, rightLen);
         return root;
     }
 

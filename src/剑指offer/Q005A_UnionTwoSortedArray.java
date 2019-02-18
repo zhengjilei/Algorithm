@@ -8,7 +8,38 @@ package 剑指offer;
  * created by Ethan-Walker on 2018/12/2
  */
 public class Q005A_UnionTwoSortedArray {
+    /**
+     * 数组a1、a2是排好序的，且末尾有足够多的空余空间容纳 a2
+     * 将a2所有的数字全部插入 a1
+     * 思路：倒着插
+     * 统计两个数组的有效数字总和，得到最终结果的长度
+     * a1End /a2End 分别是a1 a2 数组有效数据的末尾位置，
+     * 选择两个数组有效位置末尾较大的插入 a1 末尾
+     *
+     * @param a1
+     * @param a2
+     * @param a1Len 表示a1数组中有效数据的个数
+     * @return
+     */
+    public int[] union(int[] a1, int[] a2, int a1Len) {
+        int a1End = a1Len - 1, a2End = a2.length - 1;
+        int resEnd = a1Len + a2.length - 1;
 
+        while (a1End >= 0 && a2End >= 0) {
+            if (a1[a1End] >= a2[a2End]) {
+                a1[resEnd--] = a1[a1End--];
+            } else {
+                a1[resEnd--] = a2[a2End--];
+            }
+
+        }
+        // 如果 a1End>=0 , 不需要动了
+
+        while (a2End >= 0) {
+            a1[resEnd--] = a2[a2End--];
+        }
+        return a1;
+    }
 }
 /*
 #include <stdio.h>

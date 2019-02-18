@@ -13,33 +13,21 @@ public class Q008_NextInOrder {
     public TreeNode<Integer> getNext(TreeNode<Integer> node) {
 
         if (node == null) return null;
-        TreeNode<Integer> p = node;
 
-        if (p.right != null) {
+        if (node.right != null) {
             // 右子节点不为空，中序下一个节点为右子树的最左子节点
-            p = p.right;
-            while (p.left != null) {
-                p = p.left;
+            node = node.right;
+            while (node.left != null) {
+                node = node.left;
             }
-            return p;
+            return node;
         } else {
             // 右子节点为空, 寻找某个节点是父节点的左子节点
-            TreeNode<Integer> parent;
-            while (p != null) {
-                parent = p.parent;
-                if (parent != null) {
-                    if (parent.left == p) {
-                        // p 是 父节点的左子节点, 父节点即为中序下一个节点
-                        return parent;
-                    } else {
-                        p = parent;
-                    }
-                } else {
-                    break;
-                }
+            while (node.parent != null && node == node.parent.right) {
+                node = node.parent;
             }
+            return node.parent; // node.parent==null 没找到 , node.parent!=null ,node 是父节点的左子节点
         }
-        return null;
     }
 
     @Test

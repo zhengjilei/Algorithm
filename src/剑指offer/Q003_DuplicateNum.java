@@ -47,7 +47,7 @@ public class Q003_DuplicateNum {
     /**
      * 先排序
      * 时间复杂度： O(nlogn)
-     * 空间复杂度:  O(1)
+     * 空间复杂度:  O(logn) 快排的时间复杂度
      * 找出所有的重复数字
      *
      * @param a
@@ -79,6 +79,8 @@ public class Q003_DuplicateNum {
      * 获得随机一个重复数字，若没有重复数，返回-1
      * 时间复杂度: O(n)
      * 空间复杂度: O(1)
+     * 允许修改输入数组，空间复杂度 O(1)
+     * 不允许修改，复制得到辅助数组，空间复杂度:O(n)
      * <p>
      * 若没有重复数字，可以通过交换得到对任意i都有  a[i] = i
      *
@@ -87,26 +89,19 @@ public class Q003_DuplicateNum {
      */
     public int getDuplicate3(int[] a) {
         int n = a.length;
-        int[] b = Arrays.copyOf(a, n);// 复制数组是为了不影响后面的测试，跟空间复杂度没关系
 
-        for (int i = 0; i < n; i++) {
-            if (b[i] < 0 || b[i] >= n) {
-                System.out.println("数值" + b[i] + "超出范围");
-                return -1;
-            }
-        }
         int temp;
         for (int i = 0; i < n; i++) {
-            if (b[i] != i) {
+            if (a[i] != i) {
                 do {
-                    if (b[i] == b[b[i]]) {
-                        return b[i];
+                    if (a[i] == a[a[i]]) {
+                        return a[i];
                     } else {
-                        temp = b[i];
-                        b[i] = b[temp];
-                        b[temp] = temp;
+                        temp = a[i];
+                        a[i] = a[temp];
+                        a[temp] = temp;
                     }
-                } while (b[i] != i); // 交换直到b[i] == i
+                } while (a[i] != i); // 交换直到b[i] == i
             }
         }
         return -1;
@@ -125,7 +120,7 @@ public class Q003_DuplicateNum {
         int end = length - 1;
         int middle, count;
         while (start <= end) {
-            middle = (end - start) / 2 + start;
+            middle = ((end - start) >> 1) + start;
             count = getCount(a, length, start, middle);
 
             if (end == start) {

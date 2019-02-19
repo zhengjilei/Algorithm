@@ -64,7 +64,7 @@ public class Q015_CountOneInBinary {
         int count = 0;
         while (n != 0) {
             count++;
-            n = (n - 1) & n; // 去掉 n 的最后一位1
+            n = (n - 1) & n; // 去掉 n 的最后一位 1
         }
         return count;
     }

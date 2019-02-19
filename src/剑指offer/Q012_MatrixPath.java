@@ -1,7 +1,5 @@
 package 剑指offer;
 
-import org.junit.Test;
-
 import java.util.ArrayDeque;
 
 /**
@@ -25,20 +23,7 @@ public class Q012_MatrixPath {
         visited = new boolean[row][col];
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-
-                for (int k = 0; k < row; k++) {
-                    for (int q = 0; q < col; q++) {
-                        if (visited[k][q]) {
-                            visited[k][q] = false;
-                        }
-                    }
-                }
-                if (getMatrixPath2(s, chs, 0, visited, i, j)) {
-                    while (!stack.isEmpty()) {
-                        Pos p = stack.pop();
-                        System.out.print("(" + p.x + "," + p.y + ")  ");
-                    }
-                    System.out.println();
+                if (getMatrixPath2(s, chs, 0, visited, i, j)) {  // 判断失败，visited stack 会自动恢复
                     return true;
                 }
             }

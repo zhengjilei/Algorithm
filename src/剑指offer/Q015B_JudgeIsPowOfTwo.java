@@ -11,6 +11,7 @@ public class Q015B_JudgeIsPowOfTwo {
 
     /**
      * 正确 但效率低
+     *
      * @param n
      * @return
      */
@@ -36,12 +37,8 @@ public class Q015B_JudgeIsPowOfTwo {
      * @return
      */
     public boolean judge2(int n) {
-        if (n < 0) return false;
-        if (n == 0) return true;
-        if ((n & (n - 1)) != 0) {
-            return false;
-        }
-        return true;
+        if (n <= 0) return false;
+        return  (n & n - 1) == 0;
     }
 
     @Test

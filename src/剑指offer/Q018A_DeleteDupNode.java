@@ -11,24 +11,22 @@ public class Q018A_DeleteDupNode {
      *
      * @param head
      */
-    public void delDupNode(ListNode head) {
-        if (head == null || head.next == null) return;
-        ListNode p = head, q = head.next;
-        while (q != null) {
-            if (p.val != q.val) {
-                if (p.next != q) {
-                    // 说明p q 之间有重复元素 p
-                    p.next = q;
-                }
-                p = q;
-                q = q.next;
-            } else {
-                q = q.next;
+    public ListNode delDupNode(ListNode pHead) {
+        if (pHead == null || pHead.next == null) return pHead;
+        if (pHead == null) return null;
+        ListNode prev = pHead;
+        ListNode next = pHead.next;
+        while (next != null) {
+            while (next != null && next.val == prev.val) {
+                next = next.next;
+            }
+            prev.next = next;
+            if (next != null) {
+                prev = next;
+                next = next.next;
             }
         }
-        if (p.next != q) {
-            p.next = q;
-        }
+        return pHead;
 
     }
 
@@ -46,7 +44,7 @@ public class Q018A_DeleteDupNode {
         ListNode cur = head, follow = null;
 
         while (cur != null) {
-            // 判断 cur 是否是重复节点
+            // 过滤掉与 cur 相同值的所有节点
             follow = cur.next;
             while (follow != null && follow.val == cur.val) {
                 follow = follow.next;
@@ -82,7 +80,7 @@ public class Q018A_DeleteDupNode {
         ListNode cur = head, follow = null;
 
         while (cur != null) {
-            // 判断 cur 是否是重复节点
+            // 过滤掉与 cur 相同值的所有节点
             follow = cur.next;
             while (follow != null && follow.val == cur.val) {
                 follow = follow.next;
@@ -107,7 +105,6 @@ public class Q018A_DeleteDupNode {
         }
         return newHead;
     }
-
 
 
     public void test() {

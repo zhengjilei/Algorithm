@@ -33,9 +33,11 @@ public class Q017A_BigIntegerSum {
             // 一正 一负
             if (!positiveA) {
                 // a 为负数
-                // b-a
+                // b - a的数字部分
                 return subWithNoSign(b, a.substring(1));
             } else {
+                // b 为负数
+                // a- b的数字部分
                 return subWithNoSign(a, b.substring(1));
             }
         }
@@ -53,56 +55,46 @@ public class Q017A_BigIntegerSum {
         char[] b = y.toCharArray();
 
         int len = b.length > a.length ? b.length : a.length;
-        char[] result = new char[len + 1]; // 多余的用于存最高位溢出的 1
+        char[] result = new char[len + 1]; // 多余的用于存最高位可能溢出的 1
 
         int resultIndex = result.length - 1;
         int aIndex = a.length - 1;
         int bIndex = b.length - 1;
         int t = 0;
-        boolean upper = false; //判断是否有进位
+        int upper = 0; //判断是否有进位
         while (aIndex >= 0 && bIndex >= 0) {
-            t = a[aIndex--] - '0' + b[bIndex--] - '0';
-            if (upper) {
-                t = t + 1;
-            }
+            t = a[aIndex--] - '0' + b[bIndex--] - '0' + upper;
             if (t >= 10) {
-                upper = true;
+                upper = 1;
                 t = t % 10;
             } else {
-                upper = false;
+                upper = 0;
             }
             result[resultIndex--] = (char) (t + '0');
         }
 
         while (aIndex >= 0) {
-            t = a[aIndex--] - '0';
-            if (upper) {
-                t++;
-            }
+            t = a[aIndex--] - '0' + upper;
             if (t >= 10) {
-                upper = true;
+                upper = 1;
                 t = t % 10;
             } else {
-                upper = false;
+                upper = 0;
             }
             result[resultIndex--] = (char) (t + '0');
         }
         while (bIndex >= 0) {
-            t = b[bIndex--] - '0';
-            if (upper) {
-                t++;
-            }
+            t = b[bIndex--] - '0' + upper;
             if (t >= 10) {
-                upper = true;
+                upper = 1;
                 t = t % 10;
             } else {
-                upper = false;
+                upper = 0;
             }
             result[resultIndex--] = (char) (t + '0');
         }
 
-
-        if (upper) {
+        if (upper == 1) {
             result[0] = '1';
             return new String(result);
         } else {
@@ -152,7 +144,7 @@ public class Q017A_BigIntegerSum {
         }
 
         while (aIndex >= 0) {
-            t = a.charAt(aIndex--)-'0';
+            t = a.charAt(aIndex--) - '0';
             if (borrow) {
                 t--;
             }
@@ -180,7 +172,7 @@ public class Q017A_BigIntegerSum {
     }
 
     /**
-     * 无符号 比较 a/b 大小
+     * 无符号 比较 a 、 b 大小
      *
      * @param a
      * @param b

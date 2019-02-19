@@ -7,33 +7,40 @@ import java.util.ArrayDeque;
  */
 public class Q013_RangeReach {
 
-    Move[] dirs;
+    // 方法一: dfs
+    public int movingCount(int threshold, int rows, int cols) {
+        if (threshold < 0) return 0;
+        boolean[][] visited = new boolean[rows][cols];
+        return move(threshold, rows, cols, 0, 0, visited);
+    }
 
-    class Move {
-        int x, y;
-
-        public Move(int x, int y) {
-            this.x = x;
-            this.y = y;
+    public int move(int threshold, int rows, int cols, int i, int j, boolean[][] visited) {
+        if (i >= 0 && i < rows && j >= 0 && j < cols && isValid(i, j, threshold) && !visited[i][j]) {
+            visited[i][j] = true;
+            return 1 + move(threshold, rows, cols, i + 1, j, visited)
+                    + move(threshold, rows, cols, i - 1, j, visited)
+                    + move(threshold, rows, cols, i, j + 1, visited)
+                    + move(threshold, rows, cols, i, j - 1, visited);
         }
+        return 0;
     }
 
-    void init() {
-        dirs = new Move[4];
-        dirs[0] = new Move(0, 1);
-        dirs[1] = new Move(1, 0);
-        dirs[2] = new Move(0, -1);
-        dirs[3] = new Move(-1, 0);
+
+    public boolean isValid(int i, int j, int threshold) {
+        int count = 0;
+        while (i != 0) {
+            count += i % 10;
+            i /= 10;
+        }
+        while (j != 0) {
+            count += j % 10;
+            j /= 10;
+        }
+        return count <= threshold;
     }
 
-    boolean[][] visited;
-    int count;
 
-    public int seek(int row, int col, int k) {
-        visited = new boolean[row][col];
-        return seek2(row, col, k, 0, 0);
-    }
-
+    // 方法二: bfs 队列
     class Pos {
         int x, y;
 
@@ -43,63 +50,53 @@ public class Q013_RangeReach {
         }
     }
 
-    // 队列
-    public int seek(int row, int col, int k, int x, int y) {
+    class Move {
+        int x;
+        int y;
+        String dir;
+
+        public Move(int x, int y, String dir) {
+            this.x = x;
+            this.y = y;
+            this.dir = dir;
+        }
+    }
+
+    Move[] moves = new Move[4];
+
+    void init() {
+        moves = new Move[4];
+        moves[3] = new Move(0, 1, "down");
+        moves[2] = new Move(1, 0, "right");
+        moves[1] = new Move(-1, 0, "left");
+        moves[0] = new Move(0, -1, "up");
+    }
+
+    // bfs
+    public int movingCount2(int threshold, int rows, int cols) {
         ArrayDeque<Pos> queue = new ArrayDeque<>();
-        queue.push(new Pos(x, y));
-        visited[x][y] = true;
-        count = 1;
+        queue.offer(new Pos(0, 0));
+        int count = 0;
+        if (isValid(0, 0, threshold)) {  // 可能 threshold < 0
+            count++;
+        }
+        init();
+        boolean[][] visited = new boolean[rows][cols];
+        visited[0][0] = true;
         while (!queue.isEmpty()) {
-            Pos pos = queue.poll();
-            x = pos.x;
-            y = pos.y;
-            int p, q;
-            for (int i = 0; i < 4; i++) {
-                p = x + dirs[i].x;
-                q = y + dirs[i].y;
-                if (p >= 0 && p < row && q >= 0 && q < col && !visited[p][q]) {
-                    visited[p][q] = true; // p,q 被访问过
-                    if (calXYSum(p, q) <= 18) {
-                        count++;
-                        queue.push(new Pos(p, q));
-                    } else {
-                        System.out.println("(" + p + "," + q + ")");
-                    }
+            Pos poll = queue.poll();
+            for (int i = 0; i < moves.length; i++) {
+                int x = poll.x + moves[i].x;
+                int y = poll.y + moves[i].y;
+                if (x >= 0 && x < rows && y >= 0 && y < cols && !visited[x][y] && isValid(x, y, threshold)) {
+                    visited[x][y] = true;
+                    count++;
+                    queue.offer(new Pos(x, y));
                 }
             }
         }
         return count;
     }
 
-    public int seek2(int row, int col, int k, int p, int q) {
-        int count = 0;
-        if (p >= 0 && p < row && q >= 0 && q < col && !visited[p][q] && calXYSum(p, q) <= k) {
-            // 满足条件
-            visited[p][q] = true;
-            count = 1 + seek2(row, col, k, p + 1, q) + seek2(row, col, k, p - 1, q) + seek2(row, col, k, p, q + 1) + seek2(row, col, k, p, q - 1);
-        }
-        return count;
-    }
-
-
-    public int calXYSum(int x, int y) {
-        return calSum(x) + calSum(y);
-    }
-
-    public int calSum(int n) {
-        int sum = 0;
-        int e = 0;
-        while (n != 0) {
-            sum = sum + n % 10;
-            n /= 10;
-        }
-        return sum;
-    }
-
-    public static void main(String[] args) {
-        Q013_RangeReach instance = new Q013_RangeReach();
-        instance.init();
-        System.out.println(instance.seek(39, 39, 18));
-    }
 
 }

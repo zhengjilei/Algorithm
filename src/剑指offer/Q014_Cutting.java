@@ -19,7 +19,8 @@ public class Q014_Cutting {
             return 2;
         }
 
-        // >=4 时，当剩余长度为 1 2 3 时可以不用剪
+        //绳长>=4 时，当剪剩部分长度为 1 2 3 时可以不用剪，再减乘积反而比 1/2/3 本身还小
+        // maxLength[i] =k , 表示绳长为 i, 在所有剪的方式中最大乘积为 k
         int[] maxLength = new int[length + 1];
 
         maxLength[0] = 0;
@@ -27,7 +28,7 @@ public class Q014_Cutting {
         maxLength[2] = 2;
         maxLength[3] = 3;
         int max, temp;
-        for (int i = 4; i <= length; i++) {
+        for (int i = 4; i <= length; i++) { // 计算 maxLength[4] [5] [6]
             max = i;
             for (int j = 1; j <= i / 2; j++) {
                 temp = maxLength[i - j] * maxLength[j];

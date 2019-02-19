@@ -9,7 +9,8 @@ import org.junit.Test;
 public class Q016_Power {
 
     public double power(double base, int expo) {
-        if (base == 0) return 0;
+        if (base == 0 && expo != 0) return 0;
+        if (expo == 0) return 1;
         double result = 1;
         boolean negative = (expo < 0); // 负
         if (negative) {

@@ -38,7 +38,7 @@ public class Q033_SearchRotateArray {
             } else {
                 // [left,mid] 是有序的, [mid+1, right] 是无序的
                 if (target >= nums[left] && target < nums[mid]) { // target 在有序部分
-                    // 注意这里用 num[mid],不能用num[mid-1] , 当只有一个数的时候mid-1 会溢出
+                    // 注意这里用 num[mid],不能用num[mid-1] , 当 mid=0 的时候mid-1 会溢出
                     right = mid - 1;
                 } else {
                     left = mid + 1;

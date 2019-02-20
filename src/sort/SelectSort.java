@@ -27,7 +27,6 @@ public class SelectSort {
         }
     }
 
-
     public static void swap(int i, int j, int[] a) {
         int t = a[i];
         a[i] = a[j];

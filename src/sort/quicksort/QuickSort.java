@@ -13,22 +13,25 @@ import java.util.Random;
  */
 public class QuickSort {
 
+    // 返回pivotIndex
     public static int median3(int[] a, int left, int right) {
         int mid = (left + right) / 2, minIndex = left;
         if (a[mid] < a[minIndex]) minIndex = mid;
         if (a[right] < a[minIndex]) minIndex = right; // minIndex 指向三者中最小的元素
         if (minIndex != left) swap(a, minIndex, left); // 将最小元素换到 left
-        if (mid != right && a[mid] < a[right])
+        if (mid != right && a[right] < a[mid])
             swap(a, mid, right);
-        return a[right];
+        return mid;
     }
 
     public static int partition(int[] a, int left, int right) {
-        int pivotValue = median3(a, left, right);
+        int pivotIndex = median3(a, left, right);
+        int pivot = a[pivotIndex];
+        swap(a, pivotIndex, right);
         int i = left, j = right; // 必须将 j 初始化为 right， 而不是 right-1
         while (i < j) {
-            while (i < j && a[i] <= pivotValue) i++;
-            while (i < j && a[j] >= pivotValue) j--;
+            while (i < j && a[i] <= pivot) i++;
+            while (i < j && a[j] >= pivot) j--;
             if (i < j) {
                 swap(a, i, j);
                 // 这里不能有 i++;j--;
@@ -40,6 +43,11 @@ public class QuickSort {
         // 恢复pivot 的正确位置，i指向第一个比 pivot 大的数， 故可以交换到 pivot 的右边
         swap(a, i, right);
         return i;
+    }
+
+    public static void quickSort(int[] a) {
+        if (a == null || a.length <= 1) return;
+        quickSort(a, 0, a.length - 1);
     }
 
     public static void quickSort(int[] a, int left, int right) {
@@ -58,20 +66,22 @@ public class QuickSort {
 
     @Test
     public void testA() {
-        int[] a = new int[]{75, 70, 80, 59, 54, 96, 12, 78, 29, 35, 11, 69, 56, 36, 79, 45, 69, 30, 27, 47, 17, 74};
-        quickSort(a, 0, 21);
-        System.out.println(Arrays.toString(a));
 
-        Random r = new Random();
-        int n = r.nextInt(20) + 20;
-        int[] b = new int[n];
-        for (int i = 0; i < n; i++) {
-            b[i] = r.nextInt(100);
+
+        for (int k = 0; k < 10000; k++) {
+            Random random = new Random();
+            int length = random.nextInt(2000);
+            int[] a = new int[length];
+
+            for (int i = 0; i < length; i++) {
+                a[i] = random.nextInt(2000);
+            }
+            quickSort(a);
+            boolean judge = SortJudge.judge(a);
+            if (!judge) {
+                System.out.println(judge);
+            }
         }
-        System.out.println(Arrays.toString(b));
-        quickSort(b, 0, b.length - 1);
-        System.out.println(Arrays.toString(b));
-        System.out.println(SortJudge.judge(b));
     }
 
 }

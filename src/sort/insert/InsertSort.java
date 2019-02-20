@@ -66,6 +66,7 @@ public class InsertSort {
      * 折半插入排序
      * 稳定
      * O(nlogn)
+     *
      * @param a
      * @param length
      */

@@ -24,7 +24,7 @@ public class ListMergeSort {
         if (pHead == null) return qHead;
         if (qHead == null) return pHead;
 
-        ListNode newHead = null, prev = null, cur = null;
+        ListNode newHead = null, tail = null, cur = null;
         ListNode p = pHead, q = qHead;
         if (p.val <= q.val) {
             newHead = p;
@@ -34,21 +34,21 @@ public class ListMergeSort {
             q = q.next;
         }
 
-        prev = newHead;
-        prev.next = null;
+        tail = newHead;
+        tail.next = null;
         while (p != null && q != null) {
             if (p.val < q.val) {
-                prev.next = p;
+                tail.next = p;
                 p = p.next;
             } else {
-                prev.next = q;
+                tail.next = q;
                 q = q.next;
             }
-            prev = prev.next;
-            prev.next = null; // 断开和后面的节点的链接
+            tail = tail.next;
+            tail.next = null; // 断开和后面的节点的链接
         }
-        if (p != null) prev.next = p;
-        if (q != null) prev.next = q;
+        if (p != null) tail.next = p;
+        if (q != null) tail.next = q;
         return newHead;
     }
 

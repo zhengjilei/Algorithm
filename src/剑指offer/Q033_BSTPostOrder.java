@@ -1,6 +1,5 @@
 package 剑指offer;
 
-import binary_search_tree.BinarySearchTree;
 import org.junit.Test;
 
 /**
@@ -14,7 +13,11 @@ import org.junit.Test;
  * created by Ethan-Walker on 2018/12/7
  */
 public class Q033_BSTPostOrder {
+    public boolean VerifySquenceOfBST(int[] seq) {
+        if(seq==null||seq.length==0) return false;
 
+        return judgePostOrder(seq,0, seq.length-1);
+    }
     /**
      * 判断序列 seq[0] ~ seq[length-1] 是否满足二叉搜索树的后序遍历特征
      *

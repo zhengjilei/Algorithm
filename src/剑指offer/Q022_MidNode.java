@@ -37,9 +37,6 @@ public class Q022_MidNode {
         while (q != null && q.next != null) {
             p = p.next;
             q = q.next.next;
-            if (q.next.next == null) {
-                return p;
-            }
         }
         return p;
     }

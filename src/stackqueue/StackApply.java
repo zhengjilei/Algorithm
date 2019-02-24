@@ -133,6 +133,49 @@ public class StackApply {
 
     }
 
+    /**
+     * 判定给定的出栈序列是否合法
+     * 当前输出元素
+     * 1. 等于栈顶元素，匹配出栈，继续步骤1；不匹配，进入步骤2
+     * 2. 等于输入元素，（省略进栈出栈，输入输出往后+1）；不等，压栈
+     * <p>
+     * 每次优先比较输出元素和栈顶元素是否匹配
+     *
+     * @param input  入栈序列                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    入栈序列
+     * @param output 出栈序列
+     * @return
+     */
+    public static boolean isValidSeq(int[] input, int[] output) {
+        ArrayDeque<Integer> stack = new ArrayDeque<>();
+        int i = 0, j = 0;
+
+        // 让n个数全部压栈
+
+        while (i < input.length) {
+            // 如果当前栈顶元素恰好等于 出栈元素，则栈顶元素出栈即可，匹配下一个
+            if (!stack.isEmpty() && stack.peek() == output[j]) {
+                j++;
+                stack.pop();
+                continue; // 很重要，不能省略，保证不是往后进行比较（导致压入元素），而是 先比较栈顶
+            }
+            // 栈为空 或者 栈顶元素不等于输出序列元素
+            if (input[i] == output[j]) { // 压栈出栈直接匹配，不必再执行进栈出栈操作了
+                i++;
+                j++;
+            } else {
+                stack.push(input[i]);
+                i++;
+            }
+        }
+        while (!stack.isEmpty()) {
+            if (stack.pop() == output[j]) {
+                j++;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
     @Test
     public void testBrowser() {
         String[] steps = {"a", "b", "c", "<-", "<-", "->", "d", "->", "e"};

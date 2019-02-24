@@ -1,61 +1,55 @@
 package 剑指offer;
 
-import binary_tree.BinaryTree;
-import binary_tree.TreeNode;
 import org.junit.Test;
+import 程序员代码面试指南.TreeNode;
+import 程序员代码面试指南.TreeUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * created by Ethan-Walker on 2018/12/7
  */
 public class Q034_TreeSumPath {
 
+    public ArrayList<ArrayList<Integer>> FindPath(TreeNode root, int target) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        if (root == null) return res;
+        int[] seq = new int[getHeight(root)];
+        findPath(res, seq, 0, root, target);
 
-    /**
-     * 在以 node 为根的树上，寻找和为 val 的路径, 当前正在寻找第 index 个节点
-     * <p>
-     * 数组 path + 索引起到记录栈的作用
-     */
-    public void find(TreeNode<Integer> node, int val, int[] path, int index) {
-
-        if (node == null) return;
-        if (node.val == val) {
-            if (node.left == null && node.right == null) {
-                path[index] = node.val;
-                // 只有是叶节点，才算是路径
-                print(path, index + 1);
-            }
-
-            return;
-        } else if (node.val < val) {
-            path[index] = node.val;
-            if (node.left != null) {
-                find(node.left, val - node.val, path, index + 1);
-            }
-            if (node.right != null) {
-                find(node.right, val - node.val, path, index + 1);
-            }
-        } else {
-            return;
-        }
-
+        return res;
     }
 
-    public void print(int[] path, int len) {
-        for (int i = 0; i < len; i++) {
-            System.out.printf("%3d", path[i]);
+    public int getHeight(TreeNode root) {
+        if (root == null) return 0;
+        return 1 + Math.max(getHeight(root.left), getHeight(root.right));
+    }
+
+    public void findPath(ArrayList<ArrayList<Integer>> res, int[] seq, int index, TreeNode root, int target) {
+        if (root.val == target) {
+            if (root.left == null && root.right == null) {
+                seq[index++] = root.val;
+                ArrayList<Integer> list = new ArrayList<>();
+                for (int i = 0; i < index; i++) {
+                    list.add(seq[i]);
+                }
+                res.add(list);
+                return;
+            }
+            //注意这里不返回, 可能后面 到达叶节点路径上经过的节点 之和  = 0
         }
-        System.out.println();
+        seq[index] = root.val;
+        if (root.left != null) {
+            findPath(res, seq, index + 1, root.left, target - root.val);
+        }
+        if (root.right != null) {
+            findPath(res, seq, index + 1, root.right, target - root.val);
+        }
     }
 
     @Test
     public void test() {
-        BinaryTree<Integer> tree = new BinaryTree<>();
-//        tree.buildTree(new int[]{10, 5, 4, 7, 12}, new int[]{4, 5, 7, 10, 12});
-        tree.buildTree(new int[]{10, 5, 8, 9, 6, 11, 18, 4}, new int[]{8, 9, 5, 6, 11, 10, 4, 18});
-        int[] path = new int[1000];
-        find(tree.getRoot(), 15, path, 0);
+        TreeNode treeNode = TreeUtil.buildTreeByPreAndIn(new int[]{10, 5, 7, -6, 6, 12}, new int[]{6, -6, 7, 5, 10, 12});
+        System.out.println(FindPath(treeNode, 22));
     }
 }

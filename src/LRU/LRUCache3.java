@@ -12,7 +12,6 @@ import java.util.Map;
 class LRUCache3 {
     private Map<Integer, Integer> map;
     private final int capacity;
-
     public LRUCache3(int capacity) {
         this.capacity = capacity;
         map = new LinkedHashMap<Integer, Integer>(capacity, 0.75f, true) {

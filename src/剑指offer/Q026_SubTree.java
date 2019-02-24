@@ -11,20 +11,13 @@ public class Q026_SubTree {
             if (Math.abs(pRoot.val - qRoot.val) < 10e-8) {
                 result = judge(pRoot, qRoot);
             }
-            if (!result) {
-                result = isSubTree(pRoot.left, qRoot) || isSubTree(pRoot.right, qRoot);
-            }
         }
-        return result;
+        return result || isSubTree(pRoot.left, qRoot) || isSubTree(pRoot.right, qRoot);
     }
 
     /**
      * pRoot.val == qRoot.val
      * 判断qRoot 是否是 pRoot 中 以pRoot为根的子结构
-     *
-     * @param pRoot
-     * @param qRoot
-     * @return
      */
     boolean judge(TreeNode pRoot, TreeNode qRoot) {
         if (qRoot == null) {
@@ -37,6 +30,5 @@ public class Q026_SubTree {
         return Math.abs(pRoot.val - qRoot.val) < 10e-8
                 && judge(pRoot.left, qRoot.left)
                 && judge(pRoot.right, qRoot.right);
-
     }
 }

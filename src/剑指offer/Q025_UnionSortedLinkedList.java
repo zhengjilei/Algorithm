@@ -31,18 +31,8 @@ public class Q025_UnionSortedLinkedList {
 
         }
 
-        while (a != null) {
-            tail.next = a;
-            tail = tail.next;
-            a = a.next;
-        }
-
-        while (b != null) {
-            tail.next = b;
-            tail = tail.next;
-            b = b.next;
-        }
-        tail.next = null;
+        if (a != null) tail.next = a;
+        if (b != null) tail.next = b;
         return head;
     }
 

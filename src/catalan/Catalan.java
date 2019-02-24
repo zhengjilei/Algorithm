@@ -75,33 +75,6 @@ public class Catalan {
     }
 
     /**
-     * 入栈序列为 1,2,...,n
-     * 判断是否是合法的出栈顺序
-     */
-    public static boolean isValidSeq(int[] a) {
-        int n = a.length; // 1,2,...,n
-        ArrayDeque<Integer> stack = new ArrayDeque<>();
-        int top = 0;
-        int i = 0;
-        while (i < n) {
-            if (a[i] > top) {
-                for (int j = top + 1; j <= a[i]; j++) {
-                    stack.push(j);
-                }
-                top = stack.pop();// top 为刚刚弹出的元素,也是目前压入/弹出的最大元素
-                i++;
-            } else if (a[i] < top) {
-                if (stack.pop() != a[i]) return false;
-                else i++;
-            } else {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
-    /**
      * 判定给定的出栈序列是否合法
      * 当前输出元素
      * 1. 等于栈顶元素，匹配出栈，继续步骤1；不匹配，进入步骤2

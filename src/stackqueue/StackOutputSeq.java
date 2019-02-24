@@ -1,7 +1,6 @@
 package stackqueue;
 
 import java.util.ArrayDeque;
-import java.util.Arrays;
 
 /**
  * 给定入栈序列，求所有可能的出栈序列
@@ -20,16 +19,12 @@ public class StackOutputSeq {
      */
     public static void output(int[] stackSeq) {
         ArrayDeque<Integer> stack = new ArrayDeque<>();
-        ArrayDeque<Integer> queue = new ArrayDeque<>();
 
-        for (int i = 0; i < seq.length; i++) {
-            queue.offer(seq[i]);
-        }
-
+        int j = 0;
         for (int i = 0; i < stackSeq.length; i++) {
             if (stackSeq[i] == 1) {
                 // 压栈
-                stack.push(queue.poll());
+                stack.push(seq[j++]);
             } else {
                 // 出栈
                 System.out.printf("%3d", stack.pop());

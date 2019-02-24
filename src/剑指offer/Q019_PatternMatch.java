@@ -10,6 +10,7 @@ public class Q019_PatternMatch {
 
 
     /**
+     * 正确解法
      * . 匹配一个字符
      * * 匹配 *前面的字符 0..个
      * <p>
@@ -39,7 +40,7 @@ public class Q019_PatternMatch {
                         || match(s, p, sStart + 1, pStart + 2) // 匹配到 当前元素为止
                         || match(s, p, sStart, pStart + 2);   // 匹配 0 个
             } else {
-                // 不可能匹配 * 前面的字符
+                // 不能匹配 * 前面的字符，因为 字符串s 已经被匹配完 或者 s[sStart] 和 p[pStart] 无法匹配
                 return match(s, p, sStart, pStart + 2);
             }
         } else {
@@ -60,7 +61,10 @@ public class Q019_PatternMatch {
      * 题意理解错误  原题中 * 表示*前面的字符可以出现任意次（包括0）
      * . 匹配一个字符
      * * 匹配 0..多个字符
-     *
+     * * 有三种情况：
+     * (1) 匹配0个字符
+     * (2)匹配当前一个字符
+     * (3) 匹配了当前一个字符，继续试探匹配后面的字符（还是三种情况）
      * @param s
      * @param pattern
      * @return

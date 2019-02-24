@@ -19,17 +19,17 @@ public class Q030_MinStack {
 
     public void push(int val) {
         dataStack.push(val);
-        if (minStack.isEmpty() || val<minStack.peek()) {
+        if (minStack.isEmpty() || val <= minStack.peek()) {
             minStack.push(val);
         } else {
             minStack.push(minStack.peek());
         }
     }
 
-    public int pop() {
+    public void pop() {
         if (!isEmpty()) {
             minStack.pop();
-            return dataStack.pop();
+            dataStack.pop();
         } else {
             throw new RuntimeException("pop() 执行异常：栈为空"); // 运行时异常
         }

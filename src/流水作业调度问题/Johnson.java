@@ -6,7 +6,9 @@ import java.util.*;
  * Johnson 算法
  * Created by EthanWalker on 2017/12/2.
  */
-public class Johnson {
+public class
+
+Johnson {
 
     private static int[][] time;
 

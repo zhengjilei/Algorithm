@@ -18,18 +18,17 @@ public class Kth {
      * 复杂度 O(n)
      */
     public static int kth(int[] a, int left, int right, int k) {
-        if (k <= 0) return -1;
         int pivotIndex = randomPartition(a, left, right);
-        int leftSize = pivotIndex - left;
-        if (leftSize + 1 == k) {
+        int leftMidCount = pivotIndex - left + 1; // 左边数量 + pivot 的总数
+        if (leftMidCount == k) {
             // 随机数恰好是 第 k 小的数
             return a[pivotIndex];
-        } else if (leftSize + 1 > k) {
+        } else if (leftMidCount > k) {
             // 第 k 小的数在随机数的左边
             return kth(a, left, pivotIndex - 1, k);
         } else {
             // 第 k 小的数在随机数的右边
-            return kth(a, pivotIndex + 1, right, k - (leftSize + 1));
+            return kth(a, pivotIndex + 1, right, k - leftMidCount);
         }
     }
 
@@ -40,7 +39,6 @@ public class Kth {
         int pivotIndex = (int) (Math.random() * (right - left + 1) + left);
         swap(a, pivotIndex, right);  // 将选出的随机数 pivot 调到 数组末尾
 
-//        int i = left, j = right - 1;
         int i = left, j = right; // 注意 j 必须初始化为 right 而不是 right-1 否则会出错
         while (i < j) {
             while (i < j && a[i] <= a[right]) i++;
@@ -51,7 +49,6 @@ public class Kth {
         }
         swap(a, i, right);      // 将选中的 pivot 调到 正确的位置
         return i;
-
     }
 
     public static void swap(int[] a, int m, int n) {

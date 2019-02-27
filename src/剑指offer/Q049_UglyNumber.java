@@ -50,18 +50,18 @@ public class Q049_UglyNumber {
         int[] uglyNumbers = new int[k];
         uglyNumbers[0] = 1;
 
-        int m2 = 0, m3 = 0, m5 = 0;
+        int m2 = 0, m3 = 0, m5 = 0;// 表示第一个位置
 
-        int cnt = 1;
-        while (cnt < k) {
+        int nextUglyIndex = 1;
+        while (nextUglyIndex < k) {
             int min = getMinFrom3(uglyNumbers[m2] * 2, uglyNumbers[m3] * 3, uglyNumbers[m5] * 5);
-            uglyNumbers[cnt] = min;
+            uglyNumbers[nextUglyIndex] = min;
 
             while (uglyNumbers[m2] * 2 <= min) m2++; // 找到第一个 m2 位置，使得 uglyNumbers[m2]*2 > min
             while (uglyNumbers[m3] * 3 <= min) m3++;
             while (uglyNumbers[m5] * 5 <= min) m5++;
 
-            cnt++;
+            nextUglyIndex++;
         }
 
         return uglyNumbers[k - 1];

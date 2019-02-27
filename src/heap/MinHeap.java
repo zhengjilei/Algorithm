@@ -113,7 +113,7 @@ public class MinHeap {
         int i = (j - 1) / 2;  // 父节点
         while (j > 0) {
             // j = 0说明已经调整结束或者不需要调整
-            // 不是 j>=0 i>=0 否则(i-1)/2 始终等于0 死循环
+            // 不是 j>=0 i>=0 否则(i-1)/2 始终等于0 ,但是也不会死循环，因为 j==i 跳到 break 语句中
             if (heap[j] < heap[i]) {
                 swap(heap, i, j);
                 j = i;

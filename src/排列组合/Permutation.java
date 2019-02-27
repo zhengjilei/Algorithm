@@ -90,7 +90,7 @@ public class Permutation {
         for (int i = 0; i < a.length; i++) list.add(a[i]);
         res.add(list);
 
-        int j = a.length - 1;
+        int j;
         while (true) {
             j = a.length - 2;
             while (j >= 0 && a[j] >= a[j + 1]) j--;
@@ -132,7 +132,8 @@ public class Permutation {
     @Test
     public void test3() {
         int[] a = new int[]{1, 2, 3, 4};
-        System.out.println(lexicalPermutation(a));
+        recur(a,0,a.length-1);
+
     }
 
     @Test
@@ -166,6 +167,10 @@ public class Permutation {
         lexicalPermutation(c);
     }
 
+    @Test
+    public void test4(){
+
+    }
 
     /**
      * 字符全排列

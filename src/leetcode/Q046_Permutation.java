@@ -14,20 +14,19 @@ public class Q046_Permutation {
         List<List<Integer>> res = new ArrayList<>();
         if (nums == null || nums.length == 0) return res;
 
-        permute(nums, 0, nums.length - 1, res);
+        permute(nums, 0, res);
         return res;
     }
 
     /**
-     * 求 nums[left] ~nums[right] 的全排列
-     * 依次将 left~right 位置上的数交换到 left 位置上
+     * 求 nums[index] ~结束 的全排列
+     * 依次将 [index , ... 位置上的数交换到 index 位置上
      *
      * @param nums
-     * @param left
-     * @param right
+     * @param index
      */
-    public void permute(int[] nums, int left, int right, List<List<Integer>> res) {
-        if (left == right) {
+    public void permute(int[] nums, int index, List<List<Integer>> res) {
+        if (index == nums.length) {
             List<Integer> list = new ArrayList<>();
             for (int v : nums) {
                 list.add(v);
@@ -36,10 +35,10 @@ public class Q046_Permutation {
             return;
         }
 
-        for (int i = left; i <= right; i++) {
-            swap(nums, left, i);
-            permute(nums, left + 1, right, res);
-            swap(nums, left, i);
+        for (int i = index; i < nums.length; i++) {
+            swap(nums, index, i);
+            permute(nums, index + 1, res);
+            swap(nums, index, i);
         }
     }
 

@@ -61,7 +61,7 @@ public class Q047_Permutation {
         for (int i = 0; i < a.length; i++) list.add(a[i]);
         res.add(list);
 
-        int j = a.length - 1;
+        int j ;
         while (true) {
             j = a.length - 2;
             while (j >= 0 && a[j] >= a[j + 1]) j--;

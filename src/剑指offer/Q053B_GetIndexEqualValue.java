@@ -22,7 +22,6 @@ public class Q053B_GetIndexEqualValue {
                 return mid;
             } else if (array[mid] < mid) {
                 left = mid + 1;
-
             } else {
                 right = mid - 1;
             }

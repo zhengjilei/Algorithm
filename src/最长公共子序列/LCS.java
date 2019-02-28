@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * dp[i][j]= m 表示str1[0...i] 和 str[0...j] 最长公共子序列的长度为 m
+ * dp[i][j]= m 表示 str1[0...i] 和 str[0...j] 最长公共子序列的长度为 m
  * <p>
  * Created by EthanWalker on 2017/11/28.
  */
@@ -44,6 +44,37 @@ public class LCS {
         }
         return dp[i][j];
 
+    }
+    // 考虑边界
+    public int longestCommonSeq(String s1, String s2) {
+        int[][] dp = new int[s1.length()][s2.length()];
+        dp[0][0] = s1.charAt(0) == s2.charAt(0) ? 1 : 0;
+        for (int col = 1; col < s2.length(); col++) {
+            if (dp[0][col - 1] == 0 && s1.charAt(0) == s2.charAt(col)) {
+                dp[0][col] = 1;
+            } else {
+                dp[0][col] = dp[0][col - 1];
+            }
+        }
+
+        for (int row = 1; row < s1.length(); row++) {
+            if (dp[row - 1][0] == 0 && s2.charAt(0) == s1.charAt(row)) {
+                dp[row][0] = 1;
+            } else {
+                dp[row][0] = dp[row - 1][0];
+            }
+        }
+
+        for (int i = 1; i < s1.length(); i++) {
+            for (int j = 1; j < s2.length(); j++) {
+                if (s1.charAt(i) == s2.charAt(j)) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return dp[s1.length() - 1][s2.length() - 1];
     }
 
     /**

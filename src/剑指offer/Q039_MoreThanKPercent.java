@@ -106,7 +106,6 @@ public class Q039_MoreThanKPercent {
                 candidate1--;
             }
 
-
         }
         return list;
     }

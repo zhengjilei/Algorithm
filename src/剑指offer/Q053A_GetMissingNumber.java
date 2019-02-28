@@ -25,7 +25,7 @@ public class Q053A_GetMissingNumber {
         boolean[] exist = new boolean[n];
         // exist[i] = true 表示元素在数组内
         for (int i = 0; i < a.length; i++) {
-            exist[i] = true;
+            exist[a[i]] = true;
         }
 
         for (int i = 0; i < n; i++) {
@@ -35,7 +35,7 @@ public class Q053A_GetMissingNumber {
     }
 
     /**
-     * 数组元素在0~n-1 范围内，数组长度为 n-1 ，且数组是排序的
+     * 数组元素在0~n 范围内，数组长度为 n ，且数组是排序的
      * 意味着前一部分元素下标和数值是相同的，剩余部分下标比数值都多1
      * 找到最后一个下标和数值相同的元素
      * 或者找到第一个下标和数值不相同的元素
@@ -59,11 +59,33 @@ public class Q053A_GetMissingNumber {
                 left = mid + 1;
             }
         }
-        if (left == a.length) {// n-1个元素分别从 0~n-2 无间隔的，找不到下标和数值不相同的元素，缺少数值 n-1
+        if (left == a.length) {// n 个元素分别从 0~n-1 无间隔的，找不到下标和数值不相同的元素，缺少数值 n
             return a.length;
         }
 
         return -1;// 无效输入
+    }
+
+    public int missingNumber(int[] nums) {
+        int l = 0, r = nums.length - 1;
+        int mid;
+        // 用两个变量，处理
+        int firstBigger = -1;
+        int lastEqual = -1;
+        while (l <= r) {
+            mid = l + r >> 1;
+            if (nums[mid] > mid) {
+                firstBigger = mid;
+                r = mid - 1;
+            } else {
+                lastEqual = mid;
+                l = mid + 1;
+            }
+        }
+        if (firstBigger == -1) {        //  说明只缺少最后一个数
+            return lastEqual + 1;
+        }
+        return firstBigger; //
     }
 
     @Test

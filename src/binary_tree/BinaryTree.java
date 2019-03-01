@@ -2,6 +2,8 @@ package binary_tree;
 
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ethan-Walker on 2018/4/21.
@@ -24,6 +26,7 @@ public class BinaryTree<T> {
 
     /**
      * 根据字符串反序列化构建二叉树
+     *
      * @param str
      */
     public void buildTree(String str) {
@@ -86,37 +89,21 @@ public class BinaryTree<T> {
      * @return
      */
     public TreeNode<Integer> getNext(TreeNode<Integer> node) {
-
         if (node == null) return null;
-        TreeNode<Integer> p = node;
-
-        if (p.right != null) {
+        if (node.right != null) {
             // 右子节点不为空，中序下一个节点为右子树的最左子节点
-            p = p.right;
-            while (p.left != null) {
-                p = p.left;
+            node = node.right;
+            while (node.left != null) {
+                node = node.left;
             }
-            return p;
+            return node;
         } else {
-            // 右子节点为空
-            TreeNode<Integer> parent;
-            while (p != null) {
-                parent = p.parent;
-                if (parent != null) {
-                    if (parent.left == p) {
-                        // p 是 父节点的左子节点, 父节点即为中序下一个节点
-                        return parent;
-                    } else {
-                        p = parent;
-                    }
-                } else {
-                    break;
-                }
+            // 右子节点为空, 寻找某个节点是父节点的左子节点
+            while (node.parent != null && node == node.parent.right) {
+                node = node.parent;
             }
-
-
+            return node.parent; // node.parent==null 没找到 , node.parent!=null ,node 是父节点的左子节点
         }
-        return null;
     }
 
     public void inOrderByGetNext() {
@@ -258,26 +245,26 @@ public class BinaryTree<T> {
         TreeNode node = null;
         queue.push(root);
 
-        int toBePrint = 1;          // 当前行还没有打印的节点个数
-        int nextLineNodeCount = 0;      // 下一行节点的总数
+        int curLevelCount = 1;          // 当前行还没有打印的节点个数
+        int nextLevelCount = 0;      // 下一行节点的总数
         while (!queue.isEmpty()) {
             node = queue.poll();
             System.out.printf("%4d", node.val);
-            toBePrint--;
+            curLevelCount--;
 
             if (node.left != null) {
-                ++nextLineNodeCount;
+                ++nextLevelCount;
                 queue.push(node.left);
             }
             if (node.right != null) {
-                ++nextLineNodeCount;
+                ++nextLevelCount;
                 queue.push(node.right);
             }
 
-            if (toBePrint == 0) {
+            if (curLevelCount == 0) {
                 System.out.println();
-                toBePrint = nextLineNodeCount;
-                nextLineNodeCount = 0;
+                curLevelCount = nextLevelCount;
+                nextLevelCount = 0;
             }
         }
     }
@@ -350,18 +337,43 @@ public class BinaryTree<T> {
     }
 
     /**
+     * 错误示范：
      * 前序遍历，非递归
      * 只压右节点
      */
     public void preOrderAno() {
         ArrayDeque<TreeNode> stack = new ArrayDeque<>();
         TreeNode p = root;
-        stack.push(null); // 防止栈为空，弹出出错
+        stack.push(null); // 防止栈为空，弹出出错 => 错误: ArrayDeque<> 中不允许为 null
         while (p != null) {
             visit(p);
             if (p.right != null) stack.push(p.right);
             if (p.left != null) p = p.left;
             else p = stack.pop();  // 左子树为空，得访问右子树了（中间节点最先已经访问过了）
+        }
+    }
+
+    /**
+     * 前序遍历，非递归
+     * 只压右节点
+     *
+     * @param root
+     */
+    public void preorderTraversal(TreeNode root) {
+        ArrayDeque<TreeNode> stack = new ArrayDeque<>();
+        List<Integer> res = new ArrayList<>();
+        if (root == null) return; // 排除掉 root==null 的情况
+
+        TreeNode p = root;
+        while (true) {
+            visit(p);
+            if (p.right != null) stack.push(p.right);  // 有右子节点，压入栈中
+            if (p.left != null) p = p.left;         // 有左子节点，进入左子节点
+            else {                                  // 没有左子节点，判断栈中是否含有元素，有的话，弹出进入栈顶的右子节点
+                if (!stack.isEmpty()) {
+                    p = stack.pop();
+                } else break;
+            }
         }
     }
 
@@ -391,20 +403,32 @@ public class BinaryTree<T> {
     /**
      * 后序遍历，节点内部设置 L、R标记 略复杂
      */
-    public void mirrorTree() {
-        if (root == null) return;
+    public void postorder(TreeNode root) {
+
+        List<Integer> result = new ArrayList<>();
+        if (root == null) return ;
+
         ArrayDeque<TreeNode> stack = new ArrayDeque<>();
-        TreeNode node = root, temp;
+        stack.push(root);
         stack.push(root);
         while (!stack.isEmpty()) {
-            node = stack.pop();
-            temp = node.left;
-            node.left = node.right;
-            node.right = temp;
-
-            if (node.left != null) stack.push(node.left);
-            if (node.right != null) stack.push(node.right);
+            root = stack.pop();
+            if (!stack.isEmpty() && root == stack.peek()) {
+                // 等于栈顶元素，说明当前节点的左子树、右子树还未访问
+                if (root.right != null) {
+                    stack.push(root.right);
+                    stack.push(root.right);
+                }
+                if (root.left != null) {
+                    stack.push(root.left);
+                    stack.push(root.left);
+                }
+            } else {
+                // 左右子树都已经访问
+                visit(root);
+            }
         }
+        return ;
     }
 
     public void mirrorTreeRecur() {

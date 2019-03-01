@@ -85,12 +85,9 @@ public class Q043_IsBalancedTree {
 
         if (Math.abs(leftHeight - rightHeight) > 1) {
             isBalance[0] = false;
-            return -1;
         }
-
         // 只有左右子树平衡了，才返回高度
         return 1 + Math.max(leftHeight, rightHeight);
-
     }
 
 }

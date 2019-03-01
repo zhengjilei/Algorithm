@@ -22,7 +22,8 @@ public class Q145_PostOrder {
         while (!stack.isEmpty()) {
             root = stack.pop();
             if (!stack.isEmpty() && root == stack.peek()) {
-                // 等于栈顶元素，说明当前节点的左子树、右子树还未访问
+                // 如果当前节点等于栈顶节点，说明该节点的左子树、右子树还未遍历
+                // 先压右子树，再压左子树
                 if (root.right != null) {
                     stack.push(root.right);
                     stack.push(root.right);

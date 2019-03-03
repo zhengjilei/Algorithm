@@ -18,9 +18,9 @@ public class MySingleObj implements Serializable{
     public static MySingleObj getInstance() {
         return MySingleObjHandler.mySingleObj;
     }
-
+/*
     protected Object readResolve(){
         System.out.println("调用了readResolve()方法");
         return MySingleObjHandler.mySingleObj;
-    }
+    }*/
 }

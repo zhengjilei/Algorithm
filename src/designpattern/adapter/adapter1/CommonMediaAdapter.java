@@ -1,4 +1,4 @@
-package designpattern.adapter;
+package designpattern.adapter.adapter1;
 
 /**
  * CommonMediaPlayer 接口的适配器, 使得CommonMediaAdapter 拥有AdvancedPlayer 的功能

@@ -14,12 +14,14 @@ public class Q059_MaxQueue {
     ArrayDeque<InternalData> dataDeque = new ArrayDeque<>();
     ArrayDeque<InternalData> maxDeque = new ArrayDeque<>();
 
-    int currentIndex = 0;
+    int currentIndex = 0; // 每个数值插入时，要绑定一个索引
+    // 这样做的目的是，从队列弹出一个元素时，判断该元素绑定的索引和 最大队列队首是否相同，相同说明最大队列队首元素也要弹出
+
 
     public void offer(int val) {
         InternalData data = new InternalData(currentIndex, val);
 
-        //保证maxDeque 队头始终是最大值
+        //保证maxDeque 队头始终是最大值， 插入时从最大队列末尾删除掉不可能成为最大值的元素
         while (!maxDeque.isEmpty() && val >= maxDeque.peekLast().val) {
             maxDeque.pollLast();
         }

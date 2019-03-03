@@ -1,4 +1,4 @@
-package designpattern.adapter;
+package designpattern.adapter.adapter1;
 
 /**
  * Created by Ethan-Walker on 2018/4/25.

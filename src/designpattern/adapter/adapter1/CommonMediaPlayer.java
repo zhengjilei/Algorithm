@@ -1,4 +1,4 @@
-package designpattern.adapter;
+package designpattern.adapter.adapter1;
 
 /**
  * 普通媒体播放器

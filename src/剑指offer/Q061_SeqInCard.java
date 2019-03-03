@@ -38,11 +38,10 @@ public class Q061_SeqInCard {
         }
         int small = i, big = i + 1;
 
-        while (big < length) {
+        while (big < length && countOfZero < 0) {
             if (help[big] == help[small]) return false;
 
             countOfZero -= (help[big] - help[small] - 1); // 间隔数 抵消 大王小王(0值)
-
             small = big;
             big = big + 1;
         }

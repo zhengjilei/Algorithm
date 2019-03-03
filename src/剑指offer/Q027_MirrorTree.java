@@ -46,7 +46,7 @@ public class Q027_MirrorTree {
         try {
             binaryTree.buildTree(new int[]{8, 6, 5, 7}, new int[]{5, 6, 7, 8});
             binaryTree.postOrderRecur();
-            binaryTree.mirrorTree();
+//            binaryTree.mirrorTree();
             binaryTree.postOrderRecur();
 
         } catch (Exception e) {

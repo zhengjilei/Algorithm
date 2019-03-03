@@ -27,6 +27,7 @@ class Q001_TwoSum {
      * 解决思路: 用hashMap<key,value> key 为当前遍历元素 a 的所需值 target-a, value 为当前元素的索引位置
      * 每遍历到一个元素，检查其是否包含在 hashMap 的key 中，如果包括说明该元素是之前某个元素的所需要的值，相加=target
      * 时间复杂度 O(n)
+     * 空间复杂度 O(n)
      *
      * @param nums
      * @param target
@@ -41,10 +42,9 @@ class Q001_TwoSum {
             if (hashMap.containsKey(cur)) {
                 results[0] = hashMap.get(cur);
                 results[1] = i;
-                return results;
-            } else {
-                hashMap.put(target - cur, i);
+                break;
             }
+            hashMap.put(target - cur, i);
         }
         return results;
     }
@@ -97,7 +97,7 @@ class Q001_TwoSum {
 
     public static void testTwoSumCount2() {
         Random random = new Random();
-        int n = StdRandom.uniform(20,30);
+        int n = StdRandom.uniform(20, 30);
         int target = 11;
         int[] nums = new int[n];
         for (int i = 0; i < n; i++) {

@@ -13,6 +13,14 @@ import java.util.Set;
  */
 public class Q060_NDiceProbability {
 
+    @Test
+    public void test() {
+        printHashMap(calProbability(7));
+        printHashMap(calProbability2(7));
+        printHashMap(calProbability3(7));
+
+    }
+
     public HashMap<Integer, Double> calProbability(int n) {
 
         if (n < 1) return null;
@@ -39,9 +47,9 @@ public class Q060_NDiceProbability {
      * @return
      */
     public int calNSum(int n, int sum) {
-        if (n <= 0 || sum < n || sum > 6 * n) return 0;
-        if (n == sum || n == 1) return 1;
-        // n == 1 && sum <= 6 && sum >= 1  防止 n=1,sum=5 这种情况返回 0
+        if (n == 0 && sum == 0) return 1;
+        if (n == 0 || sum == 0 || sum < n || sum > 6 * n) // 不符合条件的情况
+            return 0;
 
         return calNSum(n - 1, sum - 1) +
                 calNSum(n - 1, sum - 2) +
@@ -57,6 +65,7 @@ public class Q060_NDiceProbability {
      * 二维数组
      * 空间复杂度: O(n*6*n)
      * 时间复杂度: O(n*6*n)
+     * p[i][j] = t 表示 i 个骰子和为 j 的种数
      *
      * @param n
      * @return
@@ -131,13 +140,6 @@ public class Q060_NDiceProbability {
         return map;
     }
 
-    @Test
-    public void test() {
-        printHashMap(calProbability(7));
-        printHashMap(calProbability2(7));
-        printHashMap(calProbability3(7));
-
-    }
 
     void printHashMap(HashMap<Integer, Double> map) {
         Set<Map.Entry<Integer, Double>> entries = map.entrySet();

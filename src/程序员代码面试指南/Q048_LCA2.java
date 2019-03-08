@@ -32,7 +32,7 @@ public class Q048_LCA2 {
         if (left != null && right != null) {
             return root;
         }
-        return left != null ? left : right;
+        return left != null ? left : right; // 否则返回其中一个非空节点
     }
 
 

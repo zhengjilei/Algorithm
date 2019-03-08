@@ -4,67 +4,55 @@ package stackqueue;
  * 链式栈 ：头插法
  * Created by Ethan-Walker on 2018/7/21.
  */
-public class LinkedListStack<T> {
+public class LinkedListStack{
 
-    private int nowNum;  // 当前栈中节点数量
+    Node head; // 辅助头结点
 
-    private Node head;
+    int count;
 
     public LinkedListStack() {
-        nowNum = 0;
-        head = new Node();  // 头结点为空
+        this.head = new Node(-1);
+        count = 0;
     }
 
-    /**
-     * 头插法
-     */
-    public void push(T t) {
-        Node<T> node = new Node<>();
-        node.item = t;
-        node.next = head.next;
-        head.next = node;
-        nowNum++;
+    boolean push(int val) {
+        Node n = new Node(val);
+        n.next = head.next;
+        head.next = n;
+        count++;
+        return true;
     }
 
-    /**
-     * 删除并返回第一个结点
-     */
-    public T pop() {
-        if (!isEmpty()) {
-            Node<T> node = head.next;
-            head.next = node.next;
-            nowNum--;
-            return node.item;
-        } else {
-            return null;
-        }
+
+    int pop() {
+        if (isEmpty())
+            throw new RuntimeException("栈为空");
+        Node p = head.next;
+        head.next = p.next;
+        count--;
+        return p.val;
     }
 
-    public int size() {
-        return nowNum;
+    int size() {
+        return count;
+    }
+
+    int getTop() {
+        if (isEmpty())
+            throw new RuntimeException("栈为空");
+        return head.next.val;
     }
 
     public boolean isEmpty() {
-        return nowNum == 0;
+        return count == 0;
     }
 
-    private class Node<T> {
-        T item;
+    class Node {
+        int val;
         Node next;
 
-        public Node() {
-            this.item = null;
-            this.next = null;
-        }
-    }
-
-    public static void main(String[] args) {
-        LinkedListStack<String> stack = new LinkedListStack<>();
-        for (int i = 0; i < 20; i++) {
-            stack.push("<" + i + ">");
-        }
-        while (!stack.isEmpty()) {
-            System.out.println(stack.pop());
+        public Node(int val) {
+            this.val = val;
         }
     }
 }

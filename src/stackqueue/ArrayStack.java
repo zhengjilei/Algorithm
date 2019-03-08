@@ -1,5 +1,7 @@
 package stackqueue;
 
+import java.util.Arrays;
+
 /**
  * 静态顺序栈
  * <p>
@@ -7,31 +9,39 @@ package stackqueue;
  */
 
 public class ArrayStack {
+    int[] item;
+    int top;
 
-    int[] nums;
-    int count;
-    int size;
-
-    public ArrayStack(int size) {
-        this.size = size;
-        nums = new int[size];
-        count = 0;
+    public ArrayStack(int maxCount) {
+        this.item = new int[maxCount];
+        this.top = 0;
     }
 
-    public boolean push(int val) {
-        if (count == size) return false;
-        nums[count++] = val;
-
+    boolean push(int val) {
+        if (top == item.length) {
+            item = Arrays.copyOf(item, item.length * 2);
+        }
+        item[top++] = val;
         return true;
     }
 
-    public int pop() {
-        if (isEmpty()) throw new RuntimeException("stack is null");
-        return nums[--count];
+    int pop() {
+        if (top == 0)
+            throw new RuntimeException("栈为空");
+        return item[top--];
     }
 
-    public boolean isEmpty() {
-        return count == 0;
+    int getTop() {
+        if (top == 0)
+            throw new RuntimeException("栈为空");
+        return item[top];
     }
 
+    int getSize() {
+        return top;
+    }
+
+    boolean isEmpty() {
+        return top == 0;
+    }
 }

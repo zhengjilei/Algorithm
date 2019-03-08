@@ -6,8 +6,7 @@ package trie;
 public class Trie {
     class TrieNode {
         public int path;// 以当前节点为路径中节点的数目
-        public int end; // 以当前节点为路径终点的书怒
-
+        public int end; // 以当前节点为路径终点的数目
         public TrieNode[] map;
 
         public TrieNode() {
@@ -26,7 +25,7 @@ public class Trie {
     public void insert(String word) {
         if (word == null || word.length() == 0) return;
         TrieNode t = root;
-        int index = 0;
+        int index;
         for (int i = 0; i < word.length(); i++) {
             index = word.charAt(i) - 'a';
             if (t.map[index] == null) {
@@ -38,16 +37,17 @@ public class Trie {
         t.end++;
     }
 
-    // 假设被删除的单词一定存在
     public void delete(String word) {
-        if (word == null || word.length() == 0) return;
+        if (!search(word)) return; // 删除的单词不存在
         TrieNode t = root;
-        int index = 0;
+        int index;
         for (int i = 0; i < word.length(); i++) {
             index = word.charAt(i) - 'a';
-            if (t.map[index].path-- == 1) {
-                t.map[index] = null; // 直接断开，不用再遍历下面的字符一个个删除
+            if (t.map[index].path == 1) {
+                t.map[index] = null; // 直接和后面节点断开，因为该节点以后只有 word 这一个字符串，不用一个个删除
                 return;
+            } else {
+                t.map[index].path--;
             }
             t = t.map[index];
         }
@@ -71,7 +71,7 @@ public class Trie {
 
     // 返回以 prefix 为前缀的单词总数
     public int prefixCount(String prefix) {
-        if (prefix == null || prefix.length() == 0) return 9;
+        if (prefix == null || prefix.length() == 0) return 0;
         int index = 0;
         TrieNode t = root;
 
@@ -81,5 +81,22 @@ public class Trie {
             t = t.map[index];
         }
         return t.path;
+    }
+
+    /**
+     * Returns if there is any word in the trie that starts with the given prefix.
+     */
+    public boolean startsWith(String prefix) {
+        if (prefix == null || prefix.length() == 0) return false;
+        int index;
+        TrieNode node = root;
+        for (int i = 0; i < prefix.length(); i++) {
+            index = prefix.charAt(i) - 'a';
+            if (node.map[index] == null) {
+                return false;
+            }
+            node = node.map[index];
+        }
+        return true;
     }
 }

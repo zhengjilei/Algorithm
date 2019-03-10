@@ -13,7 +13,7 @@ public class Q128_LongestConsecutive {
         int max = 1, temp = 0;
         for (int i = 0; i < arr.length; i++) {
             if (!map.containsKey(arr[i])) {
-                map.put(arr[i], 1);
+                map.put(arr[i], 1); // value 是arr[i] 所在连续序列的长度
                 if (map.containsKey(arr[i] - 1)) {
                     // 合并 arr[i]-1 arr[i]
                     temp = merge(map, arr[i] - 1, arr[i]);
@@ -21,7 +21,6 @@ public class Q128_LongestConsecutive {
                         max = temp;
                     }
                 }
-
                 if (map.containsKey(arr[i] + 1)) {
                     temp = merge(map, arr[i], arr[i] + 1);
                     if (temp > max) {

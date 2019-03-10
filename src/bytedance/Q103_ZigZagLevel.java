@@ -4,6 +4,7 @@ import 程序员代码面试指南.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,7 +20,6 @@ public class Q103_ZigZagLevel {
         List<Integer> levelList = new ArrayList<>();
 
         ArrayDeque<TreeNode> queue = new ArrayDeque<>();
-        ArrayDeque<Integer> stack = new ArrayDeque<>();
 
         queue.offer(root);
 
@@ -28,11 +28,7 @@ public class Q103_ZigZagLevel {
 
         while (!queue.isEmpty()) {
             node = queue.poll();
-            if ((level & 1) == 1) { // 奇数
-                levelList.add(node.val);
-            } else {
-                stack.push(node.val);
-            }
+            levelList.add(node.val);
 
             curLevelCount--;
             if (node.left != null) {
@@ -46,11 +42,8 @@ public class Q103_ZigZagLevel {
             }
 
             if (curLevelCount == 0) {
-                if ((level & 1) == 0) {
-                    // 偶数
-                    while (!stack.isEmpty()) {
-                        levelList.add(stack.pop());
-                    }
+                if ((level & 1) == 0) { // 偶数,反转
+                    Collections.reverse(levelList);
                 }
                 res.add(levelList);
                 levelList = new ArrayList<>();

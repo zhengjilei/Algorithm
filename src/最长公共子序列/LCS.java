@@ -45,6 +45,7 @@ public class LCS {
         return dp[i][j];
 
     }
+
     // 考虑边界
     public int longestCommonSeq(String s1, String s2) {
         int[][] dp = new int[s1.length()][s2.length()];
@@ -102,7 +103,7 @@ public class LCS {
      * 由于 dp[i][j] 依赖  dp[i-1][j-1] +1  dp[i-1][j] dp[i][j-1]
      * 可能依赖左上角的值（考虑是否可以从右到左计算），且同时可能依赖左边的值（必须从左往右计算）
      * <p>
-     * 需要一个辅助数组存储上一行的值
+     * 需要两个辅助变量 prev save存储dp[i-1][j-1]的值
      * <p>
      * 时间复杂度: O(row*col) row 是序列 a 的长度，col 是序列 b的长度
      * 空间复杂度: O(col)
@@ -114,17 +115,17 @@ public class LCS {
     public static int lcs2(char[] a, char[] b) {
         int[] dp = new int[b.length + 1];
         int prev;
-        // save 的赋值速度总是比 dp 慢一列，为的就是计算 dp[j]时，
-        // save[j-1] 存储上一行的 dp[i-1][j-1] 不被覆盖
+        // prev 保存上一行的 dp[i-1][j-1] , 计算 dp[j]时，先保存 save = dp[j] ,计算之后 将 save的值赋给 prev
+        // prev 存储上一行的 dp[i-1][j-1] 不被覆盖
         for (int i = 1; i <= a.length; i++) {
             prev = dp[0]; // 保留上一行的 dp[0] ，计算 dp[1]可能需要用到
             for (int j = 1; j <= b.length; j++) {
-                int tmp = dp[j]; // 上一行该列的值，保存下来，用于下一趟计算
+                int save = dp[j]; // 计算 dp[j]之前保存下来，用于下一趟计算
                 if (a[i - 1] == b[j - 1]) dp[j] = prev + 1; // 注意：这里是prev
                 else {
-                    dp[j] = Math.max(dp[j], dp[j - 1]); // 注意这里是 dp[j-1] 而不是 save[j-1]，依赖左边的值，最新更新的值
+                    dp[j] = Math.max(dp[j], dp[j - 1]);
                 }
-                prev = tmp; // 保存更新之前的 dp[j]
+                prev = save; // 保存更新之前的 dp[j]
             }
         }
         return dp[b.length];

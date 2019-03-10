@@ -1,9 +1,10 @@
 package binary_tree;
 
 import org.junit.Test;
-
+import 程序员代码面试指南.TreeNode;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -96,8 +97,8 @@ public class TraverseOrder {
      * 树的非递归后序遍历
      * 每个节点压两次
      * 弹出时，如果弹出的节点和栈顶节点仍然相等，说明该节点的左右子树都未遍历：先压右子树、再压左子树
-     *  如果弹出节点和栈顶节点不等 ：说明该节点的左右子树都已经访问过了，该访问该节点
-     *  或者栈为空：说明当前节点是树的根节点，左右子树都已经访问过了，访问该节点
+     * 如果弹出节点和栈顶节点不等 ：说明该节点的左右子树都已经访问过了，该访问该节点
+     * 或者栈为空：说明当前节点是树的根节点，左右子树都已经访问过了，访问该节点
      *
      * @param node
      */
@@ -136,7 +137,7 @@ public class TraverseOrder {
      * @param root
      * @return
      */
-    public List<Integer> levelOrder(TreeNode<Integer> root) {
+    public List<Integer> levelOrder(TreeNode root) {
         ArrayList<Integer> result = new ArrayList<>();
         if (root == null) return result;
 
@@ -162,7 +163,7 @@ public class TraverseOrder {
      * @param root
      * @return
      */
-    public List<List<Integer>> levelOrder2(TreeNode<Integer> root) {
+    public List<List<Integer>> levelOrder2(TreeNode root) {
         ArrayList<List<Integer>> result = new ArrayList<>();
         if (root == null) return result;
 
@@ -170,7 +171,7 @@ public class TraverseOrder {
         queue.offer(root);
         ArrayList<Integer> level = new ArrayList<>();
 
-        TreeNode<Integer> node = null;
+        TreeNode node = null;
         int curLevelCount = 1, nextLevelCount = 0;
 
         while (!queue.isEmpty()) {
@@ -200,6 +201,112 @@ public class TraverseOrder {
 
     }
 
+    /**
+     * 之字形打印
+     * level&1)==1 奇数：从左向右遍历
+     * level&0)==0 偶数：从右向左遍历，压入前  调用 Collections.reverse()
+     *
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelZOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) return result;
+
+        ArrayDeque<程序员代码面试指南.TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
+        List<Integer> levelList = new ArrayList<>();
+        ArrayDeque<Integer> stack = new ArrayDeque<>();
+
+        int curLevelCount = 1, nextLevelCount = 0;
+        TreeNode node = null;
+
+        int level = 1;
+        while (!queue.isEmpty()) {
+            node = queue.poll();
+            levelList.add(node.val);
+            stack.push(node.val);
+
+            curLevelCount--;
+            if (node.left != null) {
+                queue.offer(node.left);
+                nextLevelCount++;
+            }
+            if (node.right != null) {
+                queue.offer(node.right);
+                nextLevelCount++;
+            }
+
+            if (curLevelCount == 0) {
+
+                if ((level & 1) == 0) { // 偶数
+                    Collections.reverse(levelList);
+                }
+                result.add(levelList);
+                levelList = new ArrayList<>();
+                curLevelCount = nextLevelCount;
+                nextLevelCount = 0;
+                level++;
+
+            }
+        }
+        return result;
+
+
+    }
+
+    /**
+     * 层遍历，自底向上
+     *
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder3(TreeNode root) {
+        ArrayList<List<Integer>> result = new ArrayList<>();
+        if (root == null) return result;
+
+        ArrayDeque<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
+        ArrayList<Integer> level = new ArrayList<>();
+
+        TreeNode node = null;
+        int curLevelCount = 1, nextLevelCount = 0;
+
+        while (!queue.isEmpty()) {
+            node = queue.poll();
+            level.add(node.val);  // 访问当前行元素，curLevelCount-1
+            curLevelCount--;
+
+            if (node.left != null) {
+                queue.offer(node.left);
+                nextLevelCount++;
+            }
+            if (node.right != null) {
+                queue.offer(node.right);
+                nextLevelCount++;
+            }
+
+            if (curLevelCount == 0) { // 当前层遍历结束
+
+                result.add(level);
+                level = new ArrayList<>();
+
+                curLevelCount = nextLevelCount;
+                nextLevelCount = 0;
+            }
+        }
+        int i = 0, j = result.size() - 1;
+        while (i < j) {
+            List<Integer> l = result.get(i);
+            result.set(i, result.get(j));
+            result.set(j, l);
+            i++;
+            j--;
+        }
+        return result;
+
+    }
+
     @Test
     public void test() {
         BinaryTree<Integer> binaryTree = new BinaryTree<>();
@@ -209,9 +316,9 @@ public class TraverseOrder {
 
         binaryTree.levelOrderLine();
 
-        preOrder(binaryTree.getRoot());
-        preOrder2(binaryTree.getRoot());
-        inOrder(binaryTree.getRoot());
-        postOrder(binaryTree.getRoot());
+//        preOrder(binaryTree.getRoot());
+//        preOrder2(binaryTree.getRoot());
+//        inOrder(binaryTree.getRoot());
+//        postOrder(binaryTree.getRoot());
     }
 }

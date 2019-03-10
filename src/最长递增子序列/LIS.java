@@ -67,7 +67,8 @@ public class LIS {
         }
         int result = 0;
         for (int i = 0; i < nums.length; i++) {
-            if (dp[i] == maxLength) result += cnt[i];
+            if (dp[i] == maxLength)
+                result += cnt[i];
         }
         return result;
     }

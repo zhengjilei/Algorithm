@@ -1,9 +1,6 @@
 package 程序员代码面试指南;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * created by Ethan-Walker on 2018/12/28
@@ -47,10 +44,8 @@ public class Q039_ZigZagLevel {
 
     /**
      * 之字形打印
-     * 方法1：按照上面存入到 List< List< Integer>> 中，每隔一行反转List< Integer>
-     * 方法2: 创建一个栈，添加辅助变量 level
-     * level&1)==1 奇数：从左向右遍历，故不需要处理，正常访问即可
-     * level&0)==0 偶数：从右向左遍历，弹出时先不着急访问，先压到栈中，等换行时从栈中退出
+     * level&1)==1 奇数：从左向右遍历
+     * level&0)==0 偶数：从右向左遍历，压入前  调用 Collections.reverse()
      *
      * @param root
      * @return
@@ -70,11 +65,8 @@ public class Q039_ZigZagLevel {
         int level = 1;
         while (!queue.isEmpty()) {
             node = queue.poll();
-            if ((level & 1) == 1) { // 奇数
-                levelList.add(node.val);
-            } else {
-                stack.push(node.val);
-            }
+            levelList.add(node.val);
+            stack.push(node.val);
 
             curLevelCount--;
             if (node.left != null) {
@@ -89,11 +81,7 @@ public class Q039_ZigZagLevel {
             if (curLevelCount == 0) {
 
                 if ((level & 1) == 0) { // 偶数
-                    // 从右向左访问
-                    while (!stack.isEmpty()) {
-                        levelList.add(stack.pop());
-                    }
-
+                    Collections.reverse(levelList);
                 }
                 result.add(levelList);
                 levelList = new ArrayList<>();

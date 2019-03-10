@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.Arrays;
 
 /**
- * 最长公共子串（最长公共连续子序列）
+ * 最长重复子数组（最长公共连续子序列）
  * created by Ethan-Walker on 2019/1/4
  */
 public class Q718_LCST {
@@ -16,6 +16,7 @@ public class Q718_LCST {
         return lcst(a, b);
 
     }
+
 
     public int lcst(int[] str1, int[] str2) {
 

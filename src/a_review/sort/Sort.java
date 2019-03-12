@@ -79,20 +79,20 @@ public class Sort {
     }
 
     public void shellSort(int[] nums) {
-        int i, j, insert, gap = nums.length, group;
+        int i, j, insert, gap = nums.length >> 1, group;
         while (gap != 0) {
-            gap /= 2;
             // 分成 gap 组
             for (group = 0; group < gap; group++) {
                 // 每组从 group 开始
                 for (i = group + gap; i < nums.length; i += gap) {
                     insert = nums[i];
-                    for (j = i - gap; j >= 0 && insert < nums[j]; j -= gap) {
+                    for (j = i - gap; j >= group && insert < nums[j]; j -= gap) { // j>=group 每组开始的位置
                         nums[j + gap] = nums[j];
                     }
                     nums[j + gap] = insert;
                 }
             }
+            gap >>= 1;
 
         }
     }
@@ -117,8 +117,8 @@ public class Sort {
             }
 //            bubbleSort(a);
 //            selectSort(a);
-//            shellSort(a);
-            binaryInsertSort(a);
+            shellSort(a);
+//            binaryInsertSort(a);
             boolean judge = SortJudge.judge(a);
             if (!judge) {
                 System.out.println(judge);

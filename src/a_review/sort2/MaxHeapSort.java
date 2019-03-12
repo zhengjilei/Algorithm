@@ -1,10 +1,17 @@
-package a_review.sort;
+package a_review.sort2;
+
+import org.junit.Test;
+import sort.SortJudge;
+
+import java.util.Random;
 
 /**
- * created by Ethan-Walker on 2019/2/20
+ * created by Ethan-Walker on 2019/3/11
  */
 public class MaxHeapSort {
-    public void maxHeapSort(int[] nums) {
+
+
+    public void heapSort(int[] nums) {
         int count = nums.length;
         buildMaxHeap(nums, count);
 
@@ -42,4 +49,26 @@ public class MaxHeapSort {
         nums[i] = nums[j];
         nums[j] = t;
     }
+
+    @Test
+    public void test() {
+
+        for (int k = 0; k < 10000; k++) {
+            Random random = new Random();
+            int length = random.nextInt(2000);
+            int[] a = new int[length];
+
+            for (int i = 0; i < length; i++) {
+                a[i] = random.nextInt(2000);
+            }
+            heapSort(a);
+            boolean judge = SortJudge.judge(a);
+            if (!judge) {
+                System.out.println(judge);
+            }
+        }
+    }
+
 }
+
+

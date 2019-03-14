@@ -1,4 +1,4 @@
-package a_review;
+package a_review.other;
 
 import org.junit.Test;
 
@@ -24,8 +24,8 @@ public class StackOutputSeq {
 
     public void recur(int[] input, int[] out, int index, int left1, int left0) {
         if (index == out.length) {
-            add(input,out);
-            return ;
+            add(input, out);
+            return;
         }
         if (left0 == left1) {
             out[index] = 1;
@@ -39,9 +39,9 @@ public class StackOutputSeq {
             recur(input, out, index + 1, left1 - 1, left0);
         }
 
-        if (left0 > 0) {
+        if (left1 < left0) {
             out[index] = 0;
-            recur(input, out, index + 1, left1, left0-1);
+            recur(input, out, index + 1, left1, left0 - 1);
         }
 
     }

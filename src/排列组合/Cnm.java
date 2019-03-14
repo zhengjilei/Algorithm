@@ -42,7 +42,7 @@ public class Cnm {
 
     /**
      * 求 C(m,n) n个数中取m个，所有的情况数
-     * C(m,n)  = C(m,n-1)+C
+     * C(m,n)  = C(m,n-1)+C(m-1,n-1)
      *
      * @param m
      * @param n

@@ -45,7 +45,7 @@ public class ListMergeSort {
                 q = q.next;
             }
             tail = tail.next;
-            tail.next = null; // 断开和后面的节点的链接
+//            tail.next = null; // 断开和后面的节点的链接,实际上不需要断开
         }
         if (p != null) tail.next = p;
         if (q != null) tail.next = q;

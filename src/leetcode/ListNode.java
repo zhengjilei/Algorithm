@@ -12,6 +12,10 @@ public class ListNode {
         next = null;
     }
 
+    public int getVal() {
+        return val;
+    }
+
     @Override
     public String toString() {
         return this.val + "";

@@ -13,6 +13,22 @@ import java.util.Scanner;
 public class Kth {
 
 
+    public static int kthNonRecur(int[] a, int k) {
+        int pivotIndex;
+        int left = 0, right = a.length - 1;
+        while (true) {
+            pivotIndex = randomPartition(a, left, right);
+            if (pivotIndex + 1 == k) {
+                return a[pivotIndex];
+            } else if (pivotIndex + 1 > k) {
+                left = pivotIndex + 1;
+            } else {
+                right = pivotIndex - 1;
+            }
+        }
+
+    }
+
     /**
      * 在a[left]~a[right] 中选择第 K小的数
      * 复杂度 O(n)

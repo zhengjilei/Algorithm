@@ -114,4 +114,5 @@ public class Q718_LCST {
         int[] b = {1, 0, 1, 0, 1};
         System.out.println(findLength(a, b));
     }
+
 }

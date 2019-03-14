@@ -13,41 +13,40 @@ public class ListInsertSort {
 
 
         ListNode insertNode = head.next, nextInsertNode;
-        ListNode prevHead = head;  // 已经排好序的部分
 
-        // 已经排好序的部分一定要和 后面断开
-        prevHead.next = null;
+        // head 后面断开，保证已排好序的链尾是 null.
+        // 例如 1->4 ->3 , 将 4 插入，如果1后面不设为 null, 会导致 4的插入位置遍历到 3 后面
+        head.next = null;
 
         while (insertNode != null) {
             nextInsertNode = insertNode.next; // 保存下一个插入节点
-            insertNode.next = null;     // 将当前插入节点和后面的链表断开
 
-            // 寻找第一个大于等于 insertNode 值的节点t 和其前趋节点 prevT
-            ListNode t = prevHead, prevT = null;
+            // 寻找第一个大于 insertNode 值的节点t 和其前趋节点 prev
+            ListNode t = head, prev = null;
             while (t != null && t.val <= insertNode.val) {
-                prevT = t;
+                prev = t;
                 t = t.next;
             }
 
-            if (prevT == null) { // prevT 表明第一个节点就比 insertNode 大，insertNode 应插入到第一个节点
-                insertNode.next = prevHead;
-                prevHead = insertNode; // 更新 prevHead
+            if (prev == null) { // prevT ==null 表明第一个节点就比 insertNode 大，insertNode 应插入到第一个节点
+                insertNode.next = head;
+                head = insertNode; // 更新 prevHead
             } else {
                 // t 指向第一个大于等于 insertNode 的节点，或者 指向 Null
                 insertNode.next = t;
-                prevT.next = insertNode;
+                prev.next = insertNode;
             }
             insertNode = nextInsertNode;
         }
-        return prevHead;
+        return head;
     }
 
 
     @Test
     public void test() {
-        ListNode l1 = new ListNode(4);
-        ListNode l2 = new ListNode(2);
-        ListNode l3 = new ListNode(5);
+        ListNode l1 = new ListNode(1);
+        ListNode l2 = new ListNode(4);
+        ListNode l3 = new ListNode(3);
         ListNode l4 = new ListNode(3);
         ListNode l5 = new ListNode(1);
         l1.next = l2;

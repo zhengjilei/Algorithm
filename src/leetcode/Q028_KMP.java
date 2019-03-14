@@ -3,7 +3,7 @@ package leetcode;
 /**
  * created by Ethan-Walker on 2018/12/29
  */
-public class Q026_KMP {
+public class Q028_KMP {
     public int strStr(String haystack, String needle) {
         return kmp(haystack, needle);
     }
@@ -24,7 +24,7 @@ public class Q026_KMP {
                 j = next[j];
             }
         }
-        if (j == pattern.length()) return i - pattern.length();
+        if (j == pattern.length()) return i - j;
         return -1;
     }
 

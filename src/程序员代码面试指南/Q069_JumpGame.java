@@ -7,13 +7,13 @@ public class Q069_JumpGame {
 
 
     /**
-     * jump 表示当前到达位置i最少跳的步数
+     * jump 表示当前到达位置 i 最少跳的步数
      * cur 表示跳了 jump 步最远到达的位置
-     * next 表示跳 jump+1步最远到达的位置
+     * next 表示跳 jump + 1步最远到达的位置
      * <p>
      * 遍历每一个位置 i
-     * 1. cur< i 跳 jump 步到达不了位置 i, 再跳一步，cur = next
-     * 2. cur>= i,跳 jump 步能到达位置i
+     * 1. cur < i 跳 jump 步到达不了位置 i, 再跳一步，cur = next
+     * 2. cur >= i,跳 jump 步能到达位置i
      * <p>
      * 每遍历一个位置，必须判断是否需要更新跳 jump+1 能到达的最远位置
      *
@@ -43,6 +43,7 @@ public class Q069_JumpGame {
      * @return
      */
     public boolean canJump(int[] arr) {
+        if (arr.length == 1) return true;
         int jump = 0, cur = 0, next = 0;
 
         for (int i = 0; i < arr.length; i++) {

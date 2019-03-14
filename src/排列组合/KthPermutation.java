@@ -18,7 +18,7 @@ public class KthPermutation {
         // 初始时 ave = (n-1)!     以每个数开头的平均数量
         nums.add(n);
         StringBuilder sb = new StringBuilder();
-        recur(nums, nums.size(), 0, ave, sb, k - 1);
+        recur(nums, nums.size(), 0, ave, sb, k - 1); // 注意：这里是 k-1
         return sb.toString();
     }
 

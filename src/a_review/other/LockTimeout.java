@@ -1,4 +1,4 @@
-package a_review;
+package a_review.other;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;

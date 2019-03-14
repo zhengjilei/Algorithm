@@ -1,4 +1,4 @@
-package 矩阵;
+package matrix;
 
 import java.util.Arrays;
 
@@ -61,9 +61,7 @@ public class Matrix {
         int[][] result = new int[a.length][b[0].length];
         for (int i = 0; i < a.length; i++) {          // a 的第 i 行乘 b 的各列
             for (int j = 0; j < b[0].length; j++) {   // a 的第 i 行乘上 b 的 第 j 列
-
                 for (int k = 0; k < b.length; k++) {  // k 表示 b的行号，对应于 a 的列号
-
                     result[i][j] += a[i][k] * b[k][j];
                 }
             }

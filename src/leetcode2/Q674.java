@@ -40,4 +40,21 @@ public class Q674 {
 
         return maxLen;
     }
+
+    public int findLengthOfLCIS2(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        int dp = 1;
+        int max = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > nums[i - 1]) {
+                dp = dp + 1;
+            } else {
+                dp = 1;
+            }
+            if (dp > max) {
+                max = dp;
+            }
+        }
+        return max;
+    }
 }

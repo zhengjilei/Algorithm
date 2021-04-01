@@ -1,7 +1,7 @@
 package leetcode;
 
 import org.junit.Test;
-import 程序员代码面试指南.TreeNode;
+import programmer_interview.TreeNode;
 
 /**
  * 根据前序和中序构造二叉树

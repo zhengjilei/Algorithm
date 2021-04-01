@@ -29,7 +29,6 @@ public class Q008_AtoI {
         int minDiv = Integer.MIN_VALUE / 10;
         int minRemain = Integer.MIN_VALUE % 10;
         for (; i < str.length() && isDigit(str.charAt(i)); i++) {
-            if (!isDigit(str.charAt(i))) return -1;
             cur = '0' - str.charAt(i);
             if (sum < minDiv || (sum == minDiv && cur < minRemain))
                 return positive ? Integer.MAX_VALUE : Integer.MIN_VALUE;

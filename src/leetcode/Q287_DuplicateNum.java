@@ -6,6 +6,16 @@ import org.junit.Test;
  * created by Ethan-Walker on 2019/2/18
  */
 public class Q287_DuplicateNum {
+    public int findDuplicate2(int[] nums) {
+        return 0;
+    }
+
+    @Test
+    public void test2() {
+        int[] nums = {1, 3, 4, 2, 2};
+        System.out.println(findDuplicate2(nums));
+    }
+
     public int findDuplicate(int[] nums) {
 
         int start = 1, end = nums.length - 1, mid;
@@ -41,11 +51,31 @@ public class Q287_DuplicateNum {
     public int getCount(int[] nums, int start, int end) {
         int count = 0;
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] >= start && nums[i] <= end ) {
+            if (nums[i] >= start && nums[i] <= end) {
                 count++;
             }
         }
         return count;
+    }
+
+
+    public int findDuplicate3(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            while (nums[i] != i + 1) {
+                if (nums[i] == nums[nums[i] - 1]) {
+                    return nums[i];
+                } else
+                    swap(nums, i, nums[i] - 1);
+            }
+        }
+        return nums.length;
+
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int t = nums[i];
+        nums[i] = nums[j];
+        nums[j] = t;
     }
 
     @Test
@@ -53,7 +83,6 @@ public class Q287_DuplicateNum {
         int[] a = new int[]{1, 3, 4, 2, 2};
         System.out.println(findDuplicate(a));
     }
-
 
 
 }

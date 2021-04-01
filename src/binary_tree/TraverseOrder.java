@@ -1,7 +1,7 @@
 package binary_tree;
 
 import org.junit.Test;
-import 程序员代码面试指南.TreeNode;
+import programmer_interview.TreeNode;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -213,7 +213,7 @@ public class TraverseOrder {
         List<List<Integer>> result = new ArrayList<>();
         if (root == null) return result;
 
-        ArrayDeque<程序员代码面试指南.TreeNode> queue = new ArrayDeque<>();
+        ArrayDeque<programmer_interview.TreeNode> queue = new ArrayDeque<>();
         queue.offer(root);
         List<Integer> levelList = new ArrayList<>();
         ArrayDeque<Integer> stack = new ArrayDeque<>();

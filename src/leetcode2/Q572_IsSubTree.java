@@ -1,6 +1,6 @@
 package leetcode2;
 
-import 程序员代码面试指南.TreeNode;
+import programmer_interview.TreeNode;
 
 /**
  * created by Ethan-Walker on 2019/3/12

@@ -9,11 +9,12 @@ public class Q005_LongestPalindrome {
 
     public String longestPalindrome(String s) {
         if (s == null || s.length() == 0) return "";
-        int[][] dp = new int[s.length()][s.length()];
+        int[][] dp = new int[s.length()][s.length()];// dp[i][j] 表示以 i 开头 ，j 结尾的回文字符串的长度
 
         int start = 0;
         int end = 0;
         int maxLen = 1;
+
         // 长度为 1
         for (int i = 0; i < s.length(); i++) {
             dp[i][i] = 1;
@@ -35,18 +36,15 @@ public class Q005_LongestPalindrome {
             for (int l = 0; l <= s.length() - len; l++) {
                 r = l + len - 1;
                 if (dp[l + 1][r - 1] > 0 && s.charAt(l) == s.charAt(r)) {
-                    // 判断子串是否是 回文子串，子串不是的话 s[l] == s[r] 也没用
+                    // 判断子串是否是 回文子串(dp[l + 1][r - 1] > 0)
+                    // 子串不是的话 s[l] == s[r] 也没用
                     dp[l][r] = dp[l + 1][r - 1] + 2;
-
                     if (dp[l][r] > maxLen) {
                         start = l;
                         end = r;
                         maxLen = len;
                     }
-                } else {
-                    dp[l][r] = 0;
                 }
-
             }
         }
         return s.substring(start, end + 1);

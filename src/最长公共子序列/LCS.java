@@ -135,43 +135,36 @@ public class LCS {
      * 时间复杂度: O(m*n) m 是序列 a 的长度，n 是序列 b的长度
      * 空间复杂度: min{m,n}
      *
-     * @param a
-     * @param b
      * @return
      */
-    public static int lcs3(char[] a, char[] b) {
-        int minSize = a.length < b.length ? a.length : b.length;
-        int[] dp = new int[minSize + 1];
-        int maxSize = 0;
-        boolean bLess = false;
-        if (minSize == b.length) {
-            bLess = true;
-            maxSize = a.length;
-        } else {
-            maxSize = b.length;
+    public static int lcs3(char[] s1, char[] s2) {
+        if (s1 == null || s2 == null) return 0;
+        if (s1.length == 0 || s2.length == 0) return 0;
+        int s1Len = s1.length;
+        int s2Len = s2.length;
+        if (s1Len < s2Len) {
+            char[] tmp = s1;
+            s1 = s2;
+            s2 = tmp;
+            s1Len = s1.length;
+            s2Len = s2.length;
         }
-        int aIndex = 0, bIndex = 0;
-        int prev = 0, tmp;
-        for (int i = 1; i <= maxSize; i++) {
+
+        int[] dp = new int[s2Len + 1];
+        int prev, cur;
+        for (int i = 1; i <= s1Len; i++) {
             prev = dp[0];
-            for (int j = 1; j <= minSize; j++) {
-                tmp = dp[j];
-                if (bLess) {
-                    aIndex = i - 1;
-                    bIndex = j - 1;
-                } else {
-                    aIndex = j - 1;
-                    bIndex = i - 1;
-                }
-                if (a[aIndex] == b[bIndex]) {
+            for (int j = 1; j <= s2Len; j++) {
+                cur = dp[j];
+                if (s1[i - 1] == s2[j - 1]) {
                     dp[j] = prev + 1;
                 } else {
-                    dp[j] = Math.max(dp[j - 1], dp[j]);
+                    dp[j] = Math.max(dp[j], dp[j - 1]);
                 }
-                prev = tmp;
+                prev = cur;
             }
         }
-        return dp[minSize];
+        return dp[s2Len];
     }
 
     /**

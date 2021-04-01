@@ -50,19 +50,18 @@ public class Q003_LongestNoDupSubstr {
         int dp = 1;
         pos[s.charAt(0)] = 0;
         int maxLen = 1;
-        char c;
+        int lastPos;
         for (int i = 1; i < s.length(); i++) {
-            c = s.charAt(i);
-            if (pos[c] == -1 || pos[c] < i - dp) {
+            lastPos = pos[s.charAt(i)];
+            if (lastPos == -1 || lastPos < i - dp) {
                 dp++;
             } else {
-                dp = i - pos[c];
+                dp = i -lastPos;
             }
-
             if (dp > maxLen) {
                 maxLen = dp;
             }
-            pos[c] = i;
+            pos[s.charAt(i)] = i;
         }
         return maxLen;
 

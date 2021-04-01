@@ -91,17 +91,19 @@ public class Q003_DuplicateNum {
         int n = a.length;
 
         int temp;
+
         for (int i = 0; i < n; i++) {
-            if (a[i] != i) {
-                do {
-                    if (a[i] == a[a[i]]) {
-                        return a[i];
-                    } else {
-                        temp = a[i];
-                        a[i] = a[temp];
-                        a[temp] = temp;
-                    }
-                } while (a[i] != i); // 交换直到b[i] == i
+            while (a[i] != i) { // 第 i 位放的数字不是 i
+                // 将第 i 位的数字 nums[i] 与 第 nums[i] 位进行比较
+                if (a[i] == a[a[i]]) { // 相等，说明 nums[i] 就是重复数字
+                    return a[i];
+                } else {   // 不等，将 i位置上的 nums[i] 交换到其正确位置 nums[i] swap(i,nums[i])
+                    // 交换一次后，使得 nums[i] 位置上的数 就是 nums[i] 本身了
+                    // 故最多交换 n 次，所有的位置i上的数就是  i 本身了
+                    temp = a[i];
+                    a[i] = a[temp];
+                    a[temp] = temp;
+                }
             }
         }
         return -1;

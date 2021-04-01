@@ -1,6 +1,6 @@
 package binary_tree;
 
-import 程序员代码面试指南.TreeNode;
+import programmer_interview.TreeNode;
 
 import java.util.*;
 

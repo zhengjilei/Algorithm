@@ -42,6 +42,35 @@ public class ListInsertSort {
     }
 
 
+    public ListNode insertionSortList(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode insert = head.next;
+        head.next = null;
+        ListNode cur, prev, nextInsert;
+        while (insert != null) {
+            nextInsert = insert.next;
+
+            cur = head;
+            prev = null;
+            while (cur != null && cur.val <= insert.val) {
+                prev = cur;
+                cur = cur.next;
+            }
+            insert.next = cur;
+            if (prev == null) {
+                head = insert;
+            } else {
+                prev.next = insert;
+            }
+            insert = nextInsert;
+        }
+
+        return head;
+
+    }
+
+
     @Test
     public void test() {
         ListNode l1 = new ListNode(1);

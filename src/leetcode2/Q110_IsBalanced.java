@@ -1,6 +1,6 @@
 package leetcode2;
 
-import 程序员代码面试指南.TreeNode;
+import programmer_interview.TreeNode;
 
 /**
  * created by Ethan-Walker on 2019/3/1
@@ -27,5 +27,33 @@ public class Q110_IsBalanced {
         return 1 + Math.max(leftHeight, rightHeight);
 
     }
+
+
+    public boolean isBalanced2(TreeNode root) {
+        getHeight(root);
+        return isBalanced;
+    }
+
+    boolean isBalanced = true;
+
+    public int getHeight(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int leftHeight = getHeight(root.left);
+        if (!isBalanced) return -1;
+
+        int rightHeight = getHeight(root.right);
+        if (!isBalanced) return -1;
+
+        if (Math.abs(leftHeight - rightHeight) > 1) {
+            isBalanced = false;
+            return -1;
+        }
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
 
 }

@@ -1,6 +1,6 @@
 package leetcode;
 
-import 程序员代码面试指南.TreeNode;
+import programmer_interview.TreeNode;
 
 /**
  * 中序和后序构建二叉树

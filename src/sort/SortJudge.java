@@ -2,7 +2,6 @@ package sort;
 
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -10,13 +9,9 @@ import java.util.Random;
  */
 public class SortJudge {
     public static boolean judge(int[] a) {
-        int[] b = Arrays.copyOf(a, a.length);
 
-        Arrays.sort(b);
-        for (int i = 0; i < a.length; i++) {
-            if (a[i] != b[i]) {
-                return false;
-            }
+        for (int i = 0; i < a.length - 1; i++) {
+            if (a[i] > a[i + 1]) return false;
         }
         return true;
     }

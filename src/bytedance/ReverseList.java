@@ -1,7 +1,7 @@
 package bytedance;
 
 
-import 程序员代码面试指南.ListNode;
+import programmer_interview.ListNode;
 
 /**
  * created by Ethan-Walker on 2018/12/28

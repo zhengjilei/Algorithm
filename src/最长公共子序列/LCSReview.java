@@ -126,46 +126,38 @@ public class LCSReview {
                 prev = save;
             }
         }
-
         return dp[s2.length];
     }
 
 
     public int lcs5(char[] s1, char[] s2) {
-        if (s1 == null || s2 == null || s1.length == 0 || s2.length == 0) return 0;
-        boolean colLess = true;
-        int minSize = s2.length, maxSize = s1.length;
-        if (maxSize < minSize) {
-            maxSize = s2.length;
-            minSize = s1.length;
-            colLess = false;
+        if (s1 == null || s2 == null) return 0;
+        if (s1.length == 0 || s2.length == 0) return 0;
+        int s1Len = s1.length;
+        int s2Len = s2.length;
+        if (s1Len < s2Len) {
+            char[] tmp = s1;
+            s1 = s2;
+            s2 = tmp;
+            s1Len = s1.length;
+            s2Len = s2.length;
         }
 
-        int[] dp = new int[minSize + 1];
-
-        int prev, save;
-        for (int i = 1; i <= maxSize; i++) {
+        int[] dp = new int[s2Len + 1];
+        int prev, cur;
+        for (int i = 1; i <= s1Len; i++) {
             prev = dp[0];
-            for (int j = 1; j <= minSize; j++) {
-                save = dp[j];
-                if (colLess) {
-                    if (s1[i - 1] == s2[j - 1]) {
-                        dp[j] = prev + 1;
-                    } else {
-                        dp[j] = Math.max(dp[j], dp[j - 1]);
-                    }
+            for (int j = 1; j <= s2Len; j++) {
+                cur = dp[j];
+                if (s1[i - 1] == s2[j - 1]) {
+                    dp[j] = prev + 1;
                 } else {
-                    if (s1[j - 1] == s2[i - 1]) {
-                        dp[j] = prev + 1;
-                    } else {
-                        dp[j] = Math.max(dp[j], dp[j - 1]);
-                    }
+                    dp[j] = Math.max(dp[j], dp[j - 1]);
                 }
-                prev = save;
+                prev = cur;
             }
         }
-
-        return dp[minSize];
+        return dp[s2Len];
 
     }
 

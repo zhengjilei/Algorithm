@@ -1,7 +1,5 @@
 package LFU;
 
-import java.util.HashMap;
-
 /**
  * LFU: Least Frequency Use  最不经常使用
  * 缓存不足时，淘汰最不经常使用的节点

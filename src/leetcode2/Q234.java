@@ -7,7 +7,7 @@ import leetcode.ListNode;
  */
 public class Q234 {
     public boolean isPalindrome(ListNode head) {
-        if (head == null||head.next == null) return true;
+        if (head == null || head.next == null) return true;
 
         ListNode fast = head, slow = head;
         while (fast != null && fast.next != null) {
@@ -22,17 +22,20 @@ public class Q234 {
             prev = slow;
             slow = next;
         }
-
+        boolean flag = true;
         // 右半部分,prev 指向右半部分头结点
         ListNode right = prev;
         ListNode left = head;
         while (right != null) {
-            if (right.val != left.val) return false;
+            if (right.val != left.val) {
+                flag = false;
+                break;
+            }
             left = left.next;
             right = right.next;
         }
 
-        // 正确， 反转右半部分， 从 右半部分头结点 prev 开始
+        //  反转右半部分， 从 右半部分头结点 prev 开始
         ListNode cur = prev;
         prev = null;
         while (cur != null) {
@@ -41,7 +44,7 @@ public class Q234 {
             prev = cur;
             cur = next;
         }
-        return true;
+        return flag;
     }
 
 

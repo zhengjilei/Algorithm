@@ -40,7 +40,7 @@ public class Q136_UniqueNum {
      * @return
      */
     public int singleNumber2(int[] nums) {
-        // 参见 程序员代码面试指南 Q079
+        // 参见 programmer_interview Q079
         return 0;
     }
 

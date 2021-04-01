@@ -10,31 +10,35 @@ import java.util.List;
 public class Q015 {
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
+        if (nums == null || nums.length <= 2) return res;
         Arrays.sort(nums);
-        int target, sum;
-
+        int sum;
+        int target;
+        int left, right;
         for (int i = 0; i < nums.length - 2; i++) {
             if (i > 0 && nums[i] == nums[i - 1]) continue;
-            target = 0 - nums[i];
 
-            int start = i + 1, end = nums.length - 1;
-            while (start < end) {
-                sum = nums[start] + nums[end];
+            target = -nums[i];
+
+            left = i + 1;
+            right = nums.length - 1;
+            while (left < right) {
+                sum = nums[left] + nums[right];
                 if (sum == target) {
-                    res.add(Arrays.asList(nums[i], nums[start], nums[end]));
-
-                    start++;
-                    end--;
-
-                    while (start < end && nums[start] == nums[start - 1]) start++;
-                    while (start < end && nums[end] == nums[end + 1]) end--;
+                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    left++;
+                    right--;
+                    while (left < right && nums[left] == nums[left - 1]) left++;
+                    while (left < right && nums[right] == nums[right + 1]) right--;
                 } else if (sum < target) {
-                    start++;
+                    left++;
                 } else {
-                    end--;
+                    right--;
                 }
             }
         }
+
         return res;
     }
+
 }

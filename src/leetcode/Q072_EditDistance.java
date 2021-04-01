@@ -12,35 +12,38 @@ public class Q072_EditDistance {
 
     /**
      * dp[i][j] 含义: 将 str1[0..i-1] 变成 str2[0..j-1] 的最少操作数
-     * 1. 空字符串 -> str2[0..j]
+     * 1. 处理边界:空字符串
+     * 空字符串 编辑成 str2[0..j]
      * dp[0][j] = j;
-     * str1 -> 空字符串
+     * str1[0..i] 编辑成 空字符串
      * dp[i][0] = i;
-     * <p>
      * 2. 求 dp[i][j]
-     * (1) 删除 str1[i-1], 将 str1[0..i-2] -> str2[0..j-1]                  dp[i-1][j]+1
-     * (2) 将 str1[0..i-1] -> str2[0..j-2], 再插入 str2[j-1]                dp[i][j-1] +1
-     * (3) str1[i-1]==str2[j-1] ，将 str1[0..i-2] -> str2[0..j-2]           dp[i-1][j-1]
-     * (4) str1[i-1]!=str2[j-1] , 将 str1[0..i-2] -> str2[0..j-2], 再替换 str1[i-1]-> str2[j-1] dp[i-1][j-1]+1
+     * (1) str1[i-1]==str2[j-1] ，将 str1[0..i-2] 编辑成 str2[0..j-2] 即可  =>  dp[i-1][j-1]
+     *     str1[i-1]!=str2[j-1] , 将 str1[0..i-2] 编辑成 str2[0..j-2], 再替换 str1[i-1] -> str2[j-1]   => dp[i-1][j-1]+1
+     * (2) 删除 str1[i-1], 将 str1[0..i-2] 编辑成 str2[0..j-1]  =>  dp[i-1][j]+1
+     * (3) 将 str1[0..i-1] 编辑成 str2[0..j-2], 再插入 str2[j-1]  => dp[i][j-1] +1
      *
      * @return
      */
     public int minDistance(String str1, String str2) {
 
         if (str1 == null || str2 == null) return 0;
-        if (str1.length() == 0) return str2.length();
-        else if (str2.length() == 0) return str1.length();
+        int s1Len = str1.length();
+        int s2Len = str2.length();
 
-        int[][] dp = new int[str1.length() + 1][str2.length() + 1];
-        for (int j = 0; j <= str2.length(); j++) {
+        if (s1Len == 0) return str2.length();
+        if (s2Len == 0) return str1.length();
+
+        int[][] dp = new int[s1Len + 1][s2Len + 1];
+        for (int j = 0; j <= s2Len; j++) {
             dp[0][j] = j;
         }
-        for (int i = 1; i <= str1.length(); i++) {
+        for (int i = 1; i <= s1Len; i++) {
             dp[i][0] = i;
         }
 
-        for (int i = 1; i <= str1.length(); i++) {
-            for (int j = 1; j <= str2.length(); j++) {
+        for (int i = 1; i <= s1Len; i++) {
+            for (int j = 1; j <= s2Len; j++) {
                 if (str1.charAt(i - 1) == str2.charAt(j - 1)) {
                     dp[i][j] = dp[i - 1][j - 1];
                 } else {
@@ -50,7 +53,7 @@ public class Q072_EditDistance {
                 if (dp[i][j - 1] + 1 < dp[i][j]) dp[i][j] = dp[i][j - 1] + 1;
             }
         }
-        return dp[str1.length()][str2.length()];
+        return dp[s1Len][s2Len];
     }
 
 
@@ -63,7 +66,7 @@ public class Q072_EditDistance {
         for (int j = 0; j <= str2.length(); j++) {
             dp[j] = j;
         }
-        int prev = dp[0], tmp;
+        int prev , tmp;
         int num;
         for (int i = 1; i <= str1.length(); i++) {
             prev = dp[0];  // 保存上一行 dp[0]
@@ -83,7 +86,5 @@ public class Q072_EditDistance {
             }
         }
         return dp[str2.length()];
-
-
     }
 }

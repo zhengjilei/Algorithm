@@ -1,8 +1,8 @@
 package bytedance;
 
-import 程序员代码面试指南.ListNode;
+import programmer_interview.ListNode;
 import org.junit.Test;
-import 程序员代码面试指南.ListUtil;
+import programmer_interview.ListUtil;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;

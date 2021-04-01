@@ -1,6 +1,6 @@
 package leetcode;
 
-import 程序员代码面试指南.TreeNode;
+import programmer_interview.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
@@ -24,7 +24,6 @@ public class Q297_SerialBT {
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        if (data == null || data.length() == 0) return null;
         String[] split = data.split(",");
         if (split.length == 0) return null;
         Queue<String> queue = new ArrayDeque<>();

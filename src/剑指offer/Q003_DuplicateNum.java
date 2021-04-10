@@ -47,7 +47,7 @@ public class Q003_DuplicateNum {
     /**
      * 先排序
      * 时间复杂度： O(nlogn)
-     * 空间复杂度:  O(logn) 快排的时间复杂度
+     * 空间复杂度:  O(logn) 快排的空间复杂度
      * 找出所有的重复数字
      *
      * @param a

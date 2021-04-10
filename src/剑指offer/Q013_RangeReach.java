@@ -72,7 +72,7 @@ public class Q013_RangeReach {
         moves[0] = new Move(0, -1, "up");
     }
 
-    // bfs
+    // bfs=
     public int movingCount2(int threshold, int rows, int cols) {
         ArrayDeque<Pos> queue = new ArrayDeque<>();
         queue.offer(new Pos(0, 0));

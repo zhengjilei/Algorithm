@@ -10,11 +10,13 @@ import java.util.LinkedList;
  * 用链表的结构：
  * 链表尾表示最近被访问的元素，越靠近链表头表示越早之前被访问的元素
  * <p>
- * 插入一个元素，cache 不满，插到链表尾，满，移除cache链头元素再插入链表尾
+ * 插入一个元素，先遍历看是否已经有该元素了
+ * a. 如果没有: cache 不满，直接插到链表尾; 满，移除cache链头元素再插入链表尾
+ * b. 有: 将该节点移到链表尾
  * 访问一个元素，从链表尾部开始遍历, 访问到之后，将其从原位置删除，重新加入链表尾部
  * <p>
  * 实现1：用双向链表实现。
- * put、get 时间复杂度:O(n)       效率低
+ * put、get 时间复杂度:O(n) 效率低
  * <p>
  * created by Ethan-Walker on 2019/2/16
  */
@@ -38,7 +40,7 @@ public class LRUCache {
             if (node.key == key) {
                 result = node.val;
                 iterator.remove();
-                put(key, result); //添加到链表尾部
+                put(key, result); // 添加到链表尾部
                 break;
             }
         }
@@ -46,7 +48,7 @@ public class LRUCache {
     }
 
     public void put(int key, int value) {
-        //先遍历查找是否有key 的元素, 有则删除，重新添加到链尾
+        // 先遍历查找是否有key 的元素, 有则删除，重新添加到链尾
         Iterator<Node> iterator = cache.iterator();
         while (iterator.hasNext()) {
             Node node = iterator.next();
@@ -57,12 +59,11 @@ public class LRUCache {
         }
 
         if (capacity == cache.size()) {
-            //缓存已满，删除一个 最近最少访问的元素（链表头）
+            // 缓存已满，删除一个 最近最少访问的元素（链表头）
             cache.removeFirst();
         }
         cache.add(new Node(key, value));
     }
-
 
     class Node {
         int key;

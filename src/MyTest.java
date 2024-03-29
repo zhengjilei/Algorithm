@@ -1,4 +1,4 @@
-import edu.princeton.cs.algs4.StdDraw;
+//import edu.princeton.cs.algs4.StdDraw;
 import org.junit.Test;
 
 import java.util.Random;
@@ -68,7 +68,7 @@ public class MyTest {
     }
 
     public static void main(String[] args) {
-        StdDraw.circle(0.5, 0.5, 0.2);
+//        StdDraw.circle(0.5, 0.5, 0.2);
         a1(b1());
     }
 

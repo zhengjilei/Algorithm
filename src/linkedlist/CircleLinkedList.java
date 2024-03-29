@@ -1,6 +1,6 @@
 package linkedlist;
 
-import edu.princeton.cs.algs4.In;
+//import edu.princeton.cs.algs4.In;
 
 /**
  * Created by Ethan-Walker on 2018/7/22.

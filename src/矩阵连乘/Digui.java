@@ -1,6 +1,6 @@
 package 矩阵连乘;
 
-import sun.applet.Main;
+//import sun.applet.Main;
 
 import java.util.Scanner;
 

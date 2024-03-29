@@ -1,8 +1,5 @@
 package catalan;
 
-import edu.princeton.cs.algs4.In;
-import jdk.nashorn.internal.ir.IdentNode;
-
 import java.util.ArrayDeque;
 
 public class Catalan {

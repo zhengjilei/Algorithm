@@ -9,7 +9,6 @@ import java.util.Arrays;
  */
 public class LCSReview {
 
-
     public int lcs1(char[] s1, char[] s2) {
         if (s1 == null || s2 == null || s1.length == 0 || s2.length == 0) return 0;
         int[][] dp = new int[s1.length + 1][s2.length + 1];

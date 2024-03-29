@@ -1,6 +1,6 @@
 package leetcode;
 
-import edu.princeton.cs.algs4.StdRandom;
+//import edu.princeton.cs.algs4.StdRandom;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -97,7 +97,8 @@ class Q0001_TwoSum {
 
     public static void testTwoSumCount2() {
         Random random = new Random();
-        int n = StdRandom.uniform(20, 30);
+//        int n = StdRandom.uniform(20, 30);
+        int n = 20;
         int target = 11;
         int[] nums = new int[n];
         for (int i = 0; i < n; i++) {
